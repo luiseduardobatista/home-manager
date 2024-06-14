@@ -14,7 +14,6 @@
     ./devtools.nix
     ./terminal.nix
     ./programming-languages.nix
-    ./dotfiles.nix
   ];
 
   nixpkgs = {
