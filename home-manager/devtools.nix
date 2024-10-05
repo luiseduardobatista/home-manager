@@ -8,5 +8,6 @@
     gnumake
     unzip
     poetry
+    openfortivpn
   ];
 }
