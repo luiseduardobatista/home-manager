@@ -9,5 +9,6 @@
     unzip
     poetry
     openfortivpn
+    golines
   ];
 }
