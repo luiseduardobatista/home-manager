@@ -1,5 +1,3 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
 {
   inputs,
   lib,
@@ -7,14 +5,21 @@
   pkgs,
   ...
 }: {
-  # You can import other home-manager modules here
+  targets.genericLinux.enable = true;
+
   imports = [
     ./zsh.nix
     ./neovim.nix
     ./devtools.nix
     ./terminal.nix
     ./programming-languages.nix
+    ./gnome
+    ./gui.nix
+    ./utils.nix
+    ./git.nix
   ];
+
+  #nixGLPrefix = "${pkgs.nixGL.packages.x86_64-linux.nixGLDefault}/bin/nixGLDefault";
 
   nixpkgs = {
     # You can add overlays here
@@ -41,10 +46,6 @@
     username = "luisb";
     homeDirectory = "/home/luisb";
   };
-
-  # Add stuff for your user as you see fit:
-  # programs.neovim.enable = true;
-  # home.packages = with pkgs; [ steam ];
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

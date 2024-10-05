@@ -6,7 +6,6 @@
     insomnia
     remmina
     gnumake
-    docker
     unzip
     poetry
   ];
