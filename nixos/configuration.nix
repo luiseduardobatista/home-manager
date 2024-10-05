@@ -4,7 +4,9 @@
   imports =
     [
       ./hardware-configuration.nix
-      ./gnome.nix
+      ./modules/gnome.nix
+      ./modules/nvidia.nix
+      ./modules/zsh.nix
     ];
 
   # Bootloader.
@@ -43,11 +45,8 @@
   # OpenGL
   hardware.opengl.enable = true;
 
-  # Nvidia Settings
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.open = true;
-
+  # Nvidia
+  services.nvidia.enable = true;
 
   # Install Docker
   virtualisation.docker.enable = true;
