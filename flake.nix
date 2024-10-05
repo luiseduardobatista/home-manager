@@ -3,19 +3,21 @@
 
   inputs = {
     # Nixpkgs
-    nixpkgs.url = "github:nixos/nixpkgs/master";
-    home-manager.url = "github:nix-community/home-manager/master";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixGL.url = "github:guibou/nixGL";
   };
 
   outputs = {
     self,
     nixpkgs,
     home-manager,
+    nixGL,
     ...
   } @ inputs: let
     inherit (self) outputs;
-    hostname = builtins.getEnv "HOSTNAME";
+    hostname = "nixos";
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -26,14 +28,21 @@
       };
     };
 
-    # Standalone home-manager configuration entrypoint
-    # Available through 'home-manager --flake .#your-username@your-hostname'
     homeConfigurations = {
       "luisb" = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
         extraSpecialArgs = {inherit inputs outputs;};
         # > Our main home-manager configuration file <
-        modules = [./home-manager/home.nix];
+        # modules = [./home-manager/home.nix];
+	modules = [
+            ./home-manager/home.nix
+            (
+              { ... }:
+              {
+                config.nixGLPrefix = "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+              }
+            )
+          ];
       };
     };
   };
