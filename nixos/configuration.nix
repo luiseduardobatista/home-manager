@@ -110,6 +110,11 @@
     curl
   ];
 
+  environment.sessionVariables = {
+    TERMINAL = "wezterm";
+    TERM = "wezterm";
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
