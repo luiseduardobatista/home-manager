@@ -20,6 +20,4 @@ in {
     stow
     nodePackages.localtunnel
   ];
-
-  programs.wezterm.enable = true;
 }

@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  flatpaks,
   ...
 }: {
   targets.genericLinux.enable = true;
@@ -20,7 +21,8 @@
     ./cli.nix
     ./ulauncher.nix
     ./fonts.nix
-    ./dotfiles.nix
+    # ./dotfiles.nix
+    ./flatpaks.nix
   ];
 
   nixpkgs = {
@@ -44,7 +46,6 @@
   programs.home-manager.enable = true;
   programs.git.enable = true;
   programs.zsh.enable = true;
-
   systemd.user.startServices = "sd-switch";
   home.stateVersion = "23.05";
 }

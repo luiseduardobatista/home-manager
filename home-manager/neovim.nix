@@ -1,16 +1,21 @@
-{ pkgs, pkgs-unstable, ... }:
 {
-  home.packages = (with pkgs; [
-    fd
-    ripgrep
-    gcc
-    git
-    wget
-    curl
-    xclip
-  ]) ++ (with pkgs-unstable; [
-    neovim
-  ]);
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
+  home.packages =
+    (with pkgs; [
+      fd
+      ripgrep
+      gcc
+      git
+      wget
+      curl
+      xclip
+    ])
+    ++ (with pkgs-unstable; [
+      neovim
+    ]);
 
   home.sessionVariables = {
     EDITOR = "nvim";
@@ -22,4 +27,3 @@
   #   defaultEditor = true;
   # };
 }
-
