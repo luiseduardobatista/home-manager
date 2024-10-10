@@ -123,6 +123,14 @@
       focus-right = ["<Super>Right" "<Super>l"];
     };
 
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      screensaver = ["<Super>Escape"];
+      home = ["<Super>f"];
+      www = ["<Super>b"];
+      email = ["<Super>e"];
+      rotate-video-lock-static = [];
+    };
+
     "org/gnome/desktop/wm/keybindings" = {
       move-to-workspace-1 = ["<Super><Shift>1"];
       move-to-workspace-2 = ["<Super><Shift>2"];
