@@ -34,15 +34,14 @@
         extraSpecialArgs = {inherit inputs outputs;};
         # > Our main home-manager configuration file <
         # modules = [./home-manager/home.nix];
-	modules = [
-            ./home-manager/home.nix
-            (
-              { ... }:
-              {
-                config.nixGLPrefix = "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
-              }
-            )
-          ];
+        modules = [
+          ./home-manager/home.nix
+          (
+            {...}: {
+              config.nixGLPrefix = "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+            }
+          )
+        ];
       };
     };
   };

@@ -1,13 +1,14 @@
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./modules/gnome.nix
-      ./modules/nvidia.nix
-      ./modules/zsh.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    ./modules/gnome.nix
+    ./modules/nvidia.nix
+    ./modules/zsh.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -15,12 +16,11 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
 
   time.timeZone = "America/Sao_Paulo";
 
@@ -89,9 +89,9 @@
   users.users.luisb = {
     isNormalUser = true;
     description = "Luis Eduardo Batista";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -103,11 +103,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   environment.systemPackages = with pkgs; [
-  	vim
-  	git
-  	curl
+    vim
+    git
+    curl
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -136,5 +136,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }

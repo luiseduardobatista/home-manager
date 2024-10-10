@@ -1,7 +1,14 @@
-{ pkgs, ... }:
 {
+  pkgs,
+  config,
+  ...
+}: let
+  nixGL = import ./nixGL.nix {inherit pkgs config;};
+in {
   home.packages = with pkgs; [
-    vscode-fhs
+    wezterm
+    jetbrains-toolbox
+    vscode
     dbeaver-bin
     insomnia
     remmina
@@ -10,5 +17,9 @@
     poetry
     openfortivpn
     golines
+    stow
+    nodePackages.localtunnel
   ];
+
+  programs.wezterm.enable = true;
 }
