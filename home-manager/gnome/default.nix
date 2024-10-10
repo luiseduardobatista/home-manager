@@ -64,10 +64,10 @@
       "show-weekdate" = true;
     };
 
-     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-        binding = "<Super>t";
-        command = "${config.home.sessionVariables.TERMINAL}";
-        name = "Launch Terminal";
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Super>t";
+      command = "${config.home.sessionVariables.TERMINAL}";
+      name = "Launch Terminal";
     };
 
     #Pop Shell bindings
