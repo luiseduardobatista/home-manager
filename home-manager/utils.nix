@@ -12,5 +12,6 @@ in {
     vlc
     brave
     youtube-music
+    tree
   ];
 }

@@ -19,6 +19,8 @@
     ./ssh.nix
     ./cli.nix
     ./ulauncher.nix
+    ./fonts.nix
+    ./dotfiles.nix
   ];
 
   nixpkgs = {

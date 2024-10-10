@@ -1,5 +1,6 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
+{ pkgs, pkgs-unstable, ... }:
+{
+  home.packages = (with pkgs; [
     fd
     ripgrep
     gcc
@@ -7,13 +8,18 @@
     wget
     curl
     xclip
+  ]) ++ (with pkgs-unstable; [
     neovim
-  ];
+  ]);
 
   home.sessionVariables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
   };
 
-  programs.neovim.defaultEditor = true;
+  # programs.neovim = {
+  #   enable = true;
+  #   defaultEditor = true;
+  # };
 }
+
