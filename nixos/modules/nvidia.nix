@@ -1,10 +1,11 @@
-{ config, pkgs, lib, ... }:
-
-let
-  cfg = config.services.nvidia;
-in
-
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
+  cfg = config.services.nvidia;
+in {
   options.services.nvidia.enable = lib.mkOption {
     type = lib.types.bool;
     default = false;
@@ -17,4 +18,3 @@ in
     hardware.nvidia.open = true;
   };
 }
-

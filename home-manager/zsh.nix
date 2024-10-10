@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   home.packages = with pkgs; [
     zsh-syntax-highlighting
     zsh-history
@@ -8,18 +7,18 @@
   ];
 
   programs = {
-      zsh = {
-          enable = true;
-          autosuggestion.enable = true;
-          syntaxHighlighting.enable = true;
-          oh-my-zsh = {
-            enable = true;
-            theme = "robbyrussell";
-            plugins = [
-              "git"
-              "history"
-            ];
-          };
+    zsh = {
+      enable = true;
+      autosuggestion.enable = true;
+      syntaxHighlighting.enable = true;
+      oh-my-zsh = {
+        enable = true;
+        theme = "robbyrussell";
+        plugins = [
+          "git"
+          "history"
+        ];
       };
+    };
   };
 }
