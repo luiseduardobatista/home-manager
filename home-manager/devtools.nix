@@ -6,7 +6,7 @@
   nixGL = import ./nixGL.nix {inherit pkgs config;};
 in {
   home.packages = with pkgs; [
-    wezterm
+    # (nixGL wezterm)
     jetbrains-toolbox
     vscode
     dbeaver-bin
