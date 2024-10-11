@@ -1,10 +1,8 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
-    python3
+    go
     rustup
     nodejs
-    go
-    clojure
     alejandra
   ];
 }

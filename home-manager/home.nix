@@ -13,15 +13,15 @@
     ./neovim.nix
     ./devtools.nix
     ./programming-languages.nix
-    ./gnome
+    # ./gnome
+    ./gnome/pop-os.nix
     ./gui.nix
     ./utils.nix
     ./git.nix
     ./ssh.nix
     ./cli.nix
-    ./ulauncher.nix
+    # ./ulauncher.nix
     ./fonts.nix
-    # ./dotfiles.nix
     ./flatpaks.nix
   ];
 
