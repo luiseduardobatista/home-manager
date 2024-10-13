@@ -1,23 +1,35 @@
 {
   pkgs,
   config,
+  isNixOS,
   ...
 }: let
-  nixGL = import ./nixGL.nix {inherit pkgs config;};
+  nixGLwrap = pkg:
+    if isNixOS
+    then pkg
+    else config.lib.nixGL.wrap pkg;
 in {
-  home.packages = with pkgs; [
-    # (nixGL wezterm)
-    jetbrains-toolbox
-    vscode
-    dbeaver-bin
-    insomnia
-    remmina
-    gnumake
-    unzip
-    poetry
-    openfortivpn
-    golines
-    stow
-    nodePackages.localtunnel
-  ];
+  home.packages = with pkgs;
+    [
+      (nixGLwrap jetbrains-toolbox)
+      (nixGLwrap vscode)
+      (nixGLwrap dbeaver-bin)
+      (nixGLwrap insomnia)
+      (nixGLwrap remmina)
+      gnumake
+      unzip
+      poetry
+      openfortivpn
+      golines
+      stow
+      nodePackages.localtunnel
+    ]
+    ++ (
+      if isNixOS
+      then [
+        wezterm
+        alacritty
+      ]
+      else []
+    );
 }

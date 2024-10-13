@@ -1,16 +1,19 @@
 {
   pkgs,
   config,
-  lib,
+  isNixOS,
   ...
 }: let
-  nixGL = import ./nixGL.nix {inherit pkgs config;};
+  nixGLwrap = pkg:
+    if isNixOS
+    then pkg
+    else config.lib.nixGL.wrap pkg;
 in {
   home.packages = with pkgs; [
-    (nixGL obsidian )
+    (nixGLwrap obsidian)
     flameshot
     vlc
-    brave
+    (nixGLwrap brave)
     youtube-music
     tree
   ];
