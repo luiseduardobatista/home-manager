@@ -30,6 +30,11 @@
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
       center-new-windows = true;
+      edge-tiling = true;
+    };
+
+    "org/gnome/desktop/interface" = {
+      enable-hot-corners = false;
     };
 
     "org/gnome/shell/keybindings" = {
