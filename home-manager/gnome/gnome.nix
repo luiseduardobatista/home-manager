@@ -7,6 +7,7 @@
   imports = [
     ./pop-shell-config.nix
     ./shared.nix
+    ../ulauncher.nix
   ];
 
   home.packages = with pkgs; [
@@ -23,7 +24,7 @@
     gnomeExtensions.just-perfection
     gnomeExtensions.alphabetical-app-grid
     gnomeExtensions.astra-monitor
-    gnomeExtensions.tray-icons-reloaded
+    gnomeExtensions.appindicator
 
     # Themes
     tokyonight-gtk-theme
@@ -41,7 +42,7 @@
         "just-perfection-desktop@just-perfection"
         "monitor@astraext.github.io"
         "AlphabeticalAppGrid@stuarthayhurst"
-        "trayIconsReloaded@selfmade.pl"
+        "appindicatorsupport@rgcjonas.gmail.com"
       ];
     };
 
@@ -50,11 +51,17 @@
       "show-weekdate" = true;
     };
 
-    # "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-    #   binding = "<Super>t";
-    #   command = "${config.home.sessionVariables.TERMINAL}";
-    #   name = "Launch Terminal";
-    # };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Super>t";
+      command = "${config.home.sessionVariables.TERMINAL}";
+      name = "Launch Terminal";
+    };
+
+    "org/gnome/settings-daemon/plugins/media-keys" = {
+      custom-keybindings = [
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+      ];
+    };
 
     #Pop Shell bindings
     "org/gnome/desktop/wm/keybindings" = {
@@ -152,6 +159,14 @@
     # Alphabetical App Grid
     "org/gnome/shell/extensions/alphabetical-app-grid" = {
       folder-order-position = "end";
+    };
+
+    # AppIndicator and KStatusNotifierItem Support
+    "org/gnome/shell/extensions/appindicator" = {
+      icon-opacity = 220;
+      icon-saturation = 0;
+      icon-size = 20;
+      legacy-tray-enabled = true;
     };
   };
 }
