@@ -140,12 +140,13 @@
     "org/gnome/shell/extensions/space-bar/behavior" = {
       smart-workspace-names = false;
       toggle-overview = false;
+      show-empty-workspaces = false;
     };
 
     "org/gnome/shell/extensions/space-bar/shortcuts" = {
-      "enable-activate-workspace-shortcuts" = false;
-      "enable-move-to-workspace-shortcuts" = true;
-      "open-menu" = "@as []";
+      enable-activate-workspace-shortcuts = false;
+      enable-move-to-workspace-shortcuts = true;
+      open-menu = "@as []";
     };
 
     # Just Perfection
