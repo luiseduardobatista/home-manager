@@ -20,7 +20,6 @@
     gnomeExtensions.dash-to-dock
     gnomeExtensions.vitals
     gnomeExtensions.blur-my-shell
-    gnomeExtensions.space-bar
     gnomeExtensions.just-perfection
     gnomeExtensions.alphabetical-app-grid
     gnomeExtensions.astra-monitor
@@ -38,7 +37,6 @@
         "dash-to-dock@micxgx.gmail.com"
         "vitals@CoreCoding.com"
         "blur-my-shell@aunetx"
-        "space-bar@luchrioh"
         "just-perfection-desktop@just-perfection"
         "monitor@astraext.github.io"
         "AlphabeticalAppGrid@stuarthayhurst"
@@ -134,19 +132,6 @@
       hot-keys = false;
       custom-theme-shrink = true;
       running-indicator-style = "DOTS";
-    };
-
-    # Space Bar
-    "org/gnome/shell/extensions/space-bar/behavior" = {
-      smart-workspace-names = false;
-      toggle-overview = false;
-      show-empty-workspaces = false;
-    };
-
-    "org/gnome/shell/extensions/space-bar/shortcuts" = {
-      enable-activate-workspace-shortcuts = false;
-      enable-move-to-workspace-shortcuts = true;
-      open-menu = "@as []";
     };
 
     # Just Perfection
