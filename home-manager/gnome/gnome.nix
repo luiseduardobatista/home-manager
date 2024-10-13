@@ -131,7 +131,8 @@
 
     # Space Bar
     "org/gnome/shell/extensions/space-bar/behavior" = {
-      "smart-workspace-names" = false;
+      smart-workspace-names = false;
+      toggle-overview = false;
     };
 
     "org/gnome/shell/extensions/space-bar/shortcuts" = {
