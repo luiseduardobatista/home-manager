@@ -12,18 +12,18 @@
   targets.genericLinux.enable = true;
 
   imports = [
-     ./zsh.nix
-     ./neovim.nix
-     ./devtools.nix
-     ./programming-languages.nix
-     ./gnome/gnome.nix
+    ./zsh.nix
+    ./neovim.nix
+    ./devtools.nix
+    ./programming-languages.nix
+    ./gnome/gnome.nix
     # ./gnome/pop-os.nix
     # ./gui.nix
-     ./utils.nix
-     ./git.nix
-     ./ssh.nix
-     ./cli.nix
-     ./fonts.nix
+    ./utils.nix
+    ./git.nix
+    ./ssh.nix
+    ./cli.nix
+    ./fonts.nix
     # ./hyprland.nix
     (builtins.fetchurl {
       url = "https://raw.githubusercontent.com/Smona/home-manager/nixgl-compat/modules/misc/nixgl.nix";

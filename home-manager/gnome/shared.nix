@@ -10,6 +10,7 @@
   home.packages = with pkgs; [
     # Extensions
     gnomeExtensions.user-themes
+    gnomeExtensions.space-bar
 
     # Utils
     gnome.dconf-editor
@@ -23,6 +24,7 @@
     "org/gnome/shell" = {
       "enabled-extensions" = [
         "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "space-bar@luchrioh"
       ];
     };
 
@@ -73,6 +75,19 @@
       switch-to-workspace-7 = ["<Super>7"];
       switch-to-workspace-8 = ["<Super>8"];
       switch-to-workspace-9 = ["<Super>9"];
+    };
+
+    # Space Bar
+    "org/gnome/shell/extensions/space-bar/behavior" = {
+      smart-workspace-names = false;
+      toggle-overview = false;
+      show-empty-workspaces = false;
+    };
+
+    "org/gnome/shell/extensions/space-bar/shortcuts" = {
+      enable-activate-workspace-shortcuts = false;
+      enable-move-to-workspace-shortcuts = true;
+      open-menu = "@as []";
     };
   };
 }
