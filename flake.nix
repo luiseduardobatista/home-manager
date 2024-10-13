@@ -6,8 +6,12 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nixGL.url = "github:guibou/nixGL";
-    flatpaks.url = "github:gmodena/nix-flatpak/main";
+    # nixGL.url = "github:guibou/nixGL";
+    #TODO: Remove quando o mr for mergeado no home-manager
+    nixGL = {
+      url = "github:nix-community/nixGL/310f8e49a149e4c9ea52f1adf70cdc768ec53f8a";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -16,12 +20,12 @@
     nixpkgs-unstable,
     home-manager,
     nixGL,
-    flatpaks,
     ...
   } @ inputs: let
     inherit (self) outputs;
     hostname = "nixos";
-    pkgs-unstable = nixpkgs-unstable.legacyPackages.x86_64-linux;
+    system = "x86_64-linux";
+    pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
   in {
     # NixOS configuration entrypoint
     # Available through 'nixos-rebuild --flake .#your-hostname'
@@ -34,21 +38,21 @@
 
     homeConfigurations = {
       "luisb" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux; # Home-manager requires 'pkgs' instance
-        extraSpecialArgs = {inherit inputs outputs;};
+        pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit outputs;
+          isNixOS = true;
+          inherit pkgs-unstable;
+        };
         modules = [
           ./home-manager/home.nix
-          flatpaks.homeManagerModules.nix-flatpak
           (
             {...}: {
-              config.nixGLPrefix = "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
+              # config.nixGLPrefix = "${nixGL.packages.x86_64-linux.nixGLIntel}/bin/nixGLIntel ";
             }
           )
         ];
-        extraSpecialArgs = {
-            inherit pkgs-unstable;
-            inherit flatpaks;
-          };
       };
     };
   };
