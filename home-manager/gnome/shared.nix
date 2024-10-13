@@ -33,6 +33,10 @@
       edge-tiling = true;
     };
 
+    "org/gnome/desktop/wm/preferences" = {
+      num-workspaces = 9;
+    };
+
     "org/gnome/desktop/interface" = {
       enable-hot-corners = false;
     };
