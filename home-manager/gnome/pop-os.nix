@@ -22,5 +22,12 @@
         "sound-output-device-chooser@kgshank.net"
       ];
     };
+
+    # Sound Output Device Chooser
+    "org/gnome/shell/extensions/sound-output-device-chooser" = {
+      expand-volume-menu = false;
+      integrate-with-slider = true;
+      show-profiles = false;
+    };
   };
 }
