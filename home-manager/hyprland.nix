@@ -11,5 +11,7 @@
     kitty
     rofi-wayland
     wl-clipboard
+    xfce.thunar
+    nwg-look
   ];
 }
