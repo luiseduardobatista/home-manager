@@ -38,7 +38,7 @@
         "vitals@CoreCoding.com"
         "blur-my-shell@aunetx"
         "just-perfection-desktop@just-perfection"
-        "monitor@astraext.github.io"
+        # "monitor@astraext.github.io"
         "AlphabeticalAppGrid@stuarthayhurst"
         "appindicatorsupport@rgcjonas.gmail.com"
       ];
