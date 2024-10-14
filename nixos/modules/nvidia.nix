@@ -16,6 +16,6 @@ in {
     services.xserver.videoDrivers = ["nvidia"];
     hardware.nvidia.modesetting.enable = true;
     hardware.nvidia.open = true;
-    boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
+    boot.kernelParams = ["nvidia_drm.fbdev=1"];
   };
 }
