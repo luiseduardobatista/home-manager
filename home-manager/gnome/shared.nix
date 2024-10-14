@@ -75,6 +75,9 @@
       switch-to-workspace-7 = ["<Super>7"];
       switch-to-workspace-8 = ["<Super>8"];
       switch-to-workspace-9 = ["<Super>9"];
+
+      switch-windows = ["<Alt>Tab"];
+      switch-applications = ["<Super>Tab"];
     };
 
     # Space Bar
