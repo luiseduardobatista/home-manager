@@ -24,9 +24,6 @@
     gnomeExtensions.alphabetical-app-grid
     gnomeExtensions.astra-monitor
     gnomeExtensions.appindicator
-
-    # Themes
-    tokyonight-gtk-theme
   ];
 
   dconf.settings = {
@@ -60,6 +57,16 @@
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
       ];
     };
+
+    # "org/gnome/shell" = {
+    #   favorite-apps = [
+    #     "brave-browser.desktop"
+    #     "org.wezfurlong.wezterm.desktop"
+    #     "org.gnome.Nautilus.desktop"
+    #     "dbeaver.desktop"
+    #     "obsidian.desktop"
+    #   ];
+    # };
 
     #Pop Shell bindings
     "org/gnome/desktop/wm/keybindings" = {
@@ -134,6 +141,7 @@
       running-indicator-style = "DOTS";
       show-show-apps-button = false;
       dock-fixed = false;
+      show-trash = false;
     };
 
     # Just Perfection

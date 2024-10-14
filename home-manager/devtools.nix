@@ -2,6 +2,7 @@
   pkgs,
   config,
   isNixOS,
+  pkgs-unstable,
   ...
 }: let
   nixGLwrap = pkg:
@@ -24,12 +25,13 @@ in {
       stow
       nodePackages.localtunnel
     ]
+    ++ (with pkgs-unstable; [
+      (nixGLwrap wezterm)
+      (nixGLwrap alacritty)
+    ])
     ++ (
       if isNixOS
-      then [
-        wezterm
-        alacritty
-      ]
+      then []
       else []
     );
 }
