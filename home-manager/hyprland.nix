@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  inputs,
   ...
 }: {
   home.packages = with pkgs; [
@@ -13,5 +14,12 @@
     wl-clipboard
     xfce.thunar
     nwg-look
+    brightnessctl
+    networkmanagerapplet
+    bluez # Bluetooth package
+    overskride #bluetooth manager
+
+    # HyprPanel
+    inputs.hyprpanel.packages."${pkgs.system}".default
   ];
 }
