@@ -132,6 +132,8 @@
       hot-keys = false;
       custom-theme-shrink = true;
       running-indicator-style = "DOTS";
+      show-show-apps-button = false;
+      dock-fixed = false;
     };
 
     # Just Perfection

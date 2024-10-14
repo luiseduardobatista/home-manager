@@ -11,6 +11,7 @@
     ./modules/nvidia.nix
     ./modules/zsh.nix
     ./modules/gnome.nix
+    # ./modules/hyprland.nix
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -60,7 +61,9 @@
   virtualisation.docker.enable = true;
 
   # Enable Flatpak
-  services.flatpak.enable = true;
+  # xdg.portal.enable = true;
+  # xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  # services.flatpak.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
