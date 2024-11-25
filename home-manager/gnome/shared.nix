@@ -16,6 +16,14 @@
   ];
 
   dconf.settings = {
+    # Enable Extensions
+    "org/gnome/shell" = {
+      "enabled-extensions" = [
+        "space-bar@luchrioh"
+        "bluetooth-quick-connect@bjarosze.gmail.com"
+      ];
+    };
+
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
       center-new-windows = true;
