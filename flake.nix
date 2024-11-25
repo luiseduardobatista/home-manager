@@ -42,7 +42,7 @@
         extraSpecialArgs = {
           inherit inputs;
           inherit outputs;
-          isNixOS = true;
+          isNixOS = false;
           inherit pkgs-unstable;
         };
         modules = [

@@ -16,8 +16,8 @@
     ./neovim.nix
     ./devtools.nix
     ./programming-languages.nix
-    ./gnome/gnome.nix
-    # ./gnome/pop-os.nix
+    # ./gnome/gnome.nix
+    ./gnome/pop-os.nix
     # ./gui.nix
     ./utils.nix
     ./git.nix
@@ -27,7 +27,7 @@
     # ./hyprland.nix
     (builtins.fetchurl {
       url = "https://raw.githubusercontent.com/Smona/home-manager/nixgl-compat/modules/misc/nixgl.nix";
-      sha256 = "f14874544414b9f6b068cfb8c19d2054825b8531f827ec292c2b0ecc5376b305";
+      sha256 = "63d97d971edc98656a3ccde4df3aab278b15a25dbc58f1b91e1395a19ea22ccf";
     })
   ];
 
