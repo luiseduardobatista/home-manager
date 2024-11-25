@@ -24,6 +24,8 @@
     gnomeExtensions.alphabetical-app-grid
     gnomeExtensions.astra-monitor
     gnomeExtensions.appindicator
+    gnomeExtensions.user-themes
+    gnomeExtensions.space-bar
   ];
 
   dconf.settings = {
@@ -38,6 +40,9 @@
         # "monitor@astraext.github.io"
         "AlphabeticalAppGrid@stuarthayhurst"
         "appindicatorsupport@rgcjonas.gmail.com"
+        "user-theme@gnome-shell-extensions.gcampax.github.com"
+        "space-bar@luchrioh"
+        "bluetooth-quick-connect@bjarosze.gmail.com"
       ];
     };
 

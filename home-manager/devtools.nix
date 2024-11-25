@@ -25,13 +25,12 @@ in {
       stow
       nodePackages.localtunnel
     ]
-    ++ (with pkgs-unstable; [
-      (nixGLwrap wezterm)
-      (nixGLwrap alacritty)
-    ])
     ++ (
       if isNixOS
-      then []
+      then [
+        wezterm
+        alacritty
+      ]
       else []
     );
 }

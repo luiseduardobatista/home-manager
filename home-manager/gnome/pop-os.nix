@@ -10,7 +10,6 @@
 
   home.packages = with pkgs; [
     # Extensions
-    gnomeExtensions.bluetooth-quick-connect
     gnomeExtensions.sound-output-device-chooser
   ];
 
@@ -18,7 +17,6 @@
     # Enable Extensions
     "org/gnome/shell" = {
       "enabled-extensions" = [
-        "bluetooth-quick-connect@bjarosze.gmail.com"
         "sound-output-device-chooser@kgshank.net"
       ];
     };
@@ -28,6 +26,16 @@
       expand-volume-menu = false;
       integrate-with-slider = true;
       show-profiles = false;
+    };
+    "org/gnome/shell/extensions/dash-to-dock" = {
+      intellihide = false;
+      extend-height = false;
+      show-profiles = false;
+      show-mounts = false;
+      show-mounts-network = false;
+      show-show-apps-button = false;
+      show-trash = false;
+      click-action = "minimize-or-previews";
     };
   };
 }

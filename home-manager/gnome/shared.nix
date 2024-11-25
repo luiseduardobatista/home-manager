@@ -8,10 +8,6 @@
   ];
 
   home.packages = with pkgs; [
-    # Extensions
-    gnomeExtensions.user-themes
-    gnomeExtensions.space-bar
-
     # Utils
     gnome.dconf-editor
     gnome.sushi
@@ -20,15 +16,6 @@
   ];
 
   dconf.settings = {
-    # Enable Extensions
-    "org/gnome/shell" = {
-      "enabled-extensions" = [
-        "user-theme@gnome-shell-extensions.gcampax.github.com"
-        "space-bar@luchrioh"
-      ];
-    };
-
-    # Gnome
     "org/gnome/mutter" = {
       dynamic-workspaces = false;
       center-new-windows = true;
@@ -92,5 +79,6 @@
       enable-move-to-workspace-shortcuts = true;
       open-menu = "@as []";
     };
+
   };
 }
