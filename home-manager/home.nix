@@ -6,8 +6,7 @@
   nixGL,
   ixNixOS,
   ...
-}:
-{
+}: {
   targets.genericLinux.enable = true;
   nixGL.packages = nixGL.packages;
 
@@ -25,7 +24,6 @@
     ./fonts.nix
   ];
 
-
   home = {
     username = "luisb";
     homeDirectory = "/home/luisb";
@@ -33,6 +31,7 @@
       EDITOR = "nvim";
       BROWSER = "firefox";
       TERMINAL = "wezterm";
+      NIXOS_OZONE_WL = 1;
     };
   };
 
