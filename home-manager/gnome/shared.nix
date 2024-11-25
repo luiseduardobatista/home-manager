@@ -87,6 +87,5 @@
       enable-move-to-workspace-shortcuts = true;
       open-menu = "@as []";
     };
-
   };
 }
