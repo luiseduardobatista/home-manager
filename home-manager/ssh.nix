@@ -36,7 +36,15 @@
         User git
         PreferredAuthentications publickey
         IdentityFile ~/.ssh/id_rsa_kyros
+
+      # Conta do GitLab FatorRH
+      Host gitlab-a10
+        HostName git.a10inteligenciafiscal.com.br
+        User git
+        PreferredAuthentications publickey
+        IdentityFile ~/.ssh/id_rsa_kyros
         IdentitiesOnly yes
+       IdentitiesOnly yes
     '';
   };
 }

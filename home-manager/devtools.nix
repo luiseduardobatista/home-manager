@@ -24,6 +24,10 @@ in {
       golines
       stow
       nodePackages.localtunnel
+
+      ## AWS
+      aws-sam-cli
+      awscli
     ]
     ++ (
       if isNixOS
