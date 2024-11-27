@@ -1,4 +1,4 @@
-# Configuração do Home Manager no Ubuntu
+# Configuração do Home Manager no Ubuntu(e outras distros)
 
 Descreve os passos necessários para configurar o `sudo` no Ubuntu para reconhecer os pacotes instalados via Home Manager e Nix.
 
