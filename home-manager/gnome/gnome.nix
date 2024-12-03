@@ -141,11 +141,14 @@
 
     # Dash to Dock
     "org/gnome/shell/extensions/dash-to-dock" = {
-      hot-keys = false;
+      click-action = "focus-minimize-or-previews";
       custom-theme-shrink = true;
+      dock-fixed = false;
+      dock-position = "BOTTOM";
+      hot-keys = false;
+      intellihide-mode = "ALL_WINDOWS";
       running-indicator-style = "DOTS";
       show-show-apps-button = false;
-      dock-fixed = false;
       show-trash = false;
     };
 
