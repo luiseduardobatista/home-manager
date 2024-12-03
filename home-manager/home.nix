@@ -15,8 +15,8 @@
     ./neovim.nix
     ./devtools.nix
     ./programming-languages.nix
-    # ./gnome/gnome.nix
-    ./gnome/pop-os.nix
+    ./gnome/gnome.nix
+    # ./gnome/pop-os.nix
     ./utils.nix
     ./git.nix
     ./ssh.nix
