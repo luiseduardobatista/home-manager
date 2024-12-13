@@ -7,7 +7,7 @@
   imports = [
     ./pop-shell-config.nix
     ./shared.nix
-    ../ulauncher.nix
+    # ../ulauncher.nix
   ];
 
   home.packages = with pkgs; [

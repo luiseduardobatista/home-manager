@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }: let
   manageShortcutsScript = pkgs.writeScriptBin "manage-ulauncher-shortcuts" ''
@@ -54,7 +55,7 @@
   '';
 in {
   home.packages = with pkgs; [
-    ulauncher
+    (config.lib.nixGL.wrap ulauncher )
   ];
 
   xdg.configFile = {
@@ -64,7 +65,7 @@ in {
         "clear-previous-query": true,
         "disable-desktop-filters": false,
         "grab-mouse-pointer": false,
-        "hotkey-show-app": "null",
+        "hotkey-show-app": "<Control>space",
         "render-on-screen": "mouse-pointer-monitor",
         "show-indicator-icon": true,
         "show-recent-apps": "0",
