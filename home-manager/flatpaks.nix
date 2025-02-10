@@ -6,7 +6,5 @@
       location = "https://flathub.org/repo/flathub.flatpakrepo";
     }
   ];
-  services.flatpak.packages = [
-    "io.github.zen_browser.zen"
-  ];
+  services.flatpak.packages = [];
 }

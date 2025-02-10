@@ -9,9 +9,9 @@
 
   home.packages = with pkgs; [
     # Utils
-    gnome.dconf-editor
-    gnome.sushi
-    gnome.gnome-tweaks
+    dconf-editor
+    sushi
+    gnome-tweaks
     gnome-extensions-cli # Para pegar os nome completo da extensão
   ];
 

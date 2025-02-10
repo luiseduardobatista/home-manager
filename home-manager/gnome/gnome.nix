@@ -33,9 +33,9 @@
     "org/gnome/shell" = {
       "enabled-extensions" = [
         "pop-shell@system76.com"
-        "dash-to-dock@micxgx.gmail.com"
+        # "dash-to-dock@micxgx.gmail.com"
         "vitals@CoreCoding.com"
-        "blur-my-shell@aunetx"
+        # "blur-my-shell@aunetx"
         "just-perfection-desktop@just-perfection"
         # "monitor@astraext.github.io"
         "AlphabeticalAppGrid@stuarthayhurst"

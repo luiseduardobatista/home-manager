@@ -10,19 +10,24 @@
   targets.genericLinux.enable = true;
   nixGL.packages = nixGL.packages;
 
-  imports = [
-    ./zsh.nix
-    ./neovim.nix
-    ./devtools.nix
-    ./programming-languages.nix
-    ./gnome/gnome.nix
-    # ./gnome/pop-os.nix
-    ./utils.nix
-    ./git.nix
-    ./ssh.nix
-    ./cli.nix
-    ./fonts.nix
-  ];
+  imports =
+    [
+      ./neovim.nix
+      ./devtools.nix
+      ./programming-languages.nix
+      ./gnome/gnome.nix
+      ./utils.nix
+      ./configs/git.nix
+      ./configs/ssh.nix
+      ./packages.nix
+    ]
+    ++ (
+      if ixNixOS
+      then [
+        ./zsh.nix
+      ]
+      else []
+    );
 
   home = {
     username = "luisb";

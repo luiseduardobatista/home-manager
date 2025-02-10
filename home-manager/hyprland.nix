@@ -14,12 +14,10 @@
     wl-clipboard
     xfce.thunar
     nwg-look
+    nwg-displays # Display Manager
     brightnessctl
     networkmanagerapplet
     bluez # Bluetooth package
     overskride #bluetooth manager
-
-    # HyprPanel
-    inputs.hyprpanel.packages."${pkgs.system}".default
   ];
 }

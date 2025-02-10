@@ -55,7 +55,7 @@
   '';
 in {
   home.packages = with pkgs; [
-    (config.lib.nixGL.wrap ulauncher )
+    (config.lib.nixGL.wrap ulauncher)
   ];
 
   xdg.configFile = {
