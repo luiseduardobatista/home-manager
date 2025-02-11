@@ -1,0 +1,3 @@
+[submodule "home-manager/configs/config"]
+	path = home-manager/configs/config
+	url = git@github.com:luiseduardobatista/lazyvim.git

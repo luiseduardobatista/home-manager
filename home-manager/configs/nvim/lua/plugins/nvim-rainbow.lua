@@ -1,0 +1,15 @@
+-- return {
+--   "p00f/nvim-ts-rainbow",
+--   after = "nvim-treesitter",
+--   config = function()
+--     require("nvim-treesitter.configs").setup({
+--       rainbow = {
+--         enable = true,
+--         extended_mode = true, -- Highlight also non-parentheses delimiters
+--         max_file_lines = nil, -- Do not enable for files with more than n lines
+--       },
+--     })
+--   end,
+-- }
+--
+return {}

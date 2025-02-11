@@ -1,10 +1,7 @@
-{config, ...}: let
-  dotfiles = builtins.fetchGit {
-    url = "https://github.com/luiseduardobatista/dotfiles.git";
-    submodules = true;
-  };
-in {
+{config, ...}: 
+ {
   home.file = {
-    ".config/wezterm/".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config/wezterm";
+    ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "./wezterm";
+    ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "./nvim";
   };
 }
