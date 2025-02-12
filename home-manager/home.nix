@@ -4,7 +4,7 @@
   config,
   pkgs,
   nixGL,
-  ixNixOS,
+  isNixOS,
   ...
 }: {
   targets.genericLinux.enable = true;
@@ -12,17 +12,13 @@
 
   imports =
     [
-      ./neovim.nix
-      ./devtools.nix
-      ./programming-languages.nix
       ./gnome/gnome.nix
-      ./utils.nix
       ./configs/git.nix
       ./configs/ssh.nix
       ./packages.nix
     ]
     ++ (
-      if ixNixOS
+      if isNixOS
       then [
         ./zsh.nix
       ]
