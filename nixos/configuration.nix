@@ -61,9 +61,17 @@
   virtualisation.docker.enable = true;
 
   # Enable Flatpak
+  services.flatpak.enable = true;
+  services.flatpak.remotes = [
+    {
+      name = "flathub";
+      location = "https://flathub.org/repo/flathub.flatpakrepo";
+    }
+  ];
+  services.flatpak.packages = [];
+
   # xdg.portal.enable = true;
   # xdg.portal.extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  # services.flatpak.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
