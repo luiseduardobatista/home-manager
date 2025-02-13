@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  pkgs-unstable,
   ...
 }: {
   imports = [
@@ -10,13 +11,14 @@
     # ../ulauncher.nix
   ];
 
-  home.packages = with pkgs; [
+  home.packages = with pkgs-unstable; [
     # Default
     bibata-cursors
     wmctrl
 
     # Extensions
     gnomeExtensions.pop-shell
+    gnomeExtensions.forge
     gnomeExtensions.dash-to-dock
     gnomeExtensions.vitals
     gnomeExtensions.blur-my-shell
@@ -26,13 +28,14 @@
     gnomeExtensions.appindicator
     gnomeExtensions.user-themes
     gnomeExtensions.space-bar
-  ];
+  ] ;
 
   dconf.settings = {
     # Enable Extensions
     "org/gnome/shell" = {
       "enabled-extensions" = [
         "pop-shell@system76.com"
+        # "forge@jmmaranan.com"
         # "dash-to-dock@micxgx.gmail.com"
         "vitals@CoreCoding.com"
         # "blur-my-shell@aunetx"
@@ -73,7 +76,7 @@
     #   ];
     # };
 
-    #Pop Shell bindings
+    # Window management keybinds
     "org/gnome/desktop/wm/keybindings" = {
       close = ["<Super>q" "<Alt>F4"];
       minimize = ["<Super>comma"];
@@ -124,6 +127,12 @@
       focus-down = ["<Super>Down" "<Super>j"];
       focus-up = ["<Super>Up" "<Super>k"];
       focus-right = ["<Super>Right" "<Super>l"];
+    };
+
+    "org/gnome/shell/extensions/forge" = {
+      stacked-tiling-mode-enabled = false;
+      tiling-mode-enabled = true;
+      window-gap-hidden-on-single = false;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
