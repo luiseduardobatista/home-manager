@@ -36,6 +36,12 @@
 
     "org/gnome/desktop/interface" = {
       enable-hot-corners = false;
+      color-scheme = "prefer-dark";
+      gtk-theme = "Adwaita-dark";
+    };
+
+    "org/gnome/desktop/peripherals/mouse" = {
+      accel-profile = "flat";
     };
 
     "org/gnome/shell/keybindings" = {

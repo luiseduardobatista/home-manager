@@ -66,6 +66,11 @@
 
   unstablePackages = with pkgs-unstable; [
     neovim
+
+    # TWM
+    # kanshi
+    # (nixGLwrap wdisplays)
+    # wlr-randr
   ];
 
   nixOSPackages = with pkgs;
