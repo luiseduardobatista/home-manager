@@ -58,22 +58,19 @@
   ];
 
   utils = with pkgs; [
-    (nixGLwrap obsidian)
-    vlc
-    youtube-music
+    (nixGLwrap vlc )
     gearlever
   ];
 
   unstablePackages = with pkgs-unstable; [
     neovim
-
     # TWM
     # kanshi
     # (nixGLwrap wdisplays)
     # wlr-randr
   ];
 
-  nixOSPackages = with pkgs;
+  nixOSPackages = with pkgs-unstable;
     if isNixOS
     then [
       wezterm

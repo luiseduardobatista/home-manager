@@ -6,7 +6,7 @@
   ...
 }: {
   imports = [
-    ./pop-shell-config.nix
+    # ./pop-shell-config.nix
     ./shared.nix
     # ../ulauncher.nix
   ];

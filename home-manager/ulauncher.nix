@@ -54,10 +54,6 @@
     sed -i "s|\\\$HOME|$HOME|g" "$shortcutsFile"
   '';
 in {
-  home.packages = with pkgs; [
-    (config.lib.nixGL.wrap ulauncher)
-  ];
-
   xdg.configFile = {
     "ulauncher/ulauncher.json".text = ''
       {
