@@ -58,7 +58,7 @@
   ];
 
   utils = with pkgs; [
-    (nixGLwrap vlc )
+    (nixGLwrap vlc)
     gearlever
   ];
 
@@ -74,6 +74,7 @@
     if isNixOS
     then [
       wezterm
+      kitty
       alacritty
       python3
       brave
