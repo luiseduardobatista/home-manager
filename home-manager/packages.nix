@@ -24,6 +24,7 @@
     (nixGLwrap dbeaver-bin)
     (nixGLwrap bruno)
     (nixGLwrap remmina)
+    # (nixGLwrap ghostty)
     gnumake
     unzip
     poetry
@@ -56,6 +57,7 @@
     nodejs
     alejandra
   ];
+
 
   utils = with pkgs; [
     (nixGLwrap vlc)
