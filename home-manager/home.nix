@@ -4,25 +4,27 @@
   config,
   pkgs,
   nixGL,
-  ixNixOS,
+  isNixOS,
   ...
 }: {
   targets.genericLinux.enable = true;
   nixGL.packages = nixGL.packages;
 
-  imports = [
-    ./zsh.nix
-    ./neovim.nix
-    ./devtools.nix
-    ./programming-languages.nix
-    ./gnome/gnome.nix
-    # ./gnome/pop-os.nix
-    ./utils.nix
-    ./git.nix
-    ./ssh.nix
-    ./cli.nix
-    ./fonts.nix
-  ];
+  imports =
+    [
+      # ./desktop/gnome/gnome.nix # Desabilitado para o build em Docker, pois não há sessão gráfica.
+      ./programs/git.nix
+      ./programs/ssh.nix
+      ./packages.nix
+      ./dotfiles/main.nix
+    ]
+    ++ (
+      if isNixOS
+      then [
+        ./programs/zsh.nix
+      ]
+      else []
+    );
 
   home = {
     username = "luisb";
@@ -36,8 +38,6 @@
   };
 
   programs.home-manager.enable = true;
-  programs.git.enable = true;
-  programs.zsh.enable = true;
   systemd.user.startServices = "sd-switch";
   home.stateVersion = "23.05";
 }
