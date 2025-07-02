@@ -16,6 +16,8 @@
     lazydocker
     btop
     tree
+    zsh
+    fish
   ];
 
   devTools = with pkgs; [
