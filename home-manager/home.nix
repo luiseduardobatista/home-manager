@@ -12,7 +12,7 @@
 
   imports =
     [
-      ./desktop/gnome/gnome.nix
+      # ./desktop/gnome/gnome.nix # Desabilitado para o build em Docker, pois não há sessão gráfica.
       ./programs/git.nix
       ./programs/ssh.nix
       ./packages.nix

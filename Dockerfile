@@ -4,33 +4,36 @@ FROM ubuntu:22.04
 # Evitar prompts interativos durante a instalação de pacotes
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Instalar dependências básicas e sudo
+# 1. Instalar dependências do sistema
+# Esta camada é cacheada e só será reconstruída se a lista de pacotes mudar.
 RUN apt-get update && apt-get install -y \
     sudo \
     git \
     curl \
+    python3-venv \
     && rm -rf /var/lib/apt/lists/*
 
-# Criar um usuário não-root 'tester' para simular um ambiente de usuário real
-# O usuário terá o ID 1000, comum em muitas distros desktop
-RUN useradd -m -u 1000 -s /bin/bash tester
+# 2. Criar usuário e conceder permissões de sudo
+# O usuário é 'luisb' para alinhar com a configuração do Home Manager.
+RUN useradd -m -u 1000 -s /bin/bash luisb && \
+  echo "luisb ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# Conceder privilégios de sudo sem senha ao usuário 'tester'
-RUN echo "tester ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+# 3. Criar o diretório de trabalho e definir 'luisb' como proprietário
+RUN mkdir -p /home/luisb/nix-config && chown -R luisb:luisb /home/luisb/nix-config
 
-# Definir o usuário 'tester' como o usuário padrão para os comandos subsequentes
-USER tester
+# 4. Definir o diretório de trabalho e mudar para o usuário 'luisb'
+WORKDIR /home/luisb/nix-config
+USER luisb
 
-# Definir o diretório de trabalho na home do usuário
-WORKDIR /home/tester/nix-config
+# 5. Copiar os arquivos de configuração
+# A camada de dependências acima permanecerá cacheada.
+COPY --chown=luisb:luisb . .
 
-# Copiar todo o conteúdo do projeto para o diretório de trabalho no contêiner
-# O .dockerignore será respeitado aqui
-COPY . .
-
-# Tornar o script de instalação executável
+# 6. Tornar o script de instalação executável
 RUN chmod +x install.sh
 
-# Definir o ponto de entrada para executar o script de instalação
-# O script será executado no modo interativo para que o menu de seleção de shell funcione
-CMD ["/bin/bash", "-c", "./install.sh"]
+# 7. Definir o ponto de entrada e o comando padrão.
+# O ENTRYPOINT sempre executa o script de instalação.
+# O CMD fornece o comando padrão (um shell bash) para ser executado após a instalação.
+ENTRYPOINT ["./install.sh"]
+CMD ["/bin/bash", "-l"]
