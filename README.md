@@ -93,3 +93,32 @@ Isso atualizará o `flake.lock` para apontar para o seu commit mais recente, tor
 - **Flexível:** Permite testar alterações não commitadas sem quebrar o estado do seu repositório principal.
 - **Seguro:** É fácil voltar para um estado estável e conhecido.
 
+## Testando a Configuração com Docker
+
+Para testar a configuração do Home Manager em um ambiente isolado e reproduzível, você pode usar o `Dockerfile` fornecido. Este Dockerfile constrói uma imagem Ubuntu com o Nix e o Home Manager configurados, executando o script `install.sh` automaticamente.
+
+### Construir a Imagem Docker
+
+Navegue até a raiz do repositório e construa a imagem:
+
+```bash
+docker build -t home-manager-config .
+```
+
+### Executar o Contêiner
+
+Após a construção, você pode executar um contêiner a partir da imagem. O `ENTRYPOINT` do Dockerfile (`./install.sh`) garantirá que o script de instalação seja executado. O `CMD` padrão (`/bin/bash -l`) fornecerá um shell interativo após a instalação.
+
+```bash
+docker run -it home-manager-config
+```
+
+Dentro do contêiner, você estará logado como o usuário `luisb` e poderá verificar se as configurações do Home Manager foram aplicadas corretamente. Por exemplo, você pode verificar a versão do `neovim` ou `zsh`:
+
+```bash
+nvim --version
+zsh --version
+```
+
+Este método é ideal para validar suas alterações de configuração em um ambiente limpo antes de aplicá-las ao seu sistema principal.
+
