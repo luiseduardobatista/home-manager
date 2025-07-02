@@ -1,23 +1,10 @@
-#!/bin/bash
 set -e
 
-# Define o usuário atual de forma robusta
 CURRENT_USER=$(whoami)
 
-# Este script automatiza a configuração do ambiente de desenvolvimento em novas instalações
-# do Ubuntu, Fedora e Arch Linux. Ele é projetado para ser idempotente.
-#
-# O script irá:
-# 1. Detectar a distribuição (distro).
-# 2. Instalar dependências de sistema necessárias usando o gerenciador de pacotes correto.
-# 3. Instalar o gerenciador de pacotes Nix, caso ainda não esteja instalado.
-# 4. Aplicar a configuração do Home Manager a partir do flake no diretório atual.
-# 5. Solicitar ao usuário que selecione um shell padrão (Bash, Zsh ou Fish).
-# 6. Configurar a toolchain padrão do Rust.
 
-# Função para detectar a distribuição
 detect_distro() {
-  echo "--- Passo 1: Detecção da Distro ---"
+  echo "Iniciando a detecção da distribuição do sistema..."
   if [ -f /etc/os-release ]; then
     . /etc/os-release
     DISTRO_ID="$ID"
@@ -28,10 +15,8 @@ detect_distro() {
   echo "Distribuição detectada: $DISTRO_ID"
 }
 
-# Função para instalar dependências do sistema
 install_system_dependencies() {
-  echo "--- Passo 2: Instalar Dependências do Sistema ---"
-  echo "Garantindo que as dependências do sistema estejam instaladas..."
+  echo "Verificando e instalando dependências essenciais do sistema..."
   case "$DISTRO_ID" in
   ubuntu | debian)
     sudo apt-get update
@@ -51,9 +36,8 @@ install_system_dependencies() {
   esac
 }
 
-# Função para instalar o Nix
 install_nix() {
-  echo "--- Passo 3: Instalar o Gerenciador de Pacotes Nix ---"
+  echo "Verificando a instalação do Nix e iniciando o processo se necessário..."
   if ! command -v nix &>/dev/null; then
     echo "Nix não encontrado. Instalando o gerenciador de pacotes Nix..."
 
@@ -78,9 +62,8 @@ install_nix() {
   fi
 }
 
-# Função para configurar e iniciar o daemon Nix (para ambientes sem systemd)
 configure_nix_daemon() {
-  echo "--- Passo 3.5: Configurar e Iniciar o Daemon (para ambientes sem systemd) ---"
+  echo "Configurando e iniciando o daemon Nix para ambientes sem systemd..."
   if ! [ -d /run/systemd/system ]; then
     echo "Ambiente sem systemd detectado. Configurando e iniciando o nix-daemon..."
 
@@ -91,20 +74,30 @@ configure_nix_daemon() {
     sudo /nix/var/nix/profiles/default/bin/nix-daemon &
 
     echo "Aguardando o nix-daemon iniciar..."
-    sleep 5
+    local NIX_DAEMON_SOCKET="/nix/var/nix/daemon-socket/socket"
+    local MAX_ATTEMPTS=10
+    local ATTEMPT=0
+    while [ ! -S "$NIX_DAEMON_SOCKET" ] && [ $ATTEMPT -lt $MAX_ATTEMPTS ]; do
+      echo "Aguardando o socket do nix-daemon ($NIX_DAEMON_SOCKET)... Tentativa $((ATTEMPT + 1)) de $MAX_ATTEMPTS"
+      sleep 1
+      ATTEMPT=$((ATTEMPT + 1))
+    done
+
+    if [ ! -S "$NIX_DAEMON_SOCKET" ]; then
+      echo "Erro: O socket do nix-daemon não apareceu após várias tentativas. Saindo."
+      exit 1
+    fi
+    echo "Nix-daemon está ativo e pronto."
   fi
 }
 
-# Função para aplicar a configuração do Home Manager
 apply_home_manager_config() {
-  echo "--- Passo 4: Aplicar a Configuração do Home Manager ---"
   echo "Aplicando a configuração do Home Manager para o usuário '$CURRENT_USER'..."
   USER=$CURRENT_USER nix shell nixpkgs#home-manager -c home-manager switch --flake .#"$CURRENT_USER"
 }
 
-# Função para definir o shell padrão
 set_default_shell() {
-  echo "--- Passo 5: Definir o Shell Padrão ---"
+  echo "Definindo o shell padrão para o usuário..."
   if ! [ -d /run/systemd/system ]; then
     echo "Ambiente não interativo detectado. Definindo 'zsh' como o shell padrão..."
     SHELL_PATH="$HOME/.nix-profile/bin/zsh"
@@ -133,10 +126,11 @@ set_default_shell() {
   fi
 
   if ! grep -qxF "$SHELL_PATH" /etc/shells; then
-    echo "Adicionando $SHELL_PATH em /etc/shells..."
-    echo "$SHELL_PATH" | sudo tee -a /etc/shells
+    echo "Adicionando '$SHELL_PATH' a /etc/shells..."
+    echo "$SHELL_PATH" | sudo tee -a /etc/shells >/dev/null
+    echo "'$SHELL_PATH' adicionado com sucesso a /etc/shells."
   else
-    echo "$SHELL_PATH já está presente em /etc/shells."
+    echo "'$SHELL_PATH' já está presente em /etc/shells. Pulando a adição."
   fi
 
   if [ "$SHELL" != "$SHELL_PATH" ]; then
@@ -147,14 +141,16 @@ set_default_shell() {
   fi
 }
 
-# Função para configurar o Rust
 configure_rust() {
-  echo "--- Passo 6: Configurar o Rust ---"
-  echo "Definindo a toolchain padrão do Rust como 'stable'..."
-  rustup default stable
+  echo "Configurando a toolchain padrão do Rust como 'stable'..."
+  if rustup default stable; then
+    echo "Toolchain padrão do Rust definida como 'stable' com sucesso."
+  else
+    echo "Erro ao definir a toolchain padrão do Rust. Por favor, verifique a instalação do rustup."
+    exit 1
+  fi
 }
 
-# Função principal
 main() {
   detect_distro
   install_system_dependencies
@@ -169,6 +165,4 @@ main() {
   echo ""
 }
 
-# Executa a função principal
 main
-

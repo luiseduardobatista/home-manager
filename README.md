@@ -1,8 +1,10 @@
-# Configuração do Home Manager no Ubuntu(e outras distros)
+# Configuração do Home Manager no Ubuntu (e outras distros)
 
-Descreve os passos necessários para configurar o `sudo` no Ubuntu para reconhecer os pacotes instalados via Home Manager e Nix.
+Este repositório contém as configurações do Home Manager e um script de instalação (`install.sh`) projetado para automatizar a configuração do ambiente de desenvolvimento em diversas distribuições Linux (Ubuntu, Fedora, Arch Linux). O script é modular, idempotente e lida com a detecção da distribuição, instalação de dependências, configuração do Nix, Home Manager, shell padrão e Rust.
 
-## Passos para configurar o `sudo`
+## Configuração do `sudo`
+
+Para garantir que o `sudo` reconheça os pacotes instalados via Home Manager e Nix, é necessário ajustar o `secure_path` no arquivo de configuração do `sudoers`.
 
 1. Abra o arquivo de configuração do `sudoers` com o editor de sua escolha:
 
@@ -20,7 +22,7 @@ Descreve os passos necessários para configurar o `sudo` no Ubuntu para reconhec
     Defaults    secure_path = /home/luisb/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/sbin:/bin:/usr/sbin:/usr/bin:/snap/bin
     ```
 
-## Explicação dos diretórios
+### Explicação dos diretórios
 
 - `/home/luisb/.nix-profile/bin`: Diretório onde os binários do Home Manager estão localizados.
 - `/nix/var/nix/profiles/default/bin`: Diretório do perfil padrão do Nix.
