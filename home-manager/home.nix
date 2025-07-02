@@ -12,15 +12,16 @@
 
   imports =
     [
-      ./gnome/gnome.nix
-      ./configs/git.nix
-      ./configs/ssh.nix
+      ./desktop/gnome/gnome.nix
+      ./programs/git.nix
+      ./programs/ssh.nix
       ./packages.nix
+      ./dotfiles/main.nix
     ]
     ++ (
       if isNixOS
       then [
-        ./zsh.nix
+        ./programs/zsh.nix
       ]
       else []
     );
@@ -37,8 +38,6 @@
   };
 
   programs.home-manager.enable = true;
-  programs.git.enable = true;
-  programs.zsh.enable = true;
   systemd.user.startServices = "sd-switch";
   home.stateVersion = "23.05";
 }

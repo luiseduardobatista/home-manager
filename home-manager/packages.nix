@@ -52,20 +52,19 @@
   ];
 
   langs = with pkgs; [
-    go
     rustup
-    nodejs
     alejandra
   ];
 
-
   utils = with pkgs; [
-    (nixGLwrap vlc)
     gearlever
   ];
 
   unstablePackages = with pkgs-unstable; [
     neovim
+    nodejs
+    go
+    gemini-cli
     # TWM
     # kanshi
     # (nixGLwrap wdisplays)

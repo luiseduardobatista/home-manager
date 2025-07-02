@@ -28,7 +28,7 @@
     gnomeExtensions.appindicator
     gnomeExtensions.user-themes
     gnomeExtensions.space-bar
-    gnomeExtensions.disable-workspace-switch-animation-for-gnome-40
+    gnomeExtensions.disable-workspace-animation
   ];
 
   dconf.settings = {
@@ -47,7 +47,7 @@
         "user-theme@gnome-shell-extensions.gcampax.github.com"
         "space-bar@luchrioh"
         "bluetooth-quick-connect@bjarosze.gmail.com"
-        "instantworkspaceswitcher@amalantony.net"
+        "disable-workspace-animation@ethnarque"
       ];
     };
 

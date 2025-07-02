@@ -10,6 +10,10 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lazyvim = {
+      url = "github:luiseduardobatista/lazyvim";
+      flake = false;
+    };
   };
 
   outputs = {
@@ -29,13 +33,6 @@
       config.allowUnfree = true;
     };
   in {
-    nixosConfigurations = {
-      ${hostname} = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs outputs;};
-        modules = [./nixos/configuration.nix];
-      };
-    };
-
     homeConfigurations = {
       "luisb" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
