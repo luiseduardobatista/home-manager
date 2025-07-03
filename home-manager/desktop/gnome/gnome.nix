@@ -191,7 +191,7 @@
       animation-speed = 50;
       popup-at-cursor-monitor = true;
       preferred-monitor = 0;
-      shortcut-search = "['<Control>space']";
+      shortcut-search = [ "<Control>space" ];
     };
   };
 }
