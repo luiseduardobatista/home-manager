@@ -29,6 +29,7 @@
     gnomeExtensions.user-themes
     gnomeExtensions.space-bar
     gnomeExtensions.disable-workspace-animation
+    gnomeExtensions.search-light
   ];
 
   dconf.settings = {
@@ -48,6 +49,7 @@
         "space-bar@luchrioh"
         "bluetooth-quick-connect@bjarosze.gmail.com"
         "disable-workspace-animation@ethnarque"
+        "search-light@icedman.github.com"
       ];
     };
 
@@ -182,6 +184,14 @@
       icon-saturation = 0;
       icon-size = 20;
       legacy-tray-enabled = true;
+    };
+
+    # Search Light
+    "org/gnome/shell/extensions/search-light" = {
+      animation-speed = 50;
+      popup-at-cursor-monitor = true;
+      preferred-monitor = 0;
+      shortcut-search = "['<Control>space']";
     };
   };
 }
