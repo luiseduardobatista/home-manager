@@ -1,7 +1,7 @@
 {
   programs.git = {
     enable = true;
-    # userName = "luiseduardobatista";
+    userName = "Luís Eduardo Batista";
     # userEmail = "luiseduardob303@gmail.com";
   };
 }
