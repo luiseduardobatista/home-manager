@@ -17,7 +17,7 @@
     wmctrl
 
     # Extensions
-    gnomeExtensions.pop-shell
+    # gnomeExtensions.pop-shell
     gnomeExtensions.forge
     gnomeExtensions.dash-to-dock
     gnomeExtensions.vitals
@@ -36,8 +36,8 @@
     # Enable Extensions
     "org/gnome/shell" = {
       "enabled-extensions" = [
-        "pop-shell@system76.com"
-        # "forge@jmmaranan.com"
+        # "pop-shell@system76.com"
+        "forge@jmmaranan.com"
         # "dash-to-dock@micxgx.gmail.com"
         "vitals@CoreCoding.com"
         # "blur-my-shell@aunetx"
@@ -137,6 +137,16 @@
       stacked-tiling-mode-enabled = false;
       tiling-mode-enabled = true;
       window-gap-hidden-on-single = false;
+      auto-split-enabled = true;
+
+      focus-border-toggle = true;
+      focus-on-hover-enabled = true;
+      move-pointer-focus-enabled = true;
+      preview-hint-enabled = true;
+      quick-settings-enabled = true;
+      split-border-toggle = true;
+      window-gap-size = 4;
+      window-gap-size-increment = 1;
     };
 
     "org/gnome/settings-daemon/plugins/media-keys" = {
