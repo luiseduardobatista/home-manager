@@ -1,3 +1,5 @@
+#!/bin/bash
+
 set -e
 
 CURRENT_USER=$(whoami)

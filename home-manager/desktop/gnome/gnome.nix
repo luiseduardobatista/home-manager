@@ -30,6 +30,7 @@
     gnomeExtensions.space-bar
     gnomeExtensions.disable-workspace-animation
     gnomeExtensions.search-light
+    gnomeExtensions.window-is-ready-remover
   ];
 
   dconf.settings = {
