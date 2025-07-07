@@ -5,7 +5,7 @@ Este repositório contém minhas configurações pessoais de ambiente de desenvo
 ## Índice
 
 - [Recursos](#recursos)
-- [Configuração do GNOME](#configuração-do-gnome)
+- [DE/TWM](#detwm)
 - [Começando](#começando)
 - [Pós-Instalação](#pós-instalação)
 - [Testando com Docker](#testando-com-docker)
@@ -20,7 +20,10 @@ Este repositório contém minhas configurações pessoais de ambiente de desenvo
 - **Instalação Automatizada:** Um script `install.sh` que detecta a distribuição e automatiza todo o processo de setup.
 - **Ambiente de Testes:** Dockerfiles para testar as configurações em contêineres isolados do Ubuntu e Fedora.
 
-## Configuração do GNOME
+## DE/TWM
+
+<details>
+<summary>GNOME</summary>
 
 A configuração do GNOME é projetada para ser minimalista, focada em produtividade e orientada pelo teclado, transformando o ambiente de desktop padrão em um Tiling Window Manager (TWM) eficiente.
 
@@ -30,6 +33,8 @@ A configuração do GNOME é projetada para ser minimalista, focada em produtivi
 - **Foco no Teclado:** Todos os atalhos de teclado foram remapeados para serem intuitivos e eficientes, permitindo que a maioria das ações (abrir apps, mover janelas, trocar de workspace) seja feita sem tocar no mouse.
 
 O objetivo final é um ambiente de desktop que se sente como um TWM tradicional (como i3 ou Hyprland), mas com a estabilidade e integração do GNOME.
+
+</details>
 
 ## Começando
 
