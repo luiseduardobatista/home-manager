@@ -38,26 +38,13 @@ O objetivo final é um ambiente de desktop que se sente como um TWM tradicional 
 
 ## Começando
 
-Para configurar seu ambiente, siga os passos abaixo.
-
-### 1. Clone o Repositório
-
-Clone este repositório para sua máquina local:
+Para instalar e configurar seu ambiente com um único comando, execute o seguinte no seu terminal. Ele irá clonar o repositório e iniciar a instalação automaticamente.
 
 ```bash
-git clone https://github.com/luiseduardobatista/nix.git ~/nix
-cd ~/nix
+git clone https://github.com/luiseduardobatista/nix.git ~/nix && cd ~/nix && ./install.sh
 ```
 
-### 2. Execute o Script de Instalação
-
-O script `install.sh` cuidará de tudo: instalará o Nix, aplicará as configurações do Home Manager e configurará seu shell padrão.
-
-```bash
-./install.sh
-```
-
-O script é idempotente, o que significa que você pode executá-lo novamente sem problemas se algo der errado.
+O script de instalação é idempotente, o que significa que você pode executá-lo novamente sem problemas se algo der errado.
 
 ## Pós-Instalação
 
@@ -175,4 +162,3 @@ Isso atualizará o `flake.lock` para apontar para o seu commit mais recente, tor
 - **Limpo:** Mantém a lógica de desenvolvimento fora do seu código de configuração.
 - **Flexível:** Permite testar alterações não commitadas sem quebrar o estado do seu repositório principal.
 - **Seguro:** É fácil voltar para um estado estável e conhecido.
-
