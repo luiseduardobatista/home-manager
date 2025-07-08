@@ -3,7 +3,6 @@
     fd
     ripgrep
     gcc
-    git
     wget
     curl
     xclip

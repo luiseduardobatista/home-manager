@@ -27,7 +27,10 @@
     inherit (self) outputs;
     hostname = "nixos";
     system = "x86_64-linux";
-    pkgs-unstable = nixpkgs-unstable.legacyPackages.${system};
+    pkgs-unstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
