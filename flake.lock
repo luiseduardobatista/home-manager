@@ -42,11 +42,11 @@
     "lazyvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1751757117,
-        "narHash": "sha256-a9m+qbInl6KKqKPcyeRVrGsCKX1LXPaDNwuJNhgMAaA=",
+        "lastModified": 1751914950,
+        "narHash": "sha256-aYBH99FBn8ftKKr7YSKlk91902XPU8Vfh50hYWx9v3c=",
         "owner": "luiseduardobatista",
         "repo": "lazyvim",
-        "rev": "9346936a77093dbb879eb69d481bb1a7396639f5",
+        "rev": "3ddb8856a96e9acbb6b509328b18709c43551634",
         "type": "github"
       },
       "original": {
