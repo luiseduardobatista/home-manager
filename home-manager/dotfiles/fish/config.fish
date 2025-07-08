@@ -11,5 +11,5 @@ alias hmc 'sudo nix-collect-garbage -d; nix-collect-garbage -d'
 alias hms 'home-manager switch --flake .'
 alias fhmu 'nix flake update && home-manager switch --flake .'
 
-export GEMINI_API_KEY="AIzaSyA8uDrOUD3a6XU_--WqQ8dayvnvyHEtNHA"
+export GEMINI_API_KEY=""
 export SSH_AUTH_SOCK=~/.1password/agent.sock
