@@ -37,8 +37,8 @@
     # Enable Extensions
     "org/gnome/shell" = {
       "enabled-extensions" = [
-        # "pop-shell@system76.com"
-        "forge@jmmaranan.com"
+        "pop-shell@system76.com"
+        # "forge@jmmaranan.com"
         # "dash-to-dock@micxgx.gmail.com"
         "vitals@CoreCoding.com"
         # "blur-my-shell@aunetx"
@@ -141,7 +141,7 @@
       auto-split-enabled = true;
 
       focus-border-toggle = true;
-      focus-on-hover-enabled = true;
+      focus-on-hover-enabled = false;
       move-pointer-focus-enabled = true;
       preview-hint-enabled = true;
       quick-settings-enabled = true;
