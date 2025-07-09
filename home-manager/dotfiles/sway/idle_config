@@ -1,0 +1,5 @@
+swayidle -w \
+    timeout 3 'grep -q closed /proc/acpi/button/lid/LID/state && ~/.config/kanshi/kanshi_reload' \
+    timeout 3 'grep -q open /proc/acpi/button/lid/LID/state && ~/.config/kanshi/kanshi_reload' \
+    before-sleep 'loginctl lock-session'
+
