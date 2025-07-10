@@ -1,5 +1,5 @@
-{ pkgs, pkgs-unstable, ... }: {
-  home.packages = with pkgs-unstable; [
+{pkgs, ...}: {
+  home.packages = with pkgs; [
     fd
     ripgrep
     gcc
