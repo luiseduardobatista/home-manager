@@ -12,7 +12,6 @@
   services.flatpak.enable = true;
   services.flatpak.packages = [
     "org.flameshot.Flameshot"
-    "com.visualstudio.code"
     "com.usebruno.Bruno"
     "org.remmina.Remmina"
     "it.mijorus.gearlever"
