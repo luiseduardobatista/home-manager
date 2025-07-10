@@ -132,6 +132,7 @@
       focus-down = ["<Super>Down" "<Super>j"];
       focus-up = ["<Super>Up" "<Super>k"];
       focus-right = ["<Super>Right" "<Super>l"];
+      hint-color-rgba ="rgb(90,166,182)";
     };
 
     "org/gnome/shell/extensions/forge" = {
