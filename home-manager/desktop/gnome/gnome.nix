@@ -4,8 +4,7 @@
   pkgs,
   ...
 }: {
-  imports = [
-  ];
+  imports = [];
 
   home.packages = with pkgs; [
     # Default
@@ -253,7 +252,7 @@
       animation-speed = 50;
       popup-at-cursor-monitor = true;
       preferred-monitor = 0;
-      shortcut-search = ["<Super>r"];
+      shortcut-search = ["<Super>d"];
     };
 
     "org/gnome/shell/extensions/space-bar/behavior" = {
