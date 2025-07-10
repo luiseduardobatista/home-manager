@@ -16,18 +16,13 @@
       kitty
       alacritty
       brave
-      flameshot
     ]
     else [];
 in {
   home.packages = with pkgs;
     [
       (nixGLwrap jetbrains-toolbox)
-      (nixGLwrap vscode)
       (nixGLwrap dbeaver-bin)
-      (nixGLwrap bruno)
-      (nixGLwrap remmina)
-      gearlever
     ]
     ++ nixOSPackages;
 }

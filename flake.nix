@@ -13,6 +13,7 @@
       url = "github:luiseduardobatista/lazyvim";
       flake = false;
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak/";
   };
 
   outputs = {
@@ -20,6 +21,7 @@
     nixpkgs,
     home-manager,
     nixGL,
+    nix-flatpak,
     ...
   } @ inputs: let
     inherit (self) outputs;
@@ -38,8 +40,10 @@
           inherit outputs;
           isNixOS = false;
           inherit nixGL;
+          inherit nix-flatpak;
         };
         modules = [
+          nix-flatpak.homeManagerModules.nix-flatpak
           ./home-manager/home.nix
         ];
       };
