@@ -62,6 +62,7 @@
         "bluetooth-quick-connect@bjarosze.gmail.com"
         "disable-workspace-animation@ethnarque"
         "search-light@icedman.github.com"
+        "clipboard-indicator@tudmotu.com"
       ];
     };
 
@@ -190,6 +191,7 @@
       gap-inner = lib.hm.gvariant.mkUint32 1;
       gap-outer = lib.hm.gvariant.mkUint32 1;
       active-hint-border-radius = lib.hm.gvariant.mkUint32 4;
+      mouse-cursor-focus-location = lib.hm.gvariant.mkUint32 4;
     };
 
     "org/gnome/shell/extensions/forge" = {
