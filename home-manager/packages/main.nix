@@ -6,5 +6,6 @@
     ./gui.nix
     ./langs.nix
     ./neovim.nix
+    ./flatpaks.nix
   ];
 }
