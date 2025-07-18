@@ -6,6 +6,8 @@
     openfortivpn
     golines
     gopls
+    impl
+    gotestsum
     air
     sqlc
     stow

@@ -7,6 +7,6 @@
     curl
     xclip
     fzf
-    neovim
+    # neovim
   ];
 }
