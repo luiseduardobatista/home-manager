@@ -4,13 +4,13 @@
   ...
 }: let
   dotfilesPath = "/home/luisb/nix/home-manager/dotfiles";
-  createSymLink = srcPath: config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/${srcPath}";
+  createSymLink = sourceName: config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/${sourceName}";
   dotfilesToLink = [
     "wezterm"
     "foot"
     "kitty"
     "fish/config.fish"
-    "1Password/ssh/agent.toml"
+    "1Password/ssh"
     "nvim"
   ];
 in {
