@@ -192,13 +192,16 @@ Vamos supor que o diretório `alacritty` já está na sua lista `dotfilesToLink`
 2. Como o *diretório inteiro* `alacritty` é um link simbólico, este novo arquivo aparece **automaticamente** em `~/.config/alacritty/themes.yml`.
 3. Você pode então importá-lo no seu `alacritty.yml` principal. Se você deletar o arquivo, ele também desaparecerá instantaneamente.
 
-Em ambos os casos, você não precisou executar `home-manager switch` porque as mudanças ocorreram *dentro* de um diretório que já estava sendo monitorado pelo Nix
+Em ambos os casos, você não precisou executar `home-manager switch` porque as mudanças ocorreram *dentro* de um diretório que já estava sendo monitorado pelo Nix.
 
 ---
 
 ## DE/TWM
 
-### GNOME
+Esta seção detalha as configurações específicas para cada Ambiente de Desktop (DE) ou Gerenciador de Janelas (TWM) suportado.
+
+<details>
+<summary><strong>GNOME</strong></summary>
 
 A configuração do GNOME é projetada para ser minimalista, focada em produtividade e orientada pelo teclado, transformando o ambiente de desktop padrão em um Tiling Window Manager (TWM) eficiente.
 
@@ -208,6 +211,8 @@ A configuração do GNOME é projetada para ser minimalista, focada em produtivi
 * **Foco no Teclado:** Todos os atalhos de teclado foram remapeados para serem intuitivos e eficientes, permitindo que a maioria das ações (abrir apps, mover janelas, trocar de workspace) seja feita sem tocar no mouse.
 
 O objetivo final é um ambiente de desktop que se sente como um TWM tradicional (como i3 ou Hyprland), mas com a estabilidade e integração do GNOME.
+
+</details>
 
 ## Testando com Docker
 
