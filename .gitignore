@@ -1,0 +1,12 @@
+# Ignorar diretório do Git
+.git
+
+# Ignorar arquivos de lock que são específicos do host
+flake.lock
+
+# Ignorar diretórios de IDEs
+.idea/
+.vscode/
+
+# Ignorar o repositório nvim clonado
+/home-manager/dotfiles/nvim/

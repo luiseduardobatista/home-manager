@@ -133,32 +133,69 @@ Para gerenciar um novo arquivo de configuração, siga estes passos:
 
 1. **Adicionar o Arquivo ao Repositório**
 
-    Copie o arquivo de configuração que você deseja gerenciar para dentro do diretório `home-manager/dotfiles/`. Por exemplo, para adicionar a configuração do `alacritty`, crie o diretório e o arquivo em:
+    Copie o arquivo ou diretório de configuração que você deseja gerenciar para dentro de `home-manager/dotfiles/`. Por exemplo, para o `alacritty`:
 
     ```text
     home-manager/dotfiles/alacritty/alacritty.yml
     ```
 
-2. **Atualizar a Lista de Links**
+2. **Adicione sua Configuração à Lista de Links**
 
-    Abra o arquivo `home-manager/dotfiles/main.nix` e adicione o caminho do novo diretório de configuração à lista `dotfilesToLink`.
+    O próximo passo é dizer ao Nix como criar o link para sua nova configuração. Abra o arquivo:
+
+    `home-manager/dotfiles/main.nix`
+
+    Dentro dele, localize a lista `dotfilesToLink`. Você tem duas opções para adicionar sua configuração:
+
+    ---
+    **Cenário 1: Link Direto (Nomes Iguais)**
+
+    Use este método quando o nome do diretório em `dotfiles/` é o mesmo que você quer usar em `~/.config/`.
+
+    * **Como fazer:** Adicione o nome da configuração como uma string simples.
+
+        ```nix
+        "alacritty"
+        ```
+
+    * **Resultado:** O Nix criará um link de `dotfiles/alacritty` para `~/.config/alacritty`.
+
+    ---
+    **Cenário 2: Link Customizado (Nomes Diferentes)**
+
+    Use este método quando você quer que o nome do link em `~/.config/` seja **diferente** do nome do diretório de origem.
+
+    * **Como fazer:** Adicione um bloco com `source` e `target`.
+        * `source`: O nome original em `dotfiles/`.
+        * `target`: O nome final que aparecerá em `~/.config/`.
+
+        ```nix
+        { source = "nvim"; target = "nvim-teste"; }
+        ```
+
+    * **Resultado:** O Nix criará um link de `dotfiles/nvim` para `~/.config/nvim-teste`.
+
+    ---
+
+    **Exemplo de lista `dotfilesToLink` combinando os dois cenários:**
 
     ```nix
     let
       # ...
       dotfilesToLink = [
+        # --- Cenário 1: Links Diretos ---
         "wezterm"
         "foot"
         "kitty"
-        "fish/config.fish"
-        "1Password/ssh/agent.toml"
-        "alacritty"  # <-- Adicione o nome do diretório aqui
+        "alacritty"
+
+        # --- Cenário 2: Link Customizado ---
+        # Linka o diretório 'dotfiles/nvim' para '~/.config/nvim-teste'
+        { source = "nvim"; target = "nvim-teste"; }
       ];
     in
     # ...
     ```
-
-    **Nota:** Estamos linkando o diretório `alacritty` inteiro, não apenas o arquivo `alacritty.yml`. Isso nos permite gerenciar múltiplos arquivos de configuração para o mesmo programa (temas, etc.) de forma mais fácil.
 
 3. **Aplicar as Mudanças**
 
@@ -168,13 +205,13 @@ Para gerenciar um novo arquivo de configuração, siga estes passos:
     home-manager switch --flake .
     ```
 
-    O Nix irá criar o link simbólico de `~/nix/home-manager/dotfiles/alacritty` para `~/.config/alacritty`, e sua configuração estará gerenciada.
+    O Nix irá criar ou atualizar todos os links simbólicos conforme sua definição.
 
 ---
 
 **Observação Importante**
 
-Como usamos links simbólicos, se você apenas **editar o conteúdo** de um diretório ou arquivo já gerenciado, a mudança é aplicada instantaneamente. O comando `home-manager switch --flake .` só é necessário ao **adicionar ou remover** um item da lista `dotfilesToLink` em `main.nix`.
+Como usamos links simbólicos, se você apenas **editar o conteúdo** de um diretório ou arquivo já gerenciado, a mudança é aplicada instantaneamente. O comando `home-manager switch --flake .` só é necessário ao **adicionar, remover ou modificar a estrutura de um item** na lista `dotfilesToLink` em `main.nix`.
 
 #### Exemplo Prático
 
