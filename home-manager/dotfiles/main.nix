@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  inputs,
   ...
 }: let
   dotfilesPath = "/home/luisb/nix/home-manager/dotfiles";
