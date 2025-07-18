@@ -16,7 +16,7 @@ Este repositório contém minhas configurações pessoais de ambiente de desenvo
 - **Gerenciamento de Pacotes:** Utiliza o Nix para instalar e gerenciar pacotes de forma isolada e consistente.
 - **Configuração de Shell:** Inclui configurações para Zsh (com Oh My Zsh), Fish e Bash.
 - **Ambiente de Desenvolvimento:** Configurações para Neovim (baseado no LazyVim), Git, SSH e outras ferramentas de desenvolvimento.
-- **Aplicações de Desktop:** Gerencia a instalação e configuração de aplicaç��es como Wezterm, Kitty, Brave e ferramentas de desenvolvimento com interface gráfica.
+- **Aplicações de Desktop:** Gerencia a instalação e configuração de aplicações como Wezterm, Kitty, Brave e ferramentas de desenvolvimento com interface gráfica.
 - **Instalação Automatizada:** Um script `install.sh` que detecta a distribuição e automatiza todo o processo de setup.
 - **Ambiente de Testes:** Dockerfiles para testar as configurações em contêineres isolados do Ubuntu e Fedora.
 
@@ -73,7 +73,25 @@ home-manager switch --flake .
 
 O Nix irá criar o link simbólico de `~/nix/home-manager/dotfiles/alacritty/alacritty.yml` para `~/.config/alacritty/alacritty.yml`, e sua configuração estará gerenciada.
 
-> **Nota:** Se você apenas editar o *conteúdo* de um arquivo já existente no diretório `dotfiles/`, não é necessário executar `home-manager switch --flake .`. Como estamos usando links simbólicos, as alterações são refletidas instantaneamente. O comando `home-manager switch --flake .` só é necessário ao **adicionar ou remover** um arquivo da lista `dotfilesToLink` em `main.nix`.
+> **Observação:** Como usamos links simbólicos, se você apenas **editar o conteúdo** de um diretório ou arquivo já gerenciado, a mudança é aplicada instantaneamente. O comando `home-manager switch --flake .` só é necessário ao **adicionar ou remover** um arquivo da lista `dotfilesToLink` em `main.nix`.
+>
+> > **Exemplo Prático**
+> >
+> > Vamos supor que o diretório `wezterm` já está na sua lista `dotfilesToLink`. Isso significa que `~/.config/wezterm` é um link simbólico para `~/nix/home-manager/dotfiles/wezterm`.
+> >
+> > **Cenário 1: Modificando um arquivo existente**
+> >
+> > 1. Você abre o arquivo de configuração principal: `~/nix/home-manager/dotfiles/wezterm/wezterm.lua`.
+> > 2. Você altera o tamanho da fonte de `12` para `14`.
+> > 3. Ao salvar o arquivo, a mudança é aplicada **em tempo real**. Para aplicações como o Wezterm, que monitoram seu arquivo de configuração, você verá a fonte mudar imediatamente, sem precisar fechar e reabrir o terminal. Nenhum comando adicional é necessário.
+> >
+> > **Cenário 2: Adicionando ou deletando arquivos em um diretório gerenciado**
+> >
+> > 1. Você decide separar seus temas em um novo arquivo. Você cria `~/nix/home-manager/dotfiles/wezterm/themes.lua`.
+> > 2. Como o *diretório inteiro* `wezterm` é um link simbólico, este novo arquivo aparece **automaticamente** em `~/.config/wezterm/themes.lua`.
+> > 3. Você pode então importá-lo no seu `wezterm.lua` principal. Se você deletar o arquivo, ele também desaparecerá instantaneamente.
+> >
+> > Em ambos os casos, você não precisou executar `home-manager switch` porque as mudanças ocorreram *dentro* de um diretório que já estava sendo monitorado pelo Nix.
 
 ## DE/TWM
 
