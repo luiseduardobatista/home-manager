@@ -1,14 +1,23 @@
 {
   config,
+  pkgs,
   inputs,
   ...
-}: {
-  home.file = {
-    ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink (toString ./wezterm);
-    ".config/foot".source = config.lib.file.mkOutOfStoreSymlink (toString ./foot);
-    ".config/kitty".source = config.lib.file.mkOutOfStoreSymlink (toString ./kitty);
-    # ".config/nvim".source = inputs.lazyvim;
-    ".config/fish/config.fish".source = config.lib.file.mkOutOfStoreSymlink (toString ./fish/config.fish);
-    ".config/1Password/ssh/agent.toml".source = config.lib.file.mkOutOfStoreSymlink (toString ./1Password/agent.toml);
-  };
+}: let
+  dotfilesPath = "/home/luisb/nix/home-manager/dotfiles";
+  createSymLink = name: config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/${name}";
+  dotfilesToLink = [
+    "wezterm"
+    "foot"
+    "kitty"
+    "fish/config.fish"
+    "1Password/ssh/agent.toml"
+  ];
+in {
+  xdg.configFile = pkgs.lib.listToAttrs (map (name: {
+      name = name;
+      value = {source = createSymLink name;};
+    })
+    dotfilesToLink);
+  # home.file.".config/nvim".source = inputs.lazyvim;
 }
