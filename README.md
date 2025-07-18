@@ -20,6 +20,61 @@ Este repositório contém minhas configurações pessoais de ambiente de desenvo
 - **Instalação Automatizada:** Um script `install.sh` que detecta a distribuição e automatiza todo o processo de setup.
 - **Ambiente de Testes:** Dockerfiles para testar as configurações em contêineres isolados do Ubuntu e Fedora.
 
+## Gerenciando Dotfiles
+
+Este projeto utiliza uma abordagem centralizada para gerenciar *dotfiles* (arquivos de configuração, como `.bashrc` ou `kitty.conf`), garantindo que eles sejam consistentes e facilmente portáteis entre diferentes máquinas.
+
+### Como Funciona?
+
+1. **Diretório Central:** Todos os dotfiles são armazenados no diretório `home-manager/dotfiles/`. Cada subdiretório corresponde a uma aplicação específica (ex: `wezterm/`, `kitty/`, `fish/`).
+
+2. **Links Simbólicos:** O arquivo `home-manager/dotfiles/main.nix` é responsável por criar links simbólicos (symlinks) dos arquivos de configuração deste repositório para os locais corretos no seu diretório `~/.config`.
+
+3. **Automação com Nix:** Quando você executa o `home-manager switch`, o Nix lê a configuração em `main.nix` e garante que todos os links simbólicos sejam criados ou atualizados automaticamente.
+
+### Como Adicionar um Novo Dotfile
+
+Para gerenciar um novo arquivo de configuração, siga estes passos:
+
+**Passo 1: Adicionar o Arquivo ao Repositório**
+
+Copie o arquivo de configuração que você deseja gerenciar para dentro do diretório `home-manager/dotfiles/`. Por exemplo, para adicionar a configuração do `alacritty`, crie o arquivo em:
+
+```
+home-manager/dotfiles/alacritty/alacritty.yml
+```
+
+**Passo 2: Atualizar a Lista de Links**
+
+Abra o arquivo `home-manager/dotfiles/main.nix` e adicione o caminho do novo dotfile à lista `dotfilesToLink`. O caminho deve ser relativo ao diretório `~/.config`.
+
+```nix
+let
+  # ...
+  dotfilesToLink = [
+    "wezterm"
+    "foot"
+    "kitty"
+    "fish/config.fish"
+    "1Password/ssh/agent.toml"
+    "alacritty/alacritty.yml"  # <-- Adicione a nova entrada aqui
+  ];
+in
+# ...
+```
+
+**Passo 3: Aplicar as Mudanças**
+
+Execute o comando para aplicar a nova configuração do Home Manager:
+
+```bash
+home-manager switch --flake .
+```
+
+O Nix irá criar o link simbólico de `~/nix/home-manager/dotfiles/alacritty/alacritty.yml` para `~/.config/alacritty/alacritty.yml`, e sua configuração estará gerenciada.
+
+> **Nota:** Se você apenas editar o *conteúdo* de um arquivo já existente no diretório `dotfiles/`, não é necessário executar `home-manager switch --flake .`. Como estamos usando links simbólicos, as alterações são refletidas instantaneamente. O comando `home-manager switch --flake .` só é necessário ao **adicionar ou remover** um arquivo da lista `dotfilesToLink` em `main.nix`.
+
 ## DE/TWM
 
 <details>
@@ -41,7 +96,7 @@ O objetivo final é um ambiente de desktop que se sente como um TWM tradicional 
 Para instalar e configurar seu ambiente com um único comando, execute o seguinte no seu terminal. Ele irá clonar o repositório e iniciar a instalação automaticamente.
 
 ```bash
-git clone https://github.com/luiseduardobatista/nix.git ~/nix && cd ~/nix && ./install.sh
+git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && cd ~/nix && ./install.sh
 ```
 
 O script de instalação é idempotente, o que significa que você pode executá-lo novamente sem problemas se algo der errado.
