@@ -12,6 +12,7 @@
     "fish/config.fish"
     "1Password/ssh"
     "nvim"
+	"tmux"
   ];
 in {
   xdg.configFile = pkgs.lib.listToAttrs (map (
@@ -27,4 +28,8 @@ in {
         }
     )
     dotfilesToLink);
+
+  # home.file.".tmux.conf" = {
+  #   source = createSymLink "tmux/.tmux.conf";
+  # };
 }

@@ -19,7 +19,6 @@ config.use_dead_keys = false
 config.window_decorations = "NONE"
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2002 }
 config.window_padding = { right = 0, top = 0, bottom = 0 }
-
 local function is_vim(pane)
 	return pane:get_user_vars().IS_NVIM == "true"
 end
@@ -74,12 +73,12 @@ config.keys = {
 	},
 	{
 		mods = "LEADER",
-		key = "h",
+		key = "v",
 		action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
 	},
 	{
 		mods = "LEADER",
-		key = "v",
+		key = "h",
 		action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{

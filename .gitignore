@@ -10,3 +10,4 @@ flake.lock
 
 # Ignorar o repositório nvim clonado
 /home-manager/dotfiles/nvim/
+/home-manager/dotfiles/tmux/plugins/
