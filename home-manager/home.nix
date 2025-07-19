@@ -44,13 +44,14 @@
     #!/usr/bin/env bash
     set -euo pipefail
     NVIM_DOTFILES_DIR="${config.home.homeDirectory}/nix/home-manager/dotfiles/nvim"
-    # Ensure the parent directory exists
     mkdir -p "$(dirname "$NVIM_DOTFILES_DIR")"
     if [ ! -d "$NVIM_DOTFILES_DIR/.git" ]; then
-      echo "Cloning lazyvim repository into dotfiles project at $NVIM_DOTFILES_DIR..."
+      echo "Clonando o repositório lazyvim em $NVIM_DOTFILES_DIR..."
       ${pkgs.git}/bin/git clone https://github.com/luiseduardobatista/lazyvim.git "$NVIM_DOTFILES_DIR"
+      echo "Alterando a URL do remote 'origin' para a versão SSH..."
+      ${pkgs.git}/bin/git -C "$NVIM_DOTFILES_DIR" remote set-url origin git@github.com:luiseduardobatista/lazyvim.git
     else
-      echo "lazyvim repository already exists in the dotfiles project. Skipping clone."
+      echo "O repositório lazyvim já existe. Pulando o clone e a alteração de URL."
     fi
   '';
 }
