@@ -12,7 +12,8 @@
     "fish/config.fish"
     "1Password/ssh"
     "nvim"
-	"tmux"
+    "tmux"
+	"zellij"
   ];
 in {
   xdg.configFile = pkgs.lib.listToAttrs (map (
