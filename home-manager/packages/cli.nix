@@ -7,6 +7,7 @@
     zsh
     fish
     gemini-cli
+    sesh
   ];
 
   programs.zoxide.enable = true;

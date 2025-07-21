@@ -200,9 +200,40 @@ keybinds clear-defaults=true {
                 use_arrow_keys "false"
             }
         }
-        bind "y" {
+		bind "y" {
             LaunchOrFocusPlugin "file:/home/luisb/.config/zellij/plugins/zellij_forgot.wasm" {
+				"LOAD_ZELLIJ_BINDINGS" "false"
+                "lock/unlock mode"        "Ctrl g"
+                "quit zellij"             "Ctrl g, q"
+                "detach session"          "Ctrl g, o, d"
+                "session manager"         "Ctrl g, o, w"
+                "plugin manager"         "Ctrl g, o, p"
+                "configure"         "Ctrl g, o, c"
+                "split pane"                "Alt n"
+                "split pane down"           "Ctrl g, p, d"
+                "split pane right"          "Ctrl g, p, r"
+                "move pane focus"         "Ctrl h/j/k/l"
+                "close pane"              "Ctrl g, p, x"
+                "rename pane"             "Ctrl g, p, c"
+                "toggle floating panes"   "Alt f"
+                "toggle embed pane"       "Ctrl g, p, e"
+                "toggle fullscreen"       "Ctrl g, p, f"
+                "new tab"                 "Ctrl g, t, n"
+                "close tab"               "Ctrl g, t, x"
+                "go to previous/next tab" "Alt h/l"
+                "rename tab"              "Ctrl g, t, r"
+                "sync tab"                "Ctrl g, t, s"
+                "break pane to new tab"   "Ctrl g, t, b"
+                "break pane left/right"   "Ctrl g, t, [/]"
+                "toggle tab"              "Ctrl g, t, Tab"
+                "increase/decrease size"  "Alt + / Alt -"
+                "increase pane size"      "Ctrl g, r, h/j/k/l"
+                "move pane"               "Ctrl g, m, h/j/k/l"
+                "enter search mode"       "Ctrl g, s, f"
+                "edit scrollback"         "Ctrl g, s, e"
                 floating true
+				move_to_focused_tab true
+				focus_pane true
             }
         }
     }
@@ -355,7 +386,7 @@ default_mode "locked"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-default_layout "compact"
+// default_layout "compact"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
