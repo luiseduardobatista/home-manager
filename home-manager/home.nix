@@ -31,7 +31,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       BROWSER = "firefox";
-      TERMINAL = "foot";
+      TERMINAL = "alacritty";
       NIXOS_OZONE_WL = 1;
     };
   };
