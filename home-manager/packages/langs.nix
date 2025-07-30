@@ -15,7 +15,7 @@ in {
       rustup
       alejandra
       nodejs_24
-      go
+      # go
     ]
     ++ nixOSPackages;
 }

@@ -14,7 +14,7 @@
     "nvim"
     "tmux"
     "zellij"
-	"alacritty"
+    "alacritty"
   ];
 in {
   xdg.configFile = pkgs.lib.listToAttrs (map (

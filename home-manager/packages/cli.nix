@@ -11,4 +11,11 @@
   ];
 
   programs.zoxide.enable = true;
+  programs.yazi = {
+    enable = true;
+    package = pkgs.yazi;
+    plugins = {
+      no-status = pkgs.yaziPlugins.no-status;
+    };
+  };
 }

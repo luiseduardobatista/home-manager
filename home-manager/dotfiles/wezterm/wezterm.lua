@@ -9,7 +9,7 @@ end
 -- config.color_scheme = "Catppuccin Mocha"
 config.color_scheme = "tokyonight_night"
 config.font = wezterm.font("JetBrainsMono Nerd Font")
-config.font_size = 14
+config.font_size = 13
 
 config.colors = {
 	background = "#000",
@@ -25,38 +25,35 @@ config.window_padding = {
 
 -- tab bar
 config.hide_tab_bar_if_only_one_tab = true
--- config.hide_tab_bar_if_only_one_tab = false
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = false
-
 config.max_fps = 120
 config.animation_fps = 120
 
-config.use_dead_keys = false
+config.use_dead_keys = true
 
--- config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2002 }
-
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2002 }
+config.debug_key_events = true
 local function is_vim(pane)
 	return pane:get_user_vars().IS_NVIM == "true"
 end
 
-local direction_keys = {
-	h = "Left",
-	j = "Down",
-	k = "Up",
-	l = "Right",
-}
-
 local function split_nav(resize_or_move, key)
-	-- O mod foi alterado para LEADER para consistência,
-	-- mantendo a lógica da sua função original.
-	local mods = (resize_or_move == "resize") and "LEADER|SHIFT" or "LEADER"
+	local mods = (resize_or_move == "resize") and "LEADER|SHIFT" or "CTRL"
+	local direction_keys = {
+		h = "Left",
+		j = "Down",
+		k = "Up",
+		l = "Right",
+	}
 	return {
 		key = key,
 		mods = mods,
 		action = wezterm.action_callback(function(win, pane)
 			if is_vim(pane) then
+				-- Esta lógica interna para passar a tecla para o Vim continua perfeita.
+				-- Para mover, ela já envia "CTRL" + tecla.
 				local vim_mods = (resize_or_move == "resize") and "CTRL|SHIFT" or "CTRL"
 				win:perform_action({ SendKey = { key = key, mods = vim_mods } }, pane)
 			else
@@ -71,37 +68,37 @@ local function split_nav(resize_or_move, key)
 end
 
 config.keys = {
-	-- { mods = "LEADER", key = "c", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
-	-- { mods = "LEADER", key = "q", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
-	-- { mods = "LEADER", key = "b", action = wezterm.action.ActivateTabRelative(-1) },
-	-- { mods = "LEADER", key = "n", action = wezterm.action.ActivateTabRelative(1) },
-	-- { mods = "LEADER", key = "|", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-	-- { mods = "LEADER", key = "-", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
-	-- { mods = "LEADER", key = "m", action = wezterm.action.TogglePaneZoomState },
-	-- {
-	-- 	mods = "LEADER",
-	-- 	key = "r",
-	-- 	action = wezterm.action.PromptInputLine({
-	-- 		description = "Renomear a aba",
-	-- 		action = wezterm.action_callback(function(window, pane, line)
-	-- 			if line then
-	-- 				window:active_tab():set_title(line)
-	-- 			end
-	-- 		end),
-	-- 	}),
-	-- },
-	--
-	-- -- move between split panes
-	-- split_nav("move", "h"),
-	-- split_nav("move", "j"),
-	-- split_nav("move", "k"),
-	-- split_nav("move", "l"),
-	--
-	-- -- resize panes
-	-- split_nav("resize", "h"),
-	-- split_nav("resize", "j"),
-	-- split_nav("resize", "k"),
-	-- split_nav("resize", "l"),
+	{ mods = "LEADER", key = "c", action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+	{ mods = "LEADER", key = "q", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
+	{ mods = "LEADER", key = "b", action = wezterm.action.ActivateTabRelative(-1) },
+	{ mods = "LEADER", key = "n", action = wezterm.action.ActivateTabRelative(1) },
+	{ mods = "LEADER", key = "h", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER", key = "v", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+	{ mods = "LEADER", key = "f", action = wezterm.action.TogglePaneZoomState },
+	{
+		mods = "LEADER",
+		key = "r",
+		action = wezterm.action.PromptInputLine({
+			description = "Renomear a aba",
+			action = wezterm.action_callback(function(window, pane, line)
+				if line then
+					window:active_tab():set_title(line)
+				end
+			end),
+		}),
+	},
+
+	-- move between split panes
+	split_nav("move", "h"),
+	split_nav("move", "j"),
+	split_nav("move", "k"),
+	split_nav("move", "l"),
+
+	-- resize panes
+	split_nav("resize", "h"),
+	split_nav("resize", "j"),
+	split_nav("resize", "k"),
+	split_nav("resize", "l"),
 }
 
 -- leader + number to activate that tab

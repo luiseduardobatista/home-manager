@@ -27,7 +27,7 @@ end
 alias zj zellij
 alias vim nvim
 alias ls eza
-alias mvim 'NVIM_APPNAME="nvim-mini" nvim'
+alias mvim 'NVIM_APPNAME="mvim" nvim'
 alias kvim='NVIM_APPNAME="nvim-kickstart" nvim'
 alias hmc 'sudo nix-collect-garbage -d; nix-collect-garbage -d'
 alias hms 'home-manager switch --flake .'
@@ -36,3 +36,5 @@ alias testdox='gotestsum --format=testdox'
 bind \cf sesh_interactive
 
 export SSH_AUTH_SOCK=~/.1password/agent.sock
+
+fish_add_path /usr/local/go/bin
