@@ -15,5 +15,6 @@
     aws-sam-cli
     awscli
     eza
+    cargo-nextest
   ];
 }
