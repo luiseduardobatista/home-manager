@@ -23,6 +23,7 @@ in {
     [
       # (nixGLwrap jetbrains-toolbox)
       (nixGLwrap dbeaver-bin)
+	  (nixGLwrap bruno)
     ]
     ++ nixOSPackages;
 }

@@ -24,6 +24,14 @@ function sesh_interactive
     sesh connect "$session_name"
 end
 
+function ct
+    if test -z "$argv"
+        cargo nextest run
+    else
+        cargo nextest $argv
+    end
+end
+
 alias zj zellij
 alias vim nvim
 alias ls eza
