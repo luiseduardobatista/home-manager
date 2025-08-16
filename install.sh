@@ -21,13 +21,13 @@ install_system_dependencies() {
 	case "$DISTRO_ID" in
 	ubuntu | debian)
 		sudo apt-get update
-		sudo apt-get install -y git curl python3-venv
+		sudo apt-get install -y git curl python3-venv vim neovim
 		;;
 	fedora)
-		sudo dnf install -y git curl python3
+		sudo dnf install -y git curl python3 vim neovim
 		;;
 	arch)
-		sudo pacman -Syu --noconfirm git curl python
+		sudo pacman -Syu --noconfirm git curl python vim neovim
 		;;
 	*)
 		echo "Distribuição não suportada: $DISTRO_ID"
@@ -140,6 +140,15 @@ set_default_shell() {
 	else
 		echo "$shell_choice já é o shell padrão."
 	fi
+
+	if [ "$shell_choice" = "fish" ]; then
+		echo "Instalando o Fisher para o shell fish..."
+		curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+	fi
+
+	echo "Instalando o Starship Prompt..."
+	curl -sS https://starship.rs/install.sh | sh -s -- -y
+
 }
 
 configure_rust() {
