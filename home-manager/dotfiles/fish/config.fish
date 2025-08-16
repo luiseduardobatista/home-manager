@@ -46,3 +46,4 @@ bind \cf sesh_interactive
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 
 fish_add_path /usr/local/go/bin
+starship init fish | source
