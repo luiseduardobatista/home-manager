@@ -143,11 +143,13 @@ set_default_shell() {
 
 	if [ "$shell_choice" = "fish" ]; then
 		echo "Instalando o Fisher para o shell fish..."
-		curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+		fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source; fisher install jorgebucaran/fisher"
+		fish -c "fisher install kidonng/zoxide.fish"
 	fi
-
 	echo "Instalando o Starship Prompt..."
 	curl -sS https://starship.rs/install.sh | sh -s -- -y
+	export PATH="$HOME/.nix-profile/bin:$PATH"
+	starship preset nerd-font-symbols -o ~/.config/starship.toml
 
 }
 
