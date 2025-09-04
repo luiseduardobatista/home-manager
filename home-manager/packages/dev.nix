@@ -16,5 +16,6 @@
     awscli
     eza
     cargo-nextest
+    cargo-cache
   ];
 }

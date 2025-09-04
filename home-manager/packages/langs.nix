@@ -12,7 +12,7 @@
 in {
   home.packages = with pkgs;
     [
-      rustup
+      # rustup
       alejandra
       nodejs_24
       # go
