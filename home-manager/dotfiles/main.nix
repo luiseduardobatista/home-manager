@@ -5,7 +5,8 @@
 }: let
   dotfilesPath = "/home/luisb/nix/home-manager/dotfiles";
   createSymLink = sourceName: config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/${sourceName}";
-  dotfilesToLink = [
+
+  configDotfiles = [
     "wezterm"
     "foot"
     "kitty"
@@ -15,6 +16,10 @@
     "tmux"
     "zellij"
     "alacritty"
+  ];
+
+  homeDotfiles = [
+    ".ideavimrc"
   ];
 in {
   xdg.configFile = pkgs.lib.listToAttrs (map (
@@ -29,5 +34,19 @@ in {
           value = {source = createSymLink item.source;};
         }
     )
-    dotfilesToLink);
+    configDotfiles);
+
+  home.file = pkgs.lib.listToAttrs (map (
+      item:
+        if pkgs.lib.isString item
+        then {
+          name = item;
+          value = {source = createSymLink item;};
+        }
+        else {
+          name = item.target;
+          value = {source = createSymLink item.source;};
+        }
+    )
+    homeDotfiles);
 }
