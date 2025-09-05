@@ -116,8 +116,8 @@ vmap <leader>cf <Action>(Format)
 
 " Navegação de código
 nmap gd <Action>(GotoDeclaration)
-nmap gD <Action>(GotoDeclaration)
-nmap gr <Action>(FindUsages)
+nmap gD <Action>(GotoImplementation)
+nmap gr <Action>(GotoDeclaration)
 nmap gI <Action>(GotoImplementation)
 nmap gy <Action>(GotoTypeDeclaration)
 
