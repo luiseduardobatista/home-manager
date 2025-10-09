@@ -11,6 +11,7 @@ set scrolloff=4
 set sidescrolloff=8
 set shiftround
 set undolevels=10000
+set visualbell
 
 " --- Comportamento de Timeout ---
 set timeoutlen=10000

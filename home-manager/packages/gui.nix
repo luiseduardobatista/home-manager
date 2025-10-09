@@ -22,7 +22,6 @@ in {
   home.packages = with pkgs;
     [
       # (nixGLwrap jetbrains-toolbox)
-      (nixGLwrap dbeaver-bin)
     ]
     ++ nixOSPackages;
 }
