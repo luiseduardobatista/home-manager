@@ -190,6 +190,7 @@
       smart-gaps = false;
       gap-inner = lib.hm.gvariant.mkUint32 1;
       gap-outer = lib.hm.gvariant.mkUint32 1;
+      active-hint = true;
       active-hint-border-radius = lib.hm.gvariant.mkUint32 4;
       mouse-cursor-focus-location = lib.hm.gvariant.mkUint32 4;
     };

@@ -12,8 +12,6 @@
     sqlc
     stow
     nodePackages.localtunnel
-    aws-sam-cli
-    awscli
     eza
     cargo-nextest
     cargo-cache

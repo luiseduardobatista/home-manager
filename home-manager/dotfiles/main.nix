@@ -20,6 +20,7 @@
 
   homeDotfiles = [
     ".ideavimrc"
+    ".lazy-idea.vim"
   ];
 in {
   xdg.configFile = pkgs.lib.listToAttrs (map (
