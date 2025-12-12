@@ -32,6 +32,41 @@ function ct
     end
 end
 
+function update-nvim
+    if test -f /usr/local/bin/nvim
+        sudo rm /usr/local/bin/nvim
+    end
+    echo "Baixando a versão stable mais recente (x86_64)..."
+    sudo curl -fL https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage -o /usr/local/bin/nvim
+    if test $status -eq 0
+        sudo chmod +x /usr/local/bin/nvim
+        echo "Sucesso! Versão atual:"
+        nvim --version | head -n 1
+    else
+        echo "Erro no download. Verifique sua conexão ou a URL."
+    end
+end
+
+function update-foot
+    set temp_dir (mktemp -d)
+    echo "Baixando código fonte mais recente do Foot..."
+    git clone https://codeberg.org/dnkl/foot.git $temp_dir
+    cd $temp_dir
+    echo "Compilando (Versão Corrigida: disabled)..."
+    meson setup build -Dbuildtype=release -Dterminfo=disabled
+    if test $status -eq 0
+        ninja -C build
+        echo "Instalando..."
+        sudo ninja -C build install
+        echo "Sucesso! Versão instalada:"
+        foot --version
+    else
+        echo "Erro: A configuração do meson falhou."
+    end
+    cd ~
+    rm -rf $temp_dir
+end
+
 alias zj zellij
 alias vim nvim
 alias ls eza
@@ -46,4 +81,4 @@ bind \cf sesh_interactive
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 
 fish_add_path /usr/local/go/bin
-# starship init fish | source
+starship init fish | source
