@@ -19,15 +19,31 @@ detect_distro() {
 install_system_dependencies() {
 	echo "Verificando e instalando dependências essenciais do sistema..."
 	case "$DISTRO_ID" in
-	ubuntu | debian)
+	ubuntu | debian | pop)
 		sudo apt-get update
-		sudo apt-get install -y git curl python3-venv vim neovim
+		sudo apt-get install -y \
+			git curl python3-venv vim wl-clipboard \
+			meson ninja-build pkg-config build-essential \
+			libwayland-dev libwayland-bin wayland-protocols \
+			libpixman-1-dev libxkbcommon-dev \
+			libfontconfig1-dev libutf8proc-dev libtllist-dev \
+			scdoc
 		;;
 	fedora)
-		sudo dnf install -y git curl python3 vim neovim
+		sudo dnf install -y \
+			git curl python3 vim wl-clipboard \
+			meson ninja-build \
+			wayland-devel wayland-protocols-devel \
+			pixman-devel libxkbcommon-devel \
+			scdoc pkgconf-pkg-config gcc
 		;;
 	arch)
-		sudo pacman -Syu --noconfirm git curl python vim neovim
+		sudo pacman -Syu --noconfirm \
+			git curl python vim wl-clipboard \
+			meson ninja \
+			wayland wayland-protocols \
+			pixman libxkbcommon \
+			scdoc pkgconf base-devel
 		;;
 	*)
 		echo "Distribuição não suportada: $DISTRO_ID"
@@ -159,6 +175,21 @@ configure_rust() {
 		echo "Toolchain padrão do Rust definida como 'stable' com sucesso."
 	else
 		echo "Erro ao definir a toolchain padrão do Rust. Por favor, verifique a instalação do rustup."
+	fi
+}
+
+install_neovim() {
+	echo "--- Instalando Neovim (Latest Stable) ---"
+	if [ -f /usr/local/bin/nvim ]; then
+		sudo rm /usr/local/bin/nvim
+	fi
+	echo "Baixando AppImage..."
+	sudo curl -fL https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.appimage -o /usr/local/bin/nvim
+	if [ $? -eq 0 ]; then
+		sudo chmod +x /usr/local/bin/nvim
+		echo "Neovim instalado com sucesso: $(/usr/local/bin/nvim --version | head -n 1)"
+	else
+		echo "ERRO: Falha ao baixar o Neovim."
 		exit 1
 	fi
 }
@@ -171,6 +202,7 @@ main() {
 	apply_home_manager_config
 	set_default_shell
 	configure_rust
+	install_neovim
 
 	echo ""
 	echo "Configuração concluída!"
