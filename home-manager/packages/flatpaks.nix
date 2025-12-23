@@ -19,5 +19,6 @@
     "com.github.tchx84.Flatseal"
     "io.dbeaver.DBeaverCommunity"
     "com.github.wwmm.easyeffects"
+    "org.telegram.desktop"
   ];
 }

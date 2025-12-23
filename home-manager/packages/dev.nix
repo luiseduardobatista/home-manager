@@ -17,5 +17,6 @@
     cargo-cache
     nixfmt-rfc-style
     statix
+    uv
   ];
 }
