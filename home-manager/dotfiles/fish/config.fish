@@ -32,11 +32,10 @@ function ct
     end
 end
 
-# function refresh_env
-#     # Pega a var do ambiente atual (COSMIC) e injeta na sessão do Tmux
-#     tmux set-environment -g WAYLAND_DISPLAY $WAYLAND_DISPLAY
-#     echo "Ambiente Tmux atualizado para $WAYLAND_DISPLAY"
-# end
+function refresh_env
+    tmux set-environment -g WAYLAND_DISPLAY $WAYLAND_DISPLAY
+    echo "Ambiente Tmux atualizado para $WAYLAND_DISPLAY"
+end
 
 alias zj zellij
 alias vim nvim
@@ -52,4 +51,5 @@ bind \cf sesh_interactive
 export SSH_AUTH_SOCK=~/.1password/agent.sock
 
 fish_add_path /usr/local/go/bin
-# starship init fish | source
+set -gx MOZ_ENABLE_WAYLAND 1
+starship init fish | source

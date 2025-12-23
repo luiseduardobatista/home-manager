@@ -15,5 +15,7 @@
     eza
     cargo-nextest
     cargo-cache
+    nixfmt-rfc-style
+    statix
   ];
 }

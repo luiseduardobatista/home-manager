@@ -13,6 +13,7 @@
   imports =
     [
       # ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
+      ./programs/git.nix
       ./programs/ssh.nix
       ./packages/main.nix
       ./dotfiles/main.nix
