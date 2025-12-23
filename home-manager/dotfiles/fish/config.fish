@@ -32,6 +32,12 @@ function ct
     end
 end
 
+# function refresh_env
+#     # Pega a var do ambiente atual (COSMIC) e injeta na sessão do Tmux
+#     tmux set-environment -g WAYLAND_DISPLAY $WAYLAND_DISPLAY
+#     echo "Ambiente Tmux atualizado para $WAYLAND_DISPLAY"
+# end
+
 alias zj zellij
 alias vim nvim
 alias ls eza

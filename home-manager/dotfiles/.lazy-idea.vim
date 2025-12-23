@@ -454,11 +454,11 @@ nmap <leader>br <Action>(CloseAllToTheRight)
 let g:WhichKeyDesc_buffer_explorer = "<leader>be Buffer Explorer"
 nmap <leader>be :NERDTreeFocus<CR>
 
-let g:WhichKeyDesc_explorer = "<leader>e Explorer NeoTree (Root Dir)"
-nmap <leader>e :NERDTreeToggle<CR>
-
 let g:WhichKeyDesc_explorer_cwd = "<leader>E Explorer NeoTree (cwd)"
-nmap <leader>E :NERDTreeFind<CR>
+nmap <leader>e :NERDTreeFind<CR>
+
+let g:WhichKeyDesc_explorer = "<leader>e Explorer NeoTree (Root Dir)"
+nmap <leader>E :NERDTreeToggle<CR>
 
 let g:WhichKeyDesc_explorer_alt = "<leader>fe Explorer NeoTree (Root Dir)"
 nmap <leader>fe :NERDTreeFocus<CR>
