@@ -6,25 +6,26 @@
   nixGL,
   isNixOS,
   ...
-}: {
+}:
+{
   targets.genericLinux.enable = true;
   nixGL.packages = nixGL.packages;
 
-  imports =
-    [
-      # ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
-      ./programs/git.nix
-      ./programs/ssh.nix
-      ./packages/main.nix
-      ./dotfiles/main.nix
-    ]
-    ++ (
-      if isNixOS
-      then [
+  imports = [
+    ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
+    ./programs/git.nix
+    ./programs/ssh.nix
+    ./packages/main.nix
+    ./dotfiles/main.nix
+  ]
+  ++ (
+    if isNixOS then
+      [
         ./programs/zsh.nix
       ]
-      else []
-    );
+    else
+      [ ]
+  );
 
   home = {
     username = "luisb";
@@ -41,7 +42,7 @@
   systemd.user.startServices = "sd-switch";
   home.stateVersion = "23.05";
 
-  home.activation.cloneLazyVim = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.cloneLazyVim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     #!/usr/bin/env bash
     set -euo pipefail
     NVIM_DOTFILES_DIR="${config.home.homeDirectory}/nix/home-manager/dotfiles/nvim"
