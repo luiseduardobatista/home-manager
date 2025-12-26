@@ -12,7 +12,7 @@
   nixGL.packages = nixGL.packages;
 
   imports = [
-    ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
+    # ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
     ./programs/git.nix
     ./programs/ssh.nix
     ./packages/main.nix
@@ -33,7 +33,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       BROWSER = "firefox";
-      TERMINAL = "foot";
+      TERMINAL = "alacritty";
       NIXOS_OZONE_WL = 1;
     };
   };

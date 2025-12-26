@@ -1,3 +1,6 @@
+# [general]
+import = ["~/.config/alacritty/catppuccin-mocha.toml"]
+
 [cursor.style]
 shape = "Block"
 
@@ -24,6 +27,3 @@ dynamic_padding = false
 [window.padding]
 x = 0
 y = 0
-
-[general]
-import = ["~/.config/alacritty/catppuccin-mocha.toml"]
