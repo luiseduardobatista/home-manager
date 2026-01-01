@@ -41,6 +41,7 @@ alias zj zellij
 alias vim nvim
 alias ls eza
 alias mvim 'NVIM_APPNAME="mvim" nvim'
+# alias mvim 'NVIM_APPNAME=nvim-minimax nvim'
 alias kvim='NVIM_APPNAME="nvim-kickstart" nvim'
 alias hmc 'sudo nix-collect-garbage -d; nix-collect-garbage -d'
 alias hms 'home-manager switch --flake .'
