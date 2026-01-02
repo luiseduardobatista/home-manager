@@ -18,6 +18,7 @@ let
     "zellij"
     "alacritty"
     "pop-shell"
+    "flameshot"
   ];
 
   homeDotfiles = [
