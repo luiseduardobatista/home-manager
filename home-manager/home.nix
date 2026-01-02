@@ -9,7 +9,7 @@
 }:
 {
   targets.genericLinux.enable = true;
-  nixGL.packages = nixGL.packages;
+  targets.genericLinux.nixGL.packages = nixGL.packages;
 
   imports = [
     # ./desktop/gnome/gnome.nix # Desabilite para o build em Docker

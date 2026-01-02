@@ -1,8 +1,12 @@
 {
   programs.git = {
     enable = true;
-    userName = "Luís Eduardo Batista";
-    userEmail = "luiseduardob303@gmail.com";
+    settings = {
+      user = {
+        name = "Luís Eduardo Batista";
+        email = "luiseduardob303@gmail.com";
+      };
+    };
     includes = [
       {
         condition = "gitdir:~/dev/kyros/";

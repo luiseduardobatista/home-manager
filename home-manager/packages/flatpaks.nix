@@ -5,9 +5,9 @@
   pkgs,
   nixGL,
   ...
-}: {
+}:
+{
   targets.genericLinux.enable = true;
-  nixGL.packages = nixGL.packages;
 
   services.flatpak.enable = true;
   services.flatpak.packages = [
