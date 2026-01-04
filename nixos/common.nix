@@ -6,7 +6,8 @@
   pkgs,
   lib,
   ...
-}: {
+}:
+{
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -106,19 +107,15 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  # Enable fish
   programs.fish.enable = true;
   programs.starship.enable = true;
   users.defaultUserShell = pkgs.fish;
 
-  # Enable zoxide
   programs.zoxide.enable = true;
-  programs.zoxide.enableBashIntegration = true;
-  programs.zoxide.enableFishIntegration = true;
-  programs.zoxide.enableZshIntegration = true;
 
-  # Enable flatpaks (Adicionado da sua cfg atual)
   services.flatpak.enable = true;
+
+  programs.nix-ld.enable = true;
 
   # Enable flakes
   nix.settings.experimental-features = [
@@ -130,7 +127,7 @@
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = ["luisb"];
+    polkitPolicyOwners = [ "luisb" ];
   };
 
   # List packages installed in system profile. To search, run:

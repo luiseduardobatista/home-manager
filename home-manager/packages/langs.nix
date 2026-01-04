@@ -1,21 +1,19 @@
 {
   pkgs,
+  lib,
   isNixOS,
   ...
-}: let
-  nixOSPackages =
-    if isNixOS
-    then [
-      pkgs.python3
-    ]
-    else [];
-in {
-  home.packages = with pkgs;
+}:
+{
+  home.packages =
+    with pkgs;
     [
-      # rustup
+      rustup
       alejandra
       nodejs_24
-      # go
     ]
-    ++ nixOSPackages;
+    ++ lib.optionals isNixOS [
+      python3
+      go
+    ];
 }

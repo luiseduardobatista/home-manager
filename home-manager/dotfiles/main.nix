@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   dotfilesPath = "/home/luisb/nix/home-manager/dotfiles";
   createSymLink = sourceName: config.lib.file.mkOutOfStoreSymlink "${dotfilesPath}/${sourceName}";
 
@@ -18,50 +19,52 @@
     "alacritty"
     "pop-shell"
     "flameshot"
+    "distrobox"
   ];
 
   homeDotfiles = [
     ".ideavimrc"
     ".lazy-idea.vim"
   ];
-in {
+in
+{
   xdg.configFile = pkgs.lib.listToAttrs (
     map (
       item:
-        if pkgs.lib.isString item
-        then {
+      if pkgs.lib.isString item then
+        {
           name = item;
           value = {
             source = createSymLink item;
           };
         }
-        else {
+      else
+        {
           name = item.target;
           value = {
             source = createSymLink item.source;
           };
         }
-    )
-    configDotfiles
+    ) configDotfiles
   );
 
   home.file = pkgs.lib.listToAttrs (
     map (
       item:
-        if pkgs.lib.isString item
-        then {
+      if pkgs.lib.isString item then
+        {
           name = item;
           value = {
             source = createSymLink item;
           };
         }
-        else {
+      else
+        {
           name = item.target;
           value = {
             source = createSymLink item.source;
           };
         }
-    )
-    homeDotfiles
+    ) homeDotfiles
   );
 }
