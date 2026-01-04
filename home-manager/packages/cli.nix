@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     lazygit
     lazydocker
@@ -11,6 +12,10 @@
   ];
 
   programs.zoxide.enable = true;
+  programs.zoxide.enableBashIntegration = true;
+  programs.zoxide.enableFishIntegration = true;
+  programs.zoxide.enableZshIntegration = true;
+
   programs.yazi = {
     enable = true;
     package = pkgs.yazi;

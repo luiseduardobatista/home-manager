@@ -18,5 +18,6 @@
     nixfmt-rfc-style
     statix
     uv
+    neovim
   ];
 }
