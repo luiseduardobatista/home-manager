@@ -6,54 +6,56 @@
   nixGL,
   isNixOS,
   ...
-}: {
+}:
+{
   targets.genericLinux.enable = true;
   targets.genericLinux.nixGL.packages = nixGL.packages;
 
-  imports =
-    [
-      ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
-      ./programs/git.nix
-      ./programs/ssh.nix
-      ./programs/starship.nix
-      ./programs/fish.nix
-      ./packages/main.nix
-      ./dotfiles/main.nix
-    ]
-    ++ (
-      if isNixOS
-      then [
+  imports = [
+    ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
+    ./programs/git.nix
+    ./programs/ssh.nix
+    ./programs/starship.nix
+    ./programs/fish.nix
+    ./programs/autostart.nix
+    ./packages/main.nix
+    ./dotfiles/main.nix
+  ]
+  ++ (
+    if isNixOS then
+      [
         ./programs/zsh.nix
       ]
-      else []
-    );
+    else
+      [ ]
+  );
 
   home = {
     username = "luisb";
     homeDirectory = "/home/luisb";
-    sessionVariables =
-      {
-        EDITOR = "nvim";
-        BROWSER = "firefox";
-        TERMINAL = "alacritty";
-        NIXOS_OZONE_WL = 1;
-      }
-      // (
-        if isNixOS
-        then {
+    sessionVariables = {
+      EDITOR = "nvim";
+      BROWSER = "firefox";
+      TERMINAL = "alacritty";
+      NIXOS_OZONE_WL = 1;
+    }
+    // (
+      if isNixOS then
+        {
           GTK_IM_MODULE = "simple";
           QT_IM_MODULE = "simple";
           XMODIFIERS = "@im=none";
         }
-        else {}
-      );
+      else
+        { }
+    );
   };
 
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch";
   home.stateVersion = "25.11";
 
-  home.activation.cloneLazyVim = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.cloneLazyVim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     #!/usr/bin/env bash
     set -euo pipefail
     NVIM_DOTFILES_DIR="${config.home.homeDirectory}/nix/home-manager/dotfiles/nvim"
