@@ -2,14 +2,15 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   programs.distrobox = {
     enable = true;
     enableSystemdUnit = true;
 
     settings = {
       container_manager = "docker";
-      container_additional_volumes = "/nix/store:/nix/store:ro /etc/profiles/per-user:/etc/profiles/per-user:ro /etc/static/profiles/per-user:/etc/static/profiles/per-user:ro /run/current-system/sw:/run/current-system/sw:ro";
+      container_additional_volumes = "/nix/store:/nix/store:ro /etc/profiles/per-user:/etc/profiles/per-user:ro /etc/static/profiles/per-user:/etc/static/profiles/per-user:ro /run/current-system/sw:/run/current-system/sw:ro /var/run/docker.sock:/var/run/docker.sock";
     };
 
     containers = {
@@ -30,6 +31,8 @@
           "sudo"
           "software-properties-common"
           "ca-certificates"
+          "docker.io"
+          "docker-compose"
         ];
 
         init_hooks = [
@@ -47,6 +50,7 @@
           "mkdir -p /etc/fish/conf.d"
           "echo 'fish_add_path --prepend --move /usr/local/bin' > /etc/fish/conf.d/00-force-local-path.fish"
           # ------------------------------------
+          "sudo chmod 666 /var/run/docker.sock"
 
           "curl -LsSf https://astral.sh/uv/install.sh | sh"
           "export DEBIAN_FRONTEND=noninteractive"
@@ -59,6 +63,7 @@
 
           ''echo 'export PATH=$PATH:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin' >> /etc/profile''
           ''echo 'fish_add_path --path --append /run/current-system/sw/bin /etc/profiles/per-user/${config.home.username}/bin' > /etc/fish/conf.d/nix-host-path.fish''
+
         ];
       };
     };
