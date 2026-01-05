@@ -6,45 +6,45 @@
   nixGL,
   isNixOS,
   ...
-}:
-{
+}: {
   targets.genericLinux.enable = !isNixOS;
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
-  imports = [
-    ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
-    ./programs/git.nix
-    ./programs/ssh.nix
-    ./programs/starship.nix
-    ./programs/fish.nix
-    ./programs/autostart.nix
-    ./programs/distrobox.nix
-    ./packages/main.nix
-    ./dotfiles/main.nix
-  ]
-  ++ lib.optionals isNixOS [
-    ./programs/zsh.nix
-  ];
+  imports =
+    [
+      ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
+      ./programs/git.nix
+      ./programs/ssh.nix
+      ./programs/starship.nix
+      ./programs/fish.nix
+      ./programs/autostart.nix
+      ./programs/distrobox.nix
+      ./packages/main.nix
+      ./dotfiles/main.nix
+    ]
+    ++ lib.optionals isNixOS [
+      ./programs/zsh.nix
+    ];
 
   home = {
     username = "luisb";
     homeDirectory = "/home/luisb";
-    sessionVariables = {
-      EDITOR = "nvim";
-      BROWSER = "firefox";
-      TERMINAL = "alacritty";
-      NIXOS_OZONE_WL = 1;
-    }
-    // (
-      if isNixOS then
-        {
+    sessionVariables =
+      {
+        EDITOR = "nvim";
+        BROWSER = "firefox";
+        TERMINAL = "alacritty";
+        NIXOS_OZONE_WL = 1;
+      }
+      // (
+        if isNixOS
+        then {
           GTK_IM_MODULE = "simple";
           QT_IM_MODULE = "simple";
           XMODIFIERS = "@im=none";
         }
-      else
-        { }
-    );
+        else {}
+      );
   };
 
   _module.args.gl = config.lib.nixGL.wrap;
@@ -72,7 +72,7 @@
     };
   };
 
-  home.activation.cloneLazyVim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.cloneLazyVim = lib.hm.dag.entryAfter ["writeBoundary"] ''
     #!/usr/bin/env bash
     set -euo pipefail
     NVIM_DOTFILES_DIR="${config.home.homeDirectory}/nix/home-manager/dotfiles/nvim"
@@ -87,31 +87,7 @@
     fi
   '';
 
-  home.activation.setupDistrobox = lib.mkIf isNixOS (
-    lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      ini_file="${config.xdg.configHome}/distrobox/distrobox.ini"
-
-      if [ -f "${pkgs.distrobox}/bin/distrobox" ] && [ -f "$ini_file" ]; then
-        echo "📦 Processando manifesto do Distrobox..."
-        
-        export PATH=$PATH:${
-          lib.makeBinPath [
-            pkgs.docker
-            pkgs.distrobox
-            pkgs.git
-            pkgs.coreutils
-          ]
-        }
-        
-        ${pkgs.distrobox}/bin/distrobox assemble create --file "$ini_file"
-      else
-        echo "⚠️ Distrobox ou arquivo .ini não encontrados. Pulando automação."
-      fi
-    ''
-  );
-
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch";
   home.stateVersion = "25.11";
-
 }

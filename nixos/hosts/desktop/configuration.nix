@@ -13,6 +13,6 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     modesetting.enable = true;
-    powerManagement.enable = false;
+    powerManagement.enable = true;
   };
 }
