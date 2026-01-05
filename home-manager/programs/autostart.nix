@@ -3,9 +3,7 @@
   lib,
   isNixOS,
   ...
-}:
-
-{
+}: {
   xdg.configFile."autostart/1password.desktop" = lib.mkIf isNixOS {
     text = ''
       [Desktop Entry]

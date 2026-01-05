@@ -6,56 +6,76 @@
   nixGL,
   isNixOS,
   ...
-}:
-{
-  targets.genericLinux.enable = true;
-  targets.genericLinux.nixGL.packages = nixGL.packages;
+}: {
+  targets.genericLinux.enable = !isNixOS;
+  targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
-  imports = [
-    ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
-    ./programs/git.nix
-    ./programs/ssh.nix
-    ./programs/starship.nix
-    ./programs/fish.nix
-    ./programs/autostart.nix
-    ./packages/main.nix
-    ./dotfiles/main.nix
-  ]
-  ++ (
-    if isNixOS then
-      [
-        ./programs/zsh.nix
-      ]
-    else
-      [ ]
-  );
+  imports =
+    [
+      ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
+      ./programs/git.nix
+      ./programs/ssh.nix
+      ./programs/starship.nix
+      ./programs/fish.nix
+      ./programs/autostart.nix
+      ./packages/main.nix
+      ./dotfiles/main.nix
+    ]
+    ++ lib.optionals isNixOS [
+      ./programs/zsh.nix
+    ];
 
   home = {
     username = "luisb";
     homeDirectory = "/home/luisb";
-    sessionVariables = {
-      EDITOR = "nvim";
-      BROWSER = "firefox";
-      TERMINAL = "alacritty";
-      NIXOS_OZONE_WL = 1;
-    }
-    // (
-      if isNixOS then
-        {
+    sessionVariables =
+      {
+        EDITOR = "nvim";
+        BROWSER = "firefox";
+        TERMINAL = "alacritty";
+        NIXOS_OZONE_WL = 1;
+      }
+      // (
+        if isNixOS
+        then {
           GTK_IM_MODULE = "simple";
           QT_IM_MODULE = "simple";
           XMODIFIERS = "@im=none";
         }
-      else
-        { }
-    );
+        else {}
+      );
+  };
+
+  _module.args.gl = config.lib.nixGL.wrap;
+
+  xdg.userDirs = lib.mkIf isNixOS {
+    enable = true;
+    createDirectories = true;
+  };
+
+  home.packages = lib.optionals (!isNixOS) [
+    pkgs.cachix
+  ];
+
+  nix = lib.mkIf (!isNixOS) {
+    package = pkgs.nix;
+    settings = {
+      substituters = [
+        "https://cache.nixos.org"
+        "https://nix-community.cachix.org"
+      ];
+      trusted-public-keys = [
+        "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
   };
 
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch";
   home.stateVersion = "25.11";
 
-  home.activation.cloneLazyVim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.cloneLazyVim = lib.hm.dag.entryAfter ["writeBoundary"] ''
     #!/usr/bin/env bash
     set -euo pipefail
     NVIM_DOTFILES_DIR="${config.home.homeDirectory}/nix/home-manager/dotfiles/nvim"

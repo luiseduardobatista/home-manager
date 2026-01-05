@@ -6,8 +6,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -123,11 +122,23 @@
     "flakes"
   ];
 
+  # Cachix
+  nix.settings = {
+    substituters = [
+      "https://cache.nixos.org"
+      "https://nix-community.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+  };
+
   # Enable 1password
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ "luisb" ];
+    polkitPolicyOwners = ["luisb"];
   };
 
   # List packages installed in system profile. To search, run:
@@ -141,6 +152,7 @@
     tree
     fish
     zoxide
+    cachix
   ];
 
   fonts.packages = with pkgs; [

@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  isNixOS,
+  gl,
+  ...
+}: {
   home.packages = with pkgs; [
     gnumake
     unzip
@@ -19,5 +25,7 @@
     statix
     uv
     neovim
+    tmux
+    (gl jetbrains-toolbox)
   ];
 }
