@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     sesh
     fzf
@@ -26,6 +27,8 @@
       vim = "nvim";
       ls = "eza";
       d = "distrobox enter dev";
+      db = "distrobox";
+      ddb = "distrobox rm ";
       mvim = "NVIM_APPNAME=\"mvim\" nvim";
       kvim = "NVIM_APPNAME=\"nvim-kickstart\" nvim";
       hmc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
