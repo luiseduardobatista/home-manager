@@ -288,6 +288,9 @@
     xorg.xkeyboardconfig
     xz
     zlib
+    gtk3
+    libxshmfence
+    systemd
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
