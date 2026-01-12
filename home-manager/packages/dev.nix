@@ -25,6 +25,5 @@
     nixfmt-rfc-style
     statix
     uv
-    tmux
   ];
 }

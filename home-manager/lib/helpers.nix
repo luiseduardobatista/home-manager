@@ -16,7 +16,9 @@ in
       source = config.lib.file.mkOutOfStoreSymlink "${nixConfigPath}/programs/${name}/config";
     };
     inherit nixConfigPath;
+
+    gl = pkg: if isNixOS then pkg else config.lib.nixGL.wrap pkg;
+
   };
 
-  gl = pkg: if isNixOS then pkg else config.lib.nixGL.wrap pkg;
 }

@@ -5,6 +5,7 @@
   pkgs,
   nixGL,
   isNixOS,
+  repoDir,
   ...
 }:
 {
@@ -18,9 +19,6 @@
     ./programs
     ./packages/main.nix
     ./dotfiles/main.nix
-  ]
-  ++ lib.optionals isNixOS [
-    ./programs/zsh.nix
   ];
 
   home = {
@@ -69,7 +67,7 @@
   home.activation.cloneLazyVim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     #!/usr/bin/env bash
     set -euo pipefail
-    NVIM_DOTFILES_DIR="${config.home.homeDirectory}/nix/home-manager/dotfiles/nvim"
+    NVIM_DOTFILES_DIR="${config.home.homeDirectory}/${repoDir}/home-manager/programs/neovim/config"
     mkdir -p "$(dirname "$NVIM_DOTFILES_DIR")"
     if [ ! -d "$NVIM_DOTFILES_DIR/.git" ]; then
       echo "Clonando o repositório lazyvim em $NVIM_DOTFILES_DIR..."

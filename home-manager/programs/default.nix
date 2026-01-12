@@ -1,0 +1,21 @@
+{
+  imports = [
+    ./1Password
+    ./alacritty
+    ./autostart
+    ./cli
+    ./distrobox
+    ./fish
+    ./flameshot
+    ./foot
+    ./git
+    ./kitty
+    ./mise
+    ./neovim
+    ./ssh
+    ./starship
+    ./tmux
+    ./wezterm
+    ./zsh
+  ];
+}
