@@ -202,7 +202,7 @@ main() {
 	apply_home_manager_config
 	set_default_shell
 	configure_rust
-	install_neovim
+	# install_neovim
 
 	echo ""
 	echo "Configuração concluída!"
