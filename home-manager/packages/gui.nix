@@ -2,26 +2,25 @@
   pkgs,
   config,
   isNixOS,
+  gl,
   ...
-}: let
-  nixGLwrap = pkg:
-    if isNixOS
-    then pkg
-    else config.lib.nixGL.wrap pkg;
+}:
+let
 
-  nixOSPackages = with pkgs;
-    if isNixOS
-    then [
-      wezterm
-      kitty
-      alacritty
-      brave
-    ]
-    else [];
-in {
-  home.packages = with pkgs;
+  nixOSPackages =
+    with pkgs;
+    if isNixOS then
+      [
+        brave
+      ]
+    else
+      [ ];
+in
+{
+  home.packages =
+    with pkgs;
     [
-      # (nixGLwrap jetbrains-toolbox)
+      (gl jetbrains-toolbox)
     ]
     ++ nixOSPackages;
 }

@@ -4,7 +4,8 @@
   isNixOS,
   gl,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     gnumake
     unzip
@@ -24,8 +25,6 @@
     nixfmt-rfc-style
     statix
     uv
-    neovim
     tmux
-    (gl jetbrains-toolbox)
   ];
 }

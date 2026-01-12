@@ -6,48 +6,42 @@
   nixGL,
   isNixOS,
   ...
-}: {
+}:
+{
   targets.genericLinux.enable = !isNixOS;
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
-  imports =
-    [
-      ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
-      ./programs/git.nix
-      ./programs/ssh.nix
-      ./programs/starship.nix
-      ./programs/fish.nix
-      ./programs/autostart.nix
-      ./programs/distrobox.nix
-      ./packages/main.nix
-      ./dotfiles/main.nix
-    ]
-    ++ lib.optionals isNixOS [
-      ./programs/zsh.nix
-    ];
+  imports = [
+    ./lib/helpers.nix
+    ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
+
+    ./programs
+    ./packages/main.nix
+    ./dotfiles/main.nix
+  ]
+  ++ lib.optionals isNixOS [
+    ./programs/zsh.nix
+  ];
 
   home = {
     username = "luisb";
     homeDirectory = "/home/luisb";
-    sessionVariables =
-      {
-        EDITOR = "nvim";
-        BROWSER = "firefox";
-        TERMINAL = "alacritty";
-        NIXOS_OZONE_WL = 1;
-      }
-      // (
-        if isNixOS
-        then {
+    sessionVariables = {
+      BROWSER = "firefox";
+      TERMINAL = "alacritty";
+      NIXOS_OZONE_WL = 1;
+    }
+    // (
+      if isNixOS then
+        {
           GTK_IM_MODULE = "simple";
           QT_IM_MODULE = "simple";
           XMODIFIERS = "@im=none";
         }
-        else {}
-      );
+      else
+        { }
+    );
   };
-
-  _module.args.gl = config.lib.nixGL.wrap;
 
   xdg.userDirs = lib.mkIf isNixOS {
     enable = true;
@@ -72,7 +66,7 @@
     };
   };
 
-  home.activation.cloneLazyVim = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  home.activation.cloneLazyVim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     #!/usr/bin/env bash
     set -euo pipefail
     NVIM_DOTFILES_DIR="${config.home.homeDirectory}/nix/home-manager/dotfiles/nvim"
