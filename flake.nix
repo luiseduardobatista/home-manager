@@ -73,21 +73,24 @@
             ./nixos/common.nix
             home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                backupFileExtension = "backup";
 
-              home-manager.extraSpecialArgs = {
-                inherit inputs outputs;
-                inherit nixGL;
-                inherit nix-flatpak;
-                inherit repoDir;
-                isNixOS = true;
-              };
-              home-manager.users.luisb = {
-                imports = [
-                  ./home-manager/home.nix
-                  nix-flatpak.homeManagerModules.nix-flatpak
-                ];
+                extraSpecialArgs = {
+                  inherit inputs outputs;
+                  inherit nixGL;
+                  inherit nix-flatpak;
+                  inherit repoDir;
+                  isNixOS = true;
+                };
+                users.luisb = {
+                  imports = [
+                    ./home-manager/home.nix
+                    nix-flatpak.homeManagerModules.nix-flatpak
+                  ];
+                };
               };
             }
           ];
