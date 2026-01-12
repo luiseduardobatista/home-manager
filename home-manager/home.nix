@@ -7,8 +7,7 @@
   isNixOS,
   repoDir,
   ...
-}:
-{
+}: {
   targets.genericLinux.enable = !isNixOS;
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
