@@ -35,6 +35,7 @@ set backspace=indent,eol,start
 set formatoptions=tcqj
 set listchars=tab:>\ ,trail:-,nbsp:+
 set shortmess=filnxtToOF
+set highlightedyank
 
 " Enable plugin behavior
 
