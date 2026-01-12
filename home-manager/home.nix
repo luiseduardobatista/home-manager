@@ -7,19 +7,17 @@
   isNixOS,
   repoDir,
   ...
-}: {
+}:
+{
   targets.genericLinux.enable = !isNixOS;
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
   imports = [
     ./lib/helpers.nix
     ./sessions
-    # ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
-
+    ./theming
     ./programs
     ./shells
-    ./packages/main.nix
-    ./dotfiles/main.nix
   ];
 
   home = {

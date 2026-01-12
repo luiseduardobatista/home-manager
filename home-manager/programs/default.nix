@@ -17,5 +17,6 @@
     ./flatpak
     ./jetbrains-toolbox
     ./ideavim
+    ./dev-langs
   ];
 }

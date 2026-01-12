@@ -3,8 +3,10 @@
   lib,
   isNixOS,
   ...
-}: {
-  home.packages = with pkgs;
+}:
+{
+  home.packages =
+    with pkgs;
     [
       rustup
       nodejs_24
