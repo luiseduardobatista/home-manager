@@ -5,7 +5,6 @@
     ./autostart
     ./cli
     ./distrobox
-    ./fish
     ./flameshot
     ./foot
     ./git
@@ -13,9 +12,7 @@
     ./mise
     ./neovim
     ./ssh
-    ./starship
     ./tmux
     ./wezterm
-    ./zsh
   ];
 }

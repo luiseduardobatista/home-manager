@@ -1,11 +1,5 @@
+{ _ }:
 {
-  inputs,
-  lib,
-  config,
-  pkgs,
-  nixGL,
-  ...
-}: {
   services.flatpak = {
     enable = true;
     update.auto = {

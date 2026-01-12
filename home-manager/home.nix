@@ -17,6 +17,7 @@
     ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
 
     ./programs
+    ./shells
     ./packages/main.nix
     ./dotfiles/main.nix
   ];
