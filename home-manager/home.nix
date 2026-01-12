@@ -7,14 +7,14 @@
   isNixOS,
   repoDir,
   ...
-}:
-{
+}: {
   targets.genericLinux.enable = !isNixOS;
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
   imports = [
     ./lib/helpers.nix
-    ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
+    ./sessions
+    # ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
 
     ./programs
     ./shells
@@ -29,17 +29,7 @@
       BROWSER = "firefox";
       TERMINAL = "alacritty";
       NIXOS_OZONE_WL = 1;
-    }
-    // (
-      if isNixOS then
-        {
-          GTK_IM_MODULE = "simple";
-          QT_IM_MODULE = "simple";
-          XMODIFIERS = "@im=none";
-        }
-      else
-        { }
-    );
+    };
   };
 
   xdg.userDirs = lib.mkIf isNixOS {
@@ -64,21 +54,6 @@
       ];
     };
   };
-
-  home.activation.cloneLazyVim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    #!/usr/bin/env bash
-    set -euo pipefail
-    NVIM_DOTFILES_DIR="${config.home.homeDirectory}/.config/nvim"
-    mkdir -p "$(dirname "$NVIM_DOTFILES_DIR")"
-    if [ ! -d "$NVIM_DOTFILES_DIR/.git" ]; then
-      echo "Clonando o repositório lazyvim em $NVIM_DOTFILES_DIR..."
-      ${pkgs.git}/bin/git clone https://github.com/luiseduardobatista/lazyvim.git "$NVIM_DOTFILES_DIR"
-      echo "Alterando a URL do remote 'origin' para a versão SSH..."
-      ${pkgs.git}/bin/git -C "$NVIM_DOTFILES_DIR" remote set-url origin git@github.com:luiseduardobatista/lazyvim.git
-    else
-      echo "O repositório lazyvim já existe. Pulando o clone e a alteração de URL."
-    fi
-  '';
 
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch";

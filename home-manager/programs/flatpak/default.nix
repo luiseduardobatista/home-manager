@@ -5,8 +5,7 @@
   pkgs,
   nixGL,
   ...
-}:
-{
+}: {
   services.flatpak = {
     enable = true;
     update.auto = {

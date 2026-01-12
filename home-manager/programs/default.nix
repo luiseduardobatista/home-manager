@@ -16,5 +16,6 @@
     ./wezterm
     ./flatpak
     ./jetbrains-toolbox
+    ./ideavim
   ];
 }
