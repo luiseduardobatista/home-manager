@@ -6,8 +6,7 @@
   pkgs,
   lib,
   ...
-}:
-{
+}: {
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -151,7 +150,7 @@
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ "luisb" ];
+    polkitPolicyOwners = ["luisb"];
   };
 
   # List packages installed in system profile. To search, run:

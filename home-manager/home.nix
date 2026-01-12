@@ -5,49 +5,29 @@
   pkgs,
   nixGL,
   isNixOS,
+  repoDir,
   ...
 }: {
   targets.genericLinux.enable = !isNixOS;
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
-  imports =
-    [
-      ./desktop/gnome/gnome.nix # Desabilite para o build em Docker
-      ./programs/git.nix
-      ./programs/ssh.nix
-      ./programs/starship.nix
-      ./programs/fish.nix
-      ./programs/autostart.nix
-      ./programs/distrobox.nix
-      ./packages/main.nix
-      ./dotfiles/main.nix
-    ]
-    ++ lib.optionals isNixOS [
-      ./programs/zsh.nix
-    ];
+  imports = [
+    ./lib/helpers.nix
+    ./sessions
+    ./theming
+    ./programs
+    ./shells
+  ];
 
   home = {
     username = "luisb";
     homeDirectory = "/home/luisb";
-    sessionVariables =
-      {
-        EDITOR = "nvim";
-        BROWSER = "firefox";
-        TERMINAL = "alacritty";
-        NIXOS_OZONE_WL = 1;
-      }
-      // (
-        if isNixOS
-        then {
-          GTK_IM_MODULE = "simple";
-          QT_IM_MODULE = "simple";
-          XMODIFIERS = "@im=none";
-        }
-        else {}
-      );
+    sessionVariables = {
+      BROWSER = "firefox";
+      TERMINAL = "alacritty";
+      NIXOS_OZONE_WL = 1;
+    };
   };
-
-  _module.args.gl = config.lib.nixGL.wrap;
 
   xdg.userDirs = lib.mkIf isNixOS {
     enable = true;
@@ -71,21 +51,6 @@
       ];
     };
   };
-
-  home.activation.cloneLazyVim = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    #!/usr/bin/env bash
-    set -euo pipefail
-    NVIM_DOTFILES_DIR="${config.home.homeDirectory}/nix/home-manager/dotfiles/nvim"
-    mkdir -p "$(dirname "$NVIM_DOTFILES_DIR")"
-    if [ ! -d "$NVIM_DOTFILES_DIR/.git" ]; then
-      echo "Clonando o repositório lazyvim em $NVIM_DOTFILES_DIR..."
-      ${pkgs.git}/bin/git clone https://github.com/luiseduardobatista/lazyvim.git "$NVIM_DOTFILES_DIR"
-      echo "Alterando a URL do remote 'origin' para a versão SSH..."
-      ${pkgs.git}/bin/git -C "$NVIM_DOTFILES_DIR" remote set-url origin git@github.com:luiseduardobatista/lazyvim.git
-    else
-      echo "O repositório lazyvim já existe. Pulando o clone e a alteração de URL."
-    fi
-  '';
 
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch";
