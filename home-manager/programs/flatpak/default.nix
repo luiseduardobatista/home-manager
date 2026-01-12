@@ -1,5 +1,4 @@
-{ _ }:
-{
+{_}: {
   services.flatpak = {
     enable = true;
     update.auto = {

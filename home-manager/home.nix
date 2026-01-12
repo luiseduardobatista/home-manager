@@ -7,8 +7,7 @@
   isNixOS,
   repoDir,
   ...
-}:
-{
+}: {
   targets.genericLinux.enable = !isNixOS;
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
@@ -25,21 +24,21 @@
   home = {
     username = "luisb";
     homeDirectory = "/home/luisb";
-    sessionVariables = {
-      BROWSER = "firefox";
-      TERMINAL = "alacritty";
-      NIXOS_OZONE_WL = 1;
-    }
-    // (
-      if isNixOS then
-        {
+    sessionVariables =
+      {
+        BROWSER = "firefox";
+        TERMINAL = "alacritty";
+        NIXOS_OZONE_WL = 1;
+      }
+      // (
+        if isNixOS
+        then {
           GTK_IM_MODULE = "simple";
           QT_IM_MODULE = "simple";
           XMODIFIERS = "@im=none";
         }
-      else
-        { }
-    );
+        else {}
+      );
   };
 
   xdg.userDirs = lib.mkIf isNixOS {
@@ -65,7 +64,7 @@
     };
   };
 
-  home.activation.cloneLazyVim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.cloneLazyVim = lib.hm.dag.entryAfter ["writeBoundary"] ''
     #!/usr/bin/env bash
     set -euo pipefail
     NVIM_DOTFILES_DIR="${config.home.homeDirectory}/${repoDir}/home-manager/programs/neovim/config"

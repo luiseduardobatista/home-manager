@@ -2,8 +2,7 @@
   linkApp,
   isNixOS,
   ...
-}:
-{
+}: {
   programs.mise = {
     enable = !isNixOS;
     enableBashIntegration = true;

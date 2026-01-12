@@ -1,7 +1,3 @@
-{
-  linkApp,
-  ...
-}:
-{
+{linkApp, ...}: {
   xdg.configFile."flameshot" = linkApp "flameshot";
 }

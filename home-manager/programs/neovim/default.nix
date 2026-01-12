@@ -2,8 +2,7 @@
   linkApp,
   pkgs,
   ...
-}:
-{
+}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -18,5 +17,4 @@
     xclip
     fzf
   ];
-
 }

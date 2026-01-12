@@ -2,8 +2,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   programs.distrobox = {
     enable = true;
     enableSystemdUnit = true;
@@ -63,7 +62,6 @@
 
           ''echo 'export PATH=$PATH:/run/current-system/sw/bin:/etc/profiles/per-user/${config.home.username}/bin' >> /etc/profile''
           ''echo 'fish_add_path --path --append /run/current-system/sw/bin /etc/profiles/per-user/${config.home.username}/bin' > /etc/fish/conf.d/nix-host-path.fish''
-
         ];
       };
     };

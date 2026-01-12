@@ -7,7 +7,6 @@
   home.packages = with pkgs;
     [
       rustup
-      alejandra
       nodejs_24
     ]
     ++ lib.optionals isNixOS [

@@ -14,5 +14,7 @@
     ./ssh
     ./tmux
     ./wezterm
+    ./flatpak
+    ./jetbrains-toolbox
   ];
 }
