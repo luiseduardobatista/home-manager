@@ -2,7 +2,8 @@
   pkgs,
   config,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     sesh
     fzf
@@ -23,7 +24,7 @@
     '';
     shellAliases = {
       zj = "zellij";
-      vim = "nvim";
+      v = "nvim";
       ls = "eza";
       d = "distrobox enter dev";
       db = "distrobox";
@@ -33,7 +34,7 @@
       hmc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       hms = "home-manager switch --flake .";
       fhmu = "nix flake update && home-manager switch --flake .";
-      rebuild = "sudo nixos-rebuild switch --flake ~/nix";
+      rb = "sudo nixos-rebuild switch --flake ~/nix";
       update = "nix flake update --flake ~/nix && sudo nixos-rebuild switch --flake ~/nix";
       clean = "nix-collect-garbage -d";
       testsum = "gotestsum --format=testdox";
