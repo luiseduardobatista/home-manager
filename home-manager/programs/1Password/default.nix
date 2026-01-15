@@ -4,8 +4,7 @@
   linkApp,
   isNixOS,
   ...
-}:
-{
+}: {
   xdg.configFile."1Password/ssh" = linkApp "1Password";
   xdg.configFile."autostart/1password.desktop" = lib.mkIf isNixOS {
     text = ''
