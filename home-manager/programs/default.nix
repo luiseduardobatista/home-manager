@@ -4,6 +4,7 @@
     ./alacritty
     ./autostart
     ./cli
+    ./zoxide
     ./distrobox
     ./flameshot
     ./foot

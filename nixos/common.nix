@@ -142,8 +142,6 @@
   programs.starship.enable = true;
   users.defaultUserShell = pkgs.fish;
 
-  programs.zoxide.enable = true;
-
   services.flatpak.enable = true;
 
   # Enable 1password
@@ -162,7 +160,6 @@
     curl
     tree
     fish
-    zoxide
     cachix
     inetutils
   ];

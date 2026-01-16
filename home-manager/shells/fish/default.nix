@@ -22,14 +22,14 @@
       bind \cf sesh_interactive
     '';
     shellAliases = {
-      zj = "zellij";
+      vim = "NVIM_APPNAME=\"mvim\" nvim";
       v = "nvim";
       ls = "eza";
+      lg = "lazygit";
+      zj = "zellij";
       d = "distrobox enter dev";
       db = "distrobox";
       ddb = "distrobox rm ";
-      mvim = "NVIM_APPNAME=\"mvim\" nvim";
-      kvim = "NVIM_APPNAME=\"nvim-kickstart\" nvim";
       hmc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       hms = "home-manager switch --flake .";
       fhmu = "nix flake update && home-manager switch --flake .";
