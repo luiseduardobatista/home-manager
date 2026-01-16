@@ -18,6 +18,8 @@
     curl
     xclip
     fzf
+    nodejs
+    tree-sitter
   ];
 
   home.activation.cloneLazyVim = lib.hm.dag.entryAfter ["writeBoundary"] ''

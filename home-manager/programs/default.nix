@@ -18,5 +18,7 @@
     ./jetbrains-toolbox
     ./ideavim
     ./dev-langs
+    ./helix
+    ./yazi
   ];
 }

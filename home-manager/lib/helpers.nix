@@ -3,11 +3,9 @@
   isNixOS,
   repoDir,
   ...
-}:
-let
+}: let
   nixConfigPath = "${config.home.homeDirectory}/${repoDir}/home-manager";
-in
-{
+in {
   # _module.args disponibiliza variáveis para TODOS os módulos importados
   _module.args = {
     linkApp = name: {
@@ -20,6 +18,9 @@ in
 
     inherit nixConfigPath;
 
-    gl = pkg: if isNixOS then pkg else config.lib.nixGL.wrap pkg;
+    gl = pkg:
+      if isNixOS
+      then pkg
+      else config.lib.nixGL.wrap pkg;
   };
 }
