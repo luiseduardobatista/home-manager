@@ -61,10 +61,10 @@ Se estiver em uma instalação limpa do NixOS:
 
     ```bash
     # Para Desktop (Configurações Nvidia, Performance)
-    sudo nixos-rebuild switch --flake ~/nix#desktop
+    sudo nixos-rebuild switch --flake .#desktop --extra-experimental-features 'nix-command flakes'
 
     # Para Laptop (Configurações TLP, Economia de bateria)
-    sudo nixos-rebuild switch --flake ~/nix#laptop
+    sudo nixos-rebuild switch --flake .#laptop --extra-experimental-features 'nix-command flakes'
     ```
 
 ## Pós-Instalação
