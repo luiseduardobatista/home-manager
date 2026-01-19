@@ -22,8 +22,7 @@
       bind \cf sesh_interactive
     '';
     shellAliases = {
-      vim = "NVIM_APPNAME=\"mvim\" nvim";
-      v = "nvim";
+      lvim = "NVIM_APPNAME=\"lvim\" nvim";
       ls = "eza";
       lg = "lazygit";
       zj = "zellij";
