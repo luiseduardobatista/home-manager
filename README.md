@@ -41,7 +41,10 @@ O projeto é híbrido, funcionando tanto como:
 Para instalar e configurar seu ambiente com um único comando, execute o script abaixo. Ele detecta a distribuição, instala o Nix, configura o Daemon e aplica o Home Manager.
 
 ```bash
-git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && cd ~/nix && ./install.sh
+git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && \
+cd ~/nix && \
+git remote set-url origin git@github.com:luiseduardobatista/home-manager.git && \
+./install.sh
 ```
 
 O script é idempotente; você pode executá-lo novamente para atualizações ou reparos.
@@ -53,7 +56,9 @@ Se estiver em uma instalação limpa do NixOS:
 1. Clone o repositório:
 
     ```bash
-    git clone https://github.com/luiseduardobatista/home-manager.git ~/nix
+    git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && \
+    cd ~/nix && \
+    git remote set-url origin git@github.com:luiseduardobatista/home-manager.git
     ```
 
 2. Gere ou ajuste a configuração de hardware (`/etc/nixos/hardware-configuration.nix`) e coloque em `./nixos/hosts/<host>`.
