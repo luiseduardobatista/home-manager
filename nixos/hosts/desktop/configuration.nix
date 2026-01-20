@@ -3,7 +3,10 @@
   pkgs,
   ...
 }: {
-  imports = [./hardware-configuration.nix];
+  imports = [
+    ./hardware-configuration.nix
+    ./gaming.nix
+  ];
   networking.hostName = "desktop";
 
   services.xserver.videoDrivers = ["nvidia"];
