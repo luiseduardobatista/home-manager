@@ -52,8 +52,8 @@
 
   # Configure keymap in X11
   services.xserver.xkb = {
-    layout = "us";
-    variant = "alt-intl";
+    layout = lib.mkDefault "us";
+    variant = lib.mkDefault "alt-intl";
   };
 
   i18n.inputMethod = {
