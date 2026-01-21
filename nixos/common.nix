@@ -162,6 +162,7 @@
     fish
     cachix
     inetutils
+    usbutils
   ];
 
   fonts.packages = with pkgs; [

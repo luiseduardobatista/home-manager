@@ -22,6 +22,7 @@
       "io.dbeaver.DBeaverCommunity"
       "com.github.wwmm.easyeffects"
       "org.telegram.desktop"
+      "com.getpostman.Postman"
     ];
   };
 }

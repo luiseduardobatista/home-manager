@@ -9,6 +9,7 @@
   hardware.graphics.enable = true;
   services.power-profiles-daemon.enable = false;
   services.tlp.enable = true;
+  services.fprintd.enable = true;
   services.xserver.xkb = {
     layout = "us,br";
     variant = "alt-intl,";
