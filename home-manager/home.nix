@@ -3,6 +3,7 @@
   lib,
   config,
   pkgs,
+  pkgs-unstable,
   nixGL,
   isNixOS,
   repoDir,
@@ -12,6 +13,7 @@
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
   imports = [
+    inputs.noctalia.homeModules.default
     ./lib/helpers.nix
     ./sessions
     ./theming

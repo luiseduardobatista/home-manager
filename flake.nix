@@ -8,6 +8,7 @@
   };
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,11 +21,16 @@
       url = "github:luiseduardobatista/lazyvim";
       flake = false;
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     nix-flatpak.url = "github:gmodena/nix-flatpak/";
   };
   outputs = {
     self,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     nixGL,
     nix-flatpak,
@@ -37,6 +43,10 @@
       inherit system;
       config.allowUnfree = true;
     };
+    pkgs-unstable = import nixpkgs-unstable {
+      inherit system;
+      config.allowUnfree = true;
+    };
     sharedArgs = {
       inherit
         inputs
@@ -44,6 +54,7 @@
         nixGL
         nix-flatpak
         repoDir
+        pkgs-unstable
         ;
     };
     homeManagerUserConfig = {

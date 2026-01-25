@@ -22,4 +22,6 @@
     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
   ];
+
+  programs.niri.enable = true;
 }
