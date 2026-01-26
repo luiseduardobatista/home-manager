@@ -49,7 +49,6 @@
       gnomeExtensions.disable-workspace-animation
       gnomeExtensions.search-light
       gnomeExtensions.window-is-ready-remover
-      gnomeExtensions.hide-top-bar
 
       dconf-editor
       sushi
@@ -87,7 +86,6 @@
               "search-light@icedman.github.com"
               "clipboard-indicator@tudmotu.com"
               "windowIsReady_Remover@nunofarruca@gmail.com"
-              "hidetopbar@mathieu.bidon.ca"
             ];
         };
 

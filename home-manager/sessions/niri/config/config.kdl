@@ -648,7 +648,11 @@ gestures {
   }
 }
 
+// Para apps electron
+environment {
+      XDG_SESSION_TYPE "wayland"
+}
 
 spawn-at-startup "noctalia-shell"
-spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "/run/current-system/sw/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit"
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"

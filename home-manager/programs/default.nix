@@ -21,6 +21,6 @@
     ./dev-langs
     ./helix
     ./yazi
-    # ./noctalia
+    ./noctalia
   ];
 }
