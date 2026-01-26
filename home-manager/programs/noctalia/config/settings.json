@@ -72,7 +72,7 @@
                     "focusedColor": "primary",
                     "followFocusedScreen": false,
                     "groupedBorderOpacity": 1,
-                    "hideUnoccupied": false,
+                    "hideUnoccupied": true,
                     "iconScale": 0.8,
                     "id": "Workspace",
                     "labelMode": "index",
@@ -85,11 +85,6 @@
             ],
             "right": [
                 {
-                    "displayMode": "onhover",
-                    "id": "KeyboardLayout",
-                    "showIcon": true
-                },
-                {
                     "blacklist": [
                     ],
                     "colorizeIcons": true,
@@ -100,19 +95,27 @@
                     ]
                 },
                 {
-                    "hideWhenZero": false,
+                    "displayMode": "onhover",
+                    "id": "KeyboardLayout",
+                    "showIcon": true
+                },
+                {
+                    "hideWhenZero": true,
                     "hideWhenZeroUnread": false,
                     "id": "NotificationHistory",
                     "showUnreadBadge": true
                 },
                 {
-                    "displayMode": "onhover",
-                    "id": "Volume",
-                    "middleClickCommand": "pwvucontrol || pavucontrol"
+                    "id": "plugin:clipper"
                 },
                 {
                     "displayMode": "onhover",
                     "id": "Network"
+                },
+                {
+                    "displayMode": "onhover",
+                    "id": "Volume",
+                    "middleClickCommand": "pwvucontrol || pavucontrol"
                 },
                 {
                     "displayMode": "alwaysHide",
