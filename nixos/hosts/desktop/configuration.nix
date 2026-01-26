@@ -23,30 +23,30 @@
     "nvidia.NVreg_TemporaryFilePath=/var/tmp"
   ];
 
-  programs.niri.enable = true;
+  # programs.niri.enable = true;
 
-  environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json".text = ''
-    {
-      "rules": [
-        {
-          "pattern": {
-            "feature": "procname",
-            "matches": "niri"
-          },
-          "profile": "Limit Free Buffer Pool On Wayland Compositors"
-        }
-      ],
-      "profiles": [
-        {
-          "name": "Limit Free Buffer Pool On Wayland Compositors",
-          "settings": [
-            {
-              "key": "GLVidHeapReuseRatio",
-              "value": 0
-            }
-          ]
-        }
-      ]
-    }
-  '';
+  # environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json".text = ''
+  #   {
+  #     "rules": [
+  #       {
+  #         "pattern": {
+  #           "feature": "procname",
+  #           "matches": "niri"
+  #         },
+  #         "profile": "Limit Free Buffer Pool On Wayland Compositors"
+  #       }
+  #     ],
+  #     "profiles": [
+  #       {
+  #         "name": "Limit Free Buffer Pool On Wayland Compositors",
+  #         "settings": [
+  #           {
+  #             "key": "GLVidHeapReuseRatio",
+  #             "value": 0
+  #           }
+  #         ]
+  #       }
+  #     ]
+  #   }
+  # '';
 }

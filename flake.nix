@@ -21,10 +21,6 @@
       url = "github:luiseduardobatista/lazyvim";
       flake = false;
     };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     nix-flatpak.url = "github:gmodena/nix-flatpak/";
   };
   outputs = {
