@@ -7,6 +7,8 @@
   lib,
   ...
 }: {
+  imports = [./desktops/niri.nix];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -151,6 +153,7 @@
     polkitPolicyOwners = ["luisb"];
   };
 
+  # Force native wayland on electron apps
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
   };
