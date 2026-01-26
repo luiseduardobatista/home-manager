@@ -650,7 +650,8 @@ gestures {
 
 // Para apps electron
 environment {
-      XDG_SESSION_TYPE "wayland"
+    XDG_SESSION_TYPE "wayland"
+    XDG_CURRENT_DESKTOP "niri"
 }
 
 spawn-at-startup "noctalia-shell"
