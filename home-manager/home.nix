@@ -13,7 +13,7 @@
   targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
 
   imports = [
-    # inputs.noctalia.homeModules.default
+    inputs.noctalia.homeModules.default
     inputs.dms.homeModules.dank-material-shell
     ./lib/helpers.nix
     ./sessions

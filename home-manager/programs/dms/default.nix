@@ -10,7 +10,6 @@
     dgop.package = inputs.dgop.packages.${pkgs.system}.default;
     systemd = {
       enable = false;
-      restartIfChanged = true;
     };
     enableSystemMonitoring = true;
     enableVPN = true;

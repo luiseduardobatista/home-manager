@@ -24,6 +24,7 @@
       "org.telegram.desktop"
       "com.getpostman.Postman"
       "com.obsproject.Studio"
+      "hu.irl.cameractrls"
     ];
   };
 }
