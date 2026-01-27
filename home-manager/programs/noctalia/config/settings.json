@@ -44,7 +44,7 @@
         "marginVertical": 7,
         "monitors": [
         ],
-        "outerCorners": true,
+        "outerCorners": false,
         "position": "top",
         "screenOverrides": [
         ],
@@ -106,6 +106,9 @@
                     "showUnreadBadge": true
                 },
                 {
+                    "defaultSettings": {
+                        "position": "Bottom"
+                    },
                     "id": "plugin:clipper"
                 },
                 {
