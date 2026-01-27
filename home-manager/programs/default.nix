@@ -21,7 +21,6 @@
     ./dev-langs
     ./helix
     ./yazi
-    ./noctalia
     ./dms
   ];
 }
