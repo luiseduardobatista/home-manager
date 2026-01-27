@@ -204,11 +204,11 @@
                 "id": "brightness-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "weather-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "media-sysmon-card"
             }
         ],
@@ -345,7 +345,7 @@
         "enableKeyboardLayoutToast": true,
         "enableMediaToast": false,
         "enabled": true,
-        "location": "top_right",
+        "location": "top",
         "lowUrgencyDuration": 3,
         "monitors": [
         ],
