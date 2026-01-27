@@ -4,10 +4,10 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    pantheon.pantheon-agent-polkit
+    # pantheon.pantheon-agent-polkit
   ];
   programs.niri.enable = true;
-  security.polkit.enable = true;
+  # security.polkit.enable = true;
 
   # Fix high VRAM usage on Nvidia
   environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json".text = ''
