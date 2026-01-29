@@ -11,7 +11,7 @@
       [Desktop Entry]
       Type=Application
       Name=1Password
-      Exec=${pkgs._1password-gui}/bin/1password --silent
+      Exec=sh -c "${pkgs.coreutils}/bin/sleep 5 && ${pkgs._1password-gui}/bin/1password --silent"
       Terminal=false
     '';
   };
