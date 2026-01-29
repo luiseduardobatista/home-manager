@@ -22,6 +22,5 @@
     ./helix
     ./yazi
     ./noctalia
-    ./dms
   ];
 }

@@ -14,7 +14,6 @@
 
   imports = [
     inputs.noctalia.homeModules.default
-    inputs.dms.homeModules.dank-material-shell
     ./lib/helpers.nix
     ./sessions
     ./theming

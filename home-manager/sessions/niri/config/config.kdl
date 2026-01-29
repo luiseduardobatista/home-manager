@@ -380,7 +380,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     // Mod+D hotkey-overlay-title="Launcher (Noctalia)" {
     //   spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"
     // }
@@ -656,18 +656,9 @@ environment {
     ELECTRON_OZONE_PLATFORM_HINT "auto"
     QT_QPA_PLATFORMTHEME "gtk3"
     QT_QPA_PLATFORMTHEME_QT6 "gtk3"
-    // NIXOS_OZONE_WL "1"
+    NIXOS_OZONE_WL "1"
 }
 
-// spawn-at-startup "noctalia-shell"
-spawn-at-startup "dms" "run"
+spawn-at-startup "noctalia-shell"
 spawn-at-startup "/run/current-system/sw/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit"
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
-
-
-include "dms/colors.kdl"
-include "dms/layout.kdl"
-include "dms/alttab.kdl"
-include "dms/binds.kdl"
-
-include "dms/cursor.kdl"
