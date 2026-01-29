@@ -1,47 +1,5 @@
 {
   "nodes": {
-    "dgop": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1769289335,
-        "narHash": "sha256-NBGF7bo+nYSToDWtIXMwPeulzRxphX8JHzNRqLTOOqU=",
-        "owner": "AvengeMedia",
-        "repo": "dgop",
-        "rev": "3cd297080573319c36884b28a3cc0dbfed79f53e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "AvengeMedia",
-        "repo": "dgop",
-        "type": "github"
-      }
-    },
-    "dms": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "quickshell": "quickshell"
-      },
-      "locked": {
-        "lastModified": 1768575133,
-        "narHash": "sha256-P//moH3z9r4PXirTzXVsccQINsK5AIlF9RWOBwK3vLc=",
-        "owner": "AvengeMedia",
-        "repo": "DankMaterialShell",
-        "rev": "a7cdb39b0b89b9af86160ad4e847a7d14ea44512",
-        "type": "github"
-      },
-      "original": {
-        "owner": "AvengeMedia",
-        "ref": "stable",
-        "repo": "DankMaterialShell",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -172,45 +130,21 @@
         ]
       },
       "locked": {
-        "lastModified": 1769688582,
-        "narHash": "sha256-uTw0huHbRuenIfZM8ckUyNRRbiwoTati5D5Psj3S7BQ=",
+        "lastModified": 1769697339,
+        "narHash": "sha256-A7zeH6Vnhk/pkfEKbMR0tST96yZ+xLrbeeOMj2tcqaM=",
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
-        "rev": "41ec8c4ee6a0bd66a7604bef084044f610a1a674",
+        "rev": "c89e8761130dea19d8ba4aa7874717e241460875",
         "type": "github"
       },
       "original": {
         "owner": "noctalia-dev",
         "repo": "noctalia-shell",
         "type": "github"
-      }
-    },
-    "quickshell": {
-      "inputs": {
-        "nixpkgs": [
-          "dms",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1766725085,
-        "narHash": "sha256-O2aMFdDUYJazFrlwL7aSIHbUSEm3ADVZjmf41uBJfHs=",
-        "ref": "refs/heads/master",
-        "rev": "41828c4180fb921df7992a5405f5ff05d2ac2fff",
-        "revCount": 715,
-        "type": "git",
-        "url": "https://git.outfoxxed.me/quickshell/quickshell"
-      },
-      "original": {
-        "rev": "41828c4180fb921df7992a5405f5ff05d2ac2fff",
-        "type": "git",
-        "url": "https://git.outfoxxed.me/quickshell/quickshell"
       }
     },
     "root": {
       "inputs": {
-        "dgop": "dgop",
-        "dms": "dms",
         "home-manager": "home-manager",
         "lazyvim": "lazyvim",
         "nix-flatpak": "nix-flatpak",

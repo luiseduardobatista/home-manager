@@ -3,15 +3,31 @@
   lib,
   config,
   pkgs,
-  nixGL,
   ...
 }: {
   services.flatpak = {
     enable = true;
+
+    overrides = {
+      global = {
+        Context.sockets = [
+          "wayland"
+          "!x11"
+          "!fallback-x11"
+        ];
+        Environment = {
+          "ELECTRON_OZONE_PLATFORM_HINT" = "auto";
+          "NIXOS_OZONE_WL" = "1";
+          XCURSOR_PATH = "/run/host/user-share/icons:/run/host/share/icons";
+        };
+      };
+    };
+
     update.auto = {
       enable = true;
       onCalendar = "weekly";
     };
+
     packages = [
       "org.flameshot.Flameshot"
       "com.usebruno.Bruno"
