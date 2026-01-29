@@ -70,7 +70,7 @@ input {
 }
 
 cursor {
-    xcursor-theme "Adwaita"
+    xcursor-theme "Bibata-Modern-Classic"
     xcursor-size 24
 }
 
