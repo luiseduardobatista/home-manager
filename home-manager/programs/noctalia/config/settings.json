@@ -130,10 +130,6 @@
                 },
                 {
                     "displayMode": "onhover",
-                    "id": "Bluetooth"
-                },
-                {
-                    "displayMode": "onhover",
                     "id": "Brightness"
                 },
                 {
@@ -212,7 +208,7 @@
                 "id": "weather-card"
             },
             {
-                "enabled": false,
+                "enabled": true,
                 "id": "media-sysmon-card"
             }
         ],
