@@ -345,7 +345,6 @@ window-rule {
     open-floating true
 }
 
-
 window-rule {
     match app-id="dev.zed.Zed" title="^$"
     match app-id="dev.zed.Zed" title="Settings"

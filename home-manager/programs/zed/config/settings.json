@@ -7,6 +7,28 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "tab_bar": {
+    "show": false,
+  },
+  "status_bar": {
+    "active_language_button": true,
+  },
+  "toolbar": {
+    "breadcrumbs": true,
+    "quick_actions": false,
+  },
+  "scrollbar": {
+    "show": "never",
+  },
+  "cursor_blink": false,
+  "project_panel": {
+    "button": true,
+  },
+  "use_smartcase_search": true,
+  "which_key": {
+    "enabled": false,
+  },
+  "buffer_line_height": "standard",
   "diagnostics": {
     "inline": {
       "enabled": true,
@@ -25,10 +47,10 @@
   "vim": {
     "use_system_clipboard": "always",
   },
-
+  "vertical_scroll_margin": 5,
   "base_keymap": "JetBrains",
   "ui_font_size": 16,
-  "buffer_font_size": 15,
+  "buffer_font_size": 15.0,
   "theme": {
     "mode": "dark",
     "light": "One Light",

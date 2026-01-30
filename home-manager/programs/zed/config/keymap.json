@@ -9,7 +9,21 @@
   {
     "context": "Workspace",
     "bindings": {
+      "space f f": "file_finder::Toggle",
+      "space f p": "projects::OpenRecent",
+      "escape": "editor::Cancel",
+      "space e": "pane::RevealInProjectPanel",
+      "space f v": "file_finder::Toggle",
       // "shift shift": "file_finder::Toggle"
+    },
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "escape": "workspace::ToggleLeftDock",
+      "q": "workspace::ToggleLeftDock",
+      "h": "project_panel::CollapseSelectedEntry",
+      "l": "project_panel::ExpandSelectedEntry",
     },
   },
   {
@@ -21,18 +35,28 @@
   {
     "context": "Editor && vim_mode == normal",
     "bindings": {
-      "space f f": "file_finder::Toggle",
       "space |": "workspace::NewFileSplitVertical",
+      "space -": "workspace::NewFileSplitHorizontal",
       "ctrl-h": "workspace::ActivatePaneLeft",
       "ctrl-j": "workspace::ActivatePaneDown",
       "ctrl-k": "workspace::ActivatePaneUp",
       "ctrl-l": "workspace::ActivatePaneRight",
+      "space w d": "pane::CloseActiveItem",
+      "space w o": "workspace::CloseInactiveTabsAndPanes",
+      "space c r": "editor::Rename",
+      "space c a": "editor::ToggleCodeActions",
     },
   },
   {
     "context": "(Editor && mode == full)",
     "bindings": {
       "ctrl-/": "buffer_search::DeployReplace",
+    },
+  },
+  {
+    "context": "BufferSearchBar",
+    "bindings": {
+      "ctrl-/": "buffer_search::Dismiss",
     },
   },
 ]

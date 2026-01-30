@@ -175,6 +175,7 @@
     usbutils
     networkmanagerapplet
     wl-clipboard
+    xclip
   ];
 
   fonts.packages = with pkgs; [
