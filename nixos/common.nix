@@ -174,6 +174,7 @@
     inetutils
     usbutils
     networkmanagerapplet
+    wl-clipboard
   ];
 
   fonts.packages = with pkgs; [
