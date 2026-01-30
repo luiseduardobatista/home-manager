@@ -345,6 +345,19 @@ window-rule {
     open-floating true
 }
 
+
+window-rule {
+    match app-id="dev.zed.Zed" title="^$"
+    match app-id="dev.zed.Zed" title="Settings"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^jetbrains-.*$"# title="^$"
+    match app-id=r#"^jetbrains-.*$"# title="Settings"
+    open-floating true
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {

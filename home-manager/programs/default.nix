@@ -22,5 +22,6 @@
     ./helix
     ./yazi
     ./noctalia
+    ./zed
   ];
 }
