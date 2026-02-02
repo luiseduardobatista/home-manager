@@ -7,6 +7,24 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    },
+    "branch_picker": {
+      "show_author_name": false
+    },
+    "blame": {
+      "show_avatar": false
+    }
+  },
+  "disable_ai": true,
+  "agent": {
+    "single_file_review": false,
+    "dock": "left",
+    "favorite_models": [],
+    "model_parameters": [],
+  },
   "tab_bar": {
     "show": false,
   },

@@ -7,40 +7,73 @@
 // from the command palette.
 [
   {
-    "context": "Workspace",
+    "context": "",
     "bindings": {
       "space f f": "file_finder::Toggle",
       "space f p": "projects::OpenRecent",
       "escape": "editor::Cancel",
       "space e": "pane::RevealInProjectPanel",
       "space f v": "file_finder::Toggle",
+      "space g g": "git_panel::ToggleFocus",
+      "ctrl-w": "pane::CloseActiveItem",
       // "shift shift": "file_finder::Toggle"
     },
   },
   {
-    "context": "ProjectPanel",
+    "context": "Dock || Terminal || Editor",
     "bindings": {
-      "escape": "workspace::ToggleLeftDock",
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-j": "workspace::ActivatePaneDown",
+    },
+  },
+  {
+    "context": "Editor && multibuffer",
+    "bindings": {
+      "ctrl-j": "menu::SelectNext", // Nome completo correto
+      "ctrl-k": "menu::SelectPrevious", // Nome completo correto
+      "enter": "editor::ExpandExcerpts",
+    },
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "a": "project_panel::NewFile",
+      "A": "project_panel::NewDirectory",
+      "r": "project_panel::Rename",
+      "d": "project_panel::Delete",
+      "x": "project_panel::Cut",
+      "c": "project_panel::Copy",
+      "p": "project_panel::Paste",
+      // Close project panel as project file panel on the right
       "q": "workspace::ToggleLeftDock",
+      "space e": "workspace::ToggleLeftDock",
+      ":": "command_palette::Toggle",
+      "%": "project_panel::NewFile",
+      "/": "project_panel::NewSearchInDirectory",
+      "enter": "project_panel::OpenPermanent",
+      "escape": "workspace::ToggleLeftDock",
       "h": "project_panel::CollapseSelectedEntry",
+      "j": "menu::SelectNext",
+      "k": "menu::SelectPrevious",
       "l": "project_panel::ExpandSelectedEntry",
+      "o": "project_panel::OpenPermanent",
+      "shift-d": "project_panel::Delete",
+      "shift-r": "project_panel::Rename",
+      "t": "project_panel::OpenPermanent",
+      "v": "project_panel::OpenPermanent",
+      "shift-g": "menu::SelectLast",
+      "g g": "menu::SelectFirst",
+      "-": "project_panel::SelectParent",
+      "ctrl-6": "pane::AlternateFile",
     },
   },
   {
-    "context": "Editor && vim_mode == insert",
-    "bindings": {
-      // "j k": "vim::NormalBefore"
-    },
-  },
-  {
-    "context": "Editor && vim_mode == normal",
+    "context": "Editor && VimControl && !VimWaiting && !menu",
     "bindings": {
       "space |": "workspace::NewFileSplitVertical",
       "space -": "workspace::NewFileSplitHorizontal",
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-j": "workspace::ActivatePaneDown",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-l": "workspace::ActivatePaneRight",
       "space w d": "pane::CloseActiveItem",
       "space w o": "workspace::CloseInactiveTabsAndPanes",
       "space c r": "editor::Rename",
@@ -48,15 +81,14 @@
     },
   },
   {
-    "context": "(Editor && mode == full)",
+    "context": "VimControl && !menu",
     "bindings": {
-      "ctrl-/": "buffer_search::DeployReplace",
-    },
-  },
-  {
-    "context": "BufferSearchBar",
-    "bindings": {
-      "ctrl-/": "buffer_search::Dismiss",
+      "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
+      "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
+      "n": ["workspace::SendKeystrokes", "n z z z v"],
+      "shift-n": ["workspace::SendKeystrokes", "shift-n z z z v"],
+      "shift-g": ["workspace::SendKeystrokes", "shift-g z z"],
+      "g r": "editor::FindAllReferences",
     },
   },
 ]

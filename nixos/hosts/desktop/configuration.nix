@@ -18,7 +18,4 @@
     modesetting.enable = true;
     powerManagement.enable = true;
   };
-  boot.kernelParams = [
-    "nvidia-drm.modeset=1"
-  ];
 }

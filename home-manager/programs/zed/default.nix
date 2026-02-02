@@ -4,7 +4,7 @@
   ...
 }: {
   home.packages = with pkgs-unstable; [
-    zed-editor
+    zed-editor-fhs
   ];
 
   xdg.configFile."zed" = linkApp "zed";
