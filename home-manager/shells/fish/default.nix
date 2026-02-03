@@ -19,7 +19,9 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting ""
-      bind \cf sesh_interactive
+      # bind \cf sesh_interactive
+      bind \cf zesh_interactive
+      fish_add_path "$HOME/.cargo/bin"
     '';
     shellAliases = {
       lvim = "NVIM_APPNAME=\"lvim\" nvim";
@@ -67,6 +69,28 @@
         end
         set -l session_name (string split -f 2 ' ' "$session")
         sesh connect "$session_name"
+      '';
+
+      zesh_interactive = ''
+        set -l session (zesh list | fzf --height 90% --layout=reverse \
+            --no-sort --ansi --border-label ' zesh ' --prompt '⚡  ' \
+            --header '  C-a All | C-t Sessions | C-x Zoxide | C-f Find | C-d Kill Session' \
+            --bind 'tab:down,btab:up' \
+            --bind 'ctrl-a:change-prompt(⚡  )+reload(zesh list)' \
+            --bind 'ctrl-t:change-prompt(🪟  )+reload(zellij list-sessions --short)' \
+            --bind 'ctrl-x:change-prompt(📁  )+reload(zoxide query -l)' \
+            --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+            --bind 'ctrl-d:execute(zellij delete-session {})+change-prompt(⚡  )+reload(zesh list)' \
+            --preview-window 'right:50%' \
+            --preview 'zesh preview {}' < /dev/tty)
+
+        commandline -f repaint >/dev/null 2>&1
+
+        if test -z "$session"
+            return
+        end
+
+        zesh connect "$session"
       '';
     };
   };
