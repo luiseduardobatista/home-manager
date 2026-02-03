@@ -23,5 +23,6 @@
     ./yazi
     ./noctalia
     ./zed
+    ./zellij
   ];
 }
