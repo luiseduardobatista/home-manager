@@ -410,7 +410,7 @@ web_client {
 //   - true (default)
 //   - false
 // 
-// session_serialization false
+session_serialization true
  
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
@@ -530,3 +530,5 @@ web_client {
 // can be useful for removing wrappers around commands
 // Note: be sure to escape backslashes and similar characters properly
 // post_command_discovery_hook "echo $RESURRECT_COMMAND | sed <your_regex_here>"
+
+post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | sed -E 's|^/nix/store/[^ ]+/bin/nvim|nvim|; s| --cmd lua vim.g.[^ ]+||g'"

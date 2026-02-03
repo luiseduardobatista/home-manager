@@ -370,25 +370,25 @@ keybinds clear-defaults=true {
         }
         // vim-zellij-navigator
         bind "Ctrl Shift h" {
-            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+            MessagePlugin "file:/home/luisb/.config/zellij/plugins/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "left";
             };
         }
         bind "Ctrl Shift j" {
-            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+            MessagePlugin "file:/home/luisb/.config/zellij/plugins/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "down";
             };
         }
         bind "Ctrl Shift k" {
-            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+            MessagePlugin "file:/home/luisb/.config/zellij/plugins/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "up";
             };
         }
         bind "Ctrl Shift l" {
-            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+            MessagePlugin "file:/home/luisb/.config/plugins/vim-zellij-navigator.wasm" {
                 name "resize";
                 payload "right";
             };
@@ -658,7 +658,7 @@ default_layout "minimal"
 //   - detach (Default)
 //   - quit
 //
-// on_force_close "quit"
+on_force_close "detach"
 // Configure the scroll back buffer size
 // This is the number of lines zellij stores for each pane in the scroll back
 // buffer. Excess number of lines are discarded in a FIFO fashion.
@@ -715,13 +715,13 @@ default_layout "minimal"
 //   - true (default)
 //   - false
 //
-// session_serialization false
+session_serialization true
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
 //   - true
 //   - false (default)
 //
-// serialize_pane_viewport false
+serialize_pane_viewport true
 // Scrollback lines to serialize along with the pane viewport when serializing sessions, 0
 // defaults to the scrollback size. If this number is higher than the scrollback size, it will
 // also default to the scrollback size. This does nothing if `serialize_pane_viewport` is not true.
@@ -735,7 +735,7 @@ default_layout "minimal"
 // styled_underlines false
 // How often in seconds sessions are serialized
 //
-// serialization_interval 10000
+serialization_interval 60
 // Enable or disable writing of session metadata to disk (if disabled, other sessions might not know
 // metadata info on this session)
 // (Requires restart)
@@ -827,3 +827,4 @@ show_startup_tips false
 // Note: be sure to escape backslashes and similar characters properly
 // post_command_discovery_hook "echo $RESURRECT_COMMAND | sed <your_regex_here>"
 
+post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | sed -E 's|^/nix/store/[^ ]+/bin/nvim|nvim|; s| --cmd lua vim.g.[^ ]+||g'"
