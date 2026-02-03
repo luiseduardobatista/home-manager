@@ -83,7 +83,7 @@
             --bind 'ctrl-t:change-prompt(🪟  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /")' \
             --bind 'ctrl-x:change-prompt(📁  )+reload(zoxide query -l)' \
             --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
-            --bind 'ctrl-d:execute(zellij delete-session {})+change-prompt(⚡  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /"; zoxide query -l)' \
+            --bind 'ctrl-d:execute(zellij delete-session --force $(echo {} | sed "s/^Session: //"))+change-prompt(⚡  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /"; zoxide query -l)' \
             --preview-window 'right:50%' \
             --preview 'zesh preview (echo {} | sed "s/^Session: //")' < /dev/tty)
 
