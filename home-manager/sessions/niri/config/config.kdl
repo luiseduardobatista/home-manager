@@ -304,6 +304,7 @@ window-rule {
 window-rule {
     match app-id="^jetbrains-.*$" title="^$"
     match app-id="^jetbrains-.*$" title="Settings"
+    match app-id="^jetbrains-.*$" title="Modify"
     open-floating true
 }
 // Example: block out two password managers from screen capture.

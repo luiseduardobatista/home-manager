@@ -8,6 +8,7 @@
     gemini-cli
     sesh
     gnumake
+    just
     unzip
     poetry
     openfortivpn

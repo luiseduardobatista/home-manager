@@ -8,18 +8,6 @@ keybinds clear-defaults=true {
         }
     }
     pane {
-        bind "left" {
-            MoveFocus "left"
-        }
-        bind "down" {
-            MoveFocus "down"
-        }
-        bind "up" {
-            MoveFocus "up"
-        }
-        bind "right" {
-            MoveFocus "right"
-        }
         bind "c" {
             SwitchToMode "renamepane"
             PaneNameInput 0
@@ -28,10 +16,10 @@ keybinds clear-defaults=true {
             NewPane "down"
             SwitchToMode "locked"
         }
-        bind "e" {
-            TogglePaneEmbedOrFloating
-            SwitchToMode "locked"
-        }
+        // bind "e" {
+        //     TogglePaneEmbedOrFloating
+        //     SwitchToMode "locked"
+        // }
         bind "f" {
             ToggleFocusFullscreen
             SwitchToMode "locked"
@@ -39,25 +27,22 @@ keybinds clear-defaults=true {
         bind "h" {
             MoveFocus "left"
         }
+        bind "j" {
+          MoveFocus "down"
+        }
+        bind "k" {
+          MoveFocus "up"
+        }
+        bind "l" {
+          MoveFocus "right"
+        }
         bind "i" {
             TogglePanePinned
             SwitchToMode "locked"
         }
-        bind "j" {
-            MoveFocus "down"
-        }
-        bind "k" {
-            MoveFocus "up"
-        }
-        bind "l" {
-            MoveFocus "right"
-        }
         bind "n" {
             NewPane
             SwitchToMode "locked"
-        }
-        bind "p" {
-            SwitchToMode "normal"
         }
         bind "r" {
             NewPane "right"
@@ -73,10 +58,6 @@ keybinds clear-defaults=true {
         }
         bind "x" {
             CloseFocus
-            SwitchToMode "locked"
-        }
-        bind "z" {
-            TogglePaneFrames
             SwitchToMode "locked"
         }
         bind "tab" {
@@ -595,7 +576,7 @@ plugins {
         welcome_screen true
     }
     zjstatus-hints location="file:~/.config/zellij/plugins/zjstatus-hints.wasm" {
-      max_length "104"
+      max_length "110"
       overflow_str ""
       pipe_name "zjstatus_hints"
       hide_in_base_mode true
