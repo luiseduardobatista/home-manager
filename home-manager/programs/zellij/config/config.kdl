@@ -369,6 +369,36 @@ keybinds clear-defaults=true {
             MoveFocusOrTab "right"
         }
         // vim-zellij-navigator
+        bind "Ctrl h" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "left";
+            };
+        }
+
+        // Navegação Baixo
+        bind "Ctrl j" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "down";
+            };
+        }
+
+        // Navegação Cima
+        bind "Ctrl k" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "up";
+            };
+        }
+
+        // Navegação Direita
+        bind "Ctrl l" {
+            MessagePlugin "file:~/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus";
+                payload "right";
+            };
+        }
         bind "Ctrl Shift h" {
             MessagePlugin "file:/home/luisb/.config/zellij/plugins/vim-zellij-navigator.wasm" {
                 name "resize";
@@ -401,18 +431,6 @@ keybinds clear-defaults=true {
         }
         bind "Alt f" {
             ToggleFloatingPanes
-        }
-        bind "Ctrl h" {
-            MoveFocusOrTab "left"
-        }
-        bind "Ctrl j" {
-            MoveFocus "down"
-        }
-        bind "Ctrl k" {
-            MoveFocus "up"
-        }
-        bind "Ctrl l" {
-            MoveFocusOrTab "right"
         }
         bind "Alt i" {
             MoveTab "left"
@@ -715,7 +733,7 @@ on_force_close "detach"
 //   - true (default)
 //   - false
 //
-session_serialization true
+// session_serialization true
 // Whether pane viewports are serialized along with the session, default is false
 // Options:
 //   - true
@@ -827,4 +845,4 @@ show_startup_tips false
 // Note: be sure to escape backslashes and similar characters properly
 // post_command_discovery_hook "echo $RESURRECT_COMMAND | sed <your_regex_here>"
 
-post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | sed -E 's|^/nix/store/[^ ]+/bin/nvim|nvim|; s| --cmd lua vim.g.[^ ]+||g'"
+// post_command_discovery_hook "echo \"$RESURRECT_COMMAND\" | sed -E 's|^/nix/store/[^ ]+/bin/nvim|nvim|; s| --cmd lua vim.g.[^ ]+||g'"

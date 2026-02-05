@@ -1,10 +1,9 @@
-{pkgs, ...}: {
-  home.packages = with pkgs; [
+{pkgs-unstable, ...}: {
+  home.packages = with pkgs-unstable; [
     lazygit
     lazydocker
     btop
     tree
-    fish
     gemini-cli
     sesh
     gnumake
@@ -27,5 +26,12 @@
     statix
     uv
     alejandra
+    fzf
+    fd
+    ripgrep
+    xclip
+    wget
+    curl
+    localtunnel
   ];
 }

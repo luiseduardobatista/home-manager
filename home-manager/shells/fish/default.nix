@@ -3,14 +3,6 @@
   config,
   ...
 }: {
-  home.packages = with pkgs; [
-    sesh
-    fzf
-    eza
-    gotestsum
-    cargo-nextest
-    fd
-  ];
   home.sessionVariables = {
     SSH_AUTH_SOCK = "${config.home.homeDirectory}/.1password/agent.sock";
     MOZ_ENABLE_WAYLAND = "1";

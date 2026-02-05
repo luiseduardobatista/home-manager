@@ -59,13 +59,13 @@
         "widgets": {
             "center": [
                 {
+                    "clockColor": "none",
                     "customFont": "",
                     "formatHorizontal": "HH:mm ddd, MMM dd",
                     "formatVertical": "HH mm - dd MM",
                     "id": "Clock",
                     "tooltipFormat": "HH:mm ddd, MMM dd",
-                    "useCustomFont": false,
-                    "usePrimaryColor": false
+                    "useCustomFont": false
                 }
             ],
             "left": [
@@ -82,6 +82,7 @@
                     "id": "Workspace",
                     "labelMode": "index",
                     "occupiedColor": "secondary",
+                    "pillSize": 0.6,
                     "reverseScroll": false,
                     "showApplications": false,
                     "showBadge": true,
@@ -142,8 +143,7 @@
                     "hideIfNotDetected": true,
                     "id": "Battery",
                     "showNoctaliaPerformance": false,
-                    "showPowerProfiles": false,
-                    "warningThreshold": 30
+                    "showPowerProfiles": false
                 },
                 {
                     "colorizeDistroLogo": false,
@@ -345,6 +345,8 @@
     },
     "notifications": {
         "backgroundOpacity": 1,
+        "batteryCriticalThreshold": 5,
+        "batteryWarningThreshold": 20,
         "criticalUrgencyDuration": 15,
         "enableKeyboardLayoutToast": true,
         "enableMediaToast": false,
