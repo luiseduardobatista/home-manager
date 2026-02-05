@@ -25,5 +25,13 @@
         };
       }
     ];
+    ignores = [
+      "Session.vim"
+      "*.swp"
+      ".direnv/"
+      ".vscode/"
+      ".idea/"
+      ".env"
+    ];
   };
 }
