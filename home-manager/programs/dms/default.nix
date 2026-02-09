@@ -18,5 +18,5 @@
     enableCalendarEvents = true;
     enableClipboardPaste = true;
   };
-  # xdg.configFile."noctalia" = linkApp "noctalia";
+  # xdg.configFile."dms" = linkApp "dms";
 }

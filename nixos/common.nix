@@ -176,6 +176,7 @@
     networkmanagerapplet
     wl-clipboard
     xclip
+    brave
   ];
 
   fonts.packages = with pkgs; [
