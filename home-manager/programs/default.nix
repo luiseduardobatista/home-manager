@@ -24,5 +24,6 @@
     ./noctalia
     ./zed
     ./zellij
+    # ./dms
   ];
 }
