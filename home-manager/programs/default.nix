@@ -24,6 +24,7 @@
     ./noctalia
     ./zed
     ./zellij
+    ./opencode
     # ./dms
   ];
 }
