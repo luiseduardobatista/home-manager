@@ -267,6 +267,9 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // The wiki explains how to configure individual animations:
 // https://yalter.github.io/niri/Configuration:-Animations
 animations {
+  workspace-switch {
+        off
+    }
  // Uncomment to turn off all animations.
     // off
 
