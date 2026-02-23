@@ -1,2 +1,3 @@
-source ~/.lazy-idea.vim
+" source ~/.lazy-idea.vim
+source ~/.lazy-idea/lazy-idea.vim
 set visualbell

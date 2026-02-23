@@ -33,5 +33,6 @@
     wget
     curl
     localtunnel
+    bat
   ];
 }
