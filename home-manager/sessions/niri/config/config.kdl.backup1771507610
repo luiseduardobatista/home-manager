@@ -829,11 +829,3 @@ spawn-at-startup "/run/current-system/sw/libexec/policykit-1-pantheon/io.element
 spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
 spawn-at-startup "dbus-update-activation-environment --systemd NIRI_SOCKET WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
 
-
-include "dms/cursor.kdl"
-
-include "dms/outputs.kdl"
-
-include "dms/windowrules.kdl"
-include "dms/binds.kdl"
-include "dms/colors.kdl"

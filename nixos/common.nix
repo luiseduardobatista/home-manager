@@ -161,6 +161,9 @@
 
   security.polkit.enable = true;
 
+  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
+  boot.kernelModules = ["v4l2loopback"];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -177,6 +180,8 @@
     wl-clipboard
     xclip
     brave
+    v4l-utils
+    libreoffice
   ];
 
   fonts.packages = with pkgs; [

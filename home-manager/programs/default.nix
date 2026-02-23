@@ -25,6 +25,6 @@
     ./zed
     ./zellij
     ./opencode
-    # ./dms
+    ./dms
   ];
 }
