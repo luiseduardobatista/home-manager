@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  isNixOS,
   ...
 }: {
   imports = [
@@ -29,7 +28,7 @@
   # Exemplo: gap-inner, gap-outer e active-hint-border-radius do Pop Shell
   # precisam ser definidos como mkUint32 para funcionarem.
 
-  config = {
+  config = lib.mkIf config.my.desktop.gnome.enable {
     home.packages = with pkgs; [
       # Default
       bibata-cursors
@@ -57,7 +56,7 @@
     ];
 
     dconf.settings = lib.mkMerge [
-      (lib.mkIf isNixOS {
+      {
         "org/gnome/desktop/input-sources" = {
           sources = [
             (lib.hm.gvariant.mkTuple [
@@ -66,7 +65,7 @@
             ])
           ];
         };
-      })
+      }
 
       {
         "org/gnome/shell" = {
