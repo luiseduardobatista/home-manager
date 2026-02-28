@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  linkApp,
   ...
 }: let
   extraPackages = with pkgs; [
@@ -24,5 +23,4 @@ in {
       '';
     };
   };
-  xdg.configFile."helix" = linkApp "helix";
 }

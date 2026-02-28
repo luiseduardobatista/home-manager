@@ -1,6 +1,5 @@
 {
   pkgs,
-  linkApp,
   gl,
   ...
 }: {
@@ -8,5 +7,4 @@
     enable = true;
     package = gl pkgs.wezterm;
   };
-  xdg.configFile."wezterm" = linkApp "wezterm";
 }

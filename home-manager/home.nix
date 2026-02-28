@@ -15,6 +15,7 @@
   imports = [
     ./options.nix
     ./lib/helpers.nix
+    ./symlinks.nix
     ./sessions
     ./theming
     ./programs

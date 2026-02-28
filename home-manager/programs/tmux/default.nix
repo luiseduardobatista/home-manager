@@ -1,8 +1,4 @@
-{
-  pkgs-unstable,
-  linkFile,
-  ...
-}: {
+{pkgs-unstable, ...}: {
   programs.tmux = {
     enable = true;
 
@@ -26,8 +22,4 @@
       source-file ~/.config/tmux/tmux.user.conf
     '';
   };
-
-  xdg.configFile."tmux/tmux.user.conf" = linkFile "programs/tmux/config/tmux.conf";
-  xdg.configFile."tmux/statusline.conf" = linkFile "programs/tmux/config/statusline.conf";
-  xdg.configFile."tmux/statusline_tokyo_night.conf" = linkFile "programs/tmux/config/statusline_tokyo_night.conf";
 }

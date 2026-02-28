@@ -2,14 +2,12 @@
   config,
   lib,
   pkgs,
-  linkFile,
   ...
 }: {
   config = lib.mkIf config.my.desktop.niri.enable {
     home.packages = with pkgs; [
       fuzzel
     ];
-    xdg.configFile."niri" = linkFile "sessions/niri/config";
 
     services.hypridle = {
       enable = true;

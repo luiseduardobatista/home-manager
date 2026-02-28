@@ -3,7 +3,6 @@
   pkgs,
   lib,
   config,
-  linkApp,
   ...
 }: {
   imports = [inputs.dms.homeModules.dank-material-shell];
@@ -22,6 +21,5 @@
       enableCalendarEvents = true;
       enableClipboardPaste = true;
     };
-    # xdg.configFile."dms" = linkApp "dms";
   };
 }

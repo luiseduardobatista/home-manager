@@ -1,6 +1,5 @@
 {
   pkgs,
-  linkApp,
   gl,
   ...
 }: {
@@ -10,5 +9,4 @@
     settings = {};
   };
   xdg.configFile."kitty/kitty.conf".enable = false;
-  xdg.configFile."kitty" = linkApp "kitty";
 }
