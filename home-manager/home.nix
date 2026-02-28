@@ -10,11 +10,10 @@
   ...
 }: {
   targets.genericLinux.enable = !isNixOS;
-  targets.genericLinux.nixGL.packages = lib.mkIf (!isNixOS) nixGL.packages;
+  targets.genericLinux.nixGL.packages = lib.mkIf config.targets.genericLinux.enable nixGL.packages;
 
   imports = [
-    inputs.noctalia.homeModules.default
-    inputs.dms.homeModules.dank-material-shell
+    ./options.nix
     ./lib/helpers.nix
     ./sessions
     ./theming
@@ -32,16 +31,16 @@
     };
   };
 
-  xdg.userDirs = lib.mkIf isNixOS {
+  xdg.userDirs = lib.mkIf (!config.targets.genericLinux.enable) {
     enable = true;
     createDirectories = true;
   };
 
-  home.packages = lib.optionals (!isNixOS) [
+  home.packages = lib.optionals config.targets.genericLinux.enable [
     pkgs.cachix
   ];
 
-  nix = lib.mkIf (!isNixOS) {
+  nix = lib.mkIf config.targets.genericLinux.enable {
     package = pkgs.nix;
     settings = {
       substituters = [
