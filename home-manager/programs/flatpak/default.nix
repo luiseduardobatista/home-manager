@@ -41,6 +41,7 @@
       "com.getpostman.Postman"
       "com.obsproject.Studio"
       "hu.irl.cameractrls"
+      "com.poweriso.PowerISO"
     ];
   };
 }
