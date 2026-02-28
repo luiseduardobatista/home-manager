@@ -17,10 +17,6 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lazyvim = {
-      url = "github:luiseduardobatista/lazyvim";
-      flake = false;
-    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -91,8 +87,6 @@
                 };
               users.luisb = {
                 imports = [homeManagerUserConfig];
-                my.desktop.niri.enable = true;
-                my.desktop.gnome.enable = true;
               };
             };
           }

@@ -81,22 +81,6 @@
         "type": "github"
       }
     },
-    "lazyvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1768817649,
-        "narHash": "sha256-U8QS6ypZHrPAbCHqGnBlE9PXySkRnhv83MG3W5t2guk=",
-        "owner": "luiseduardobatista",
-        "repo": "lazyvim",
-        "rev": "99206d63b6adc7a675f24d9e9378a2450192fd60",
-        "type": "github"
-      },
-      "original": {
-        "owner": "luiseduardobatista",
-        "repo": "lazyvim",
-        "type": "github"
-      }
-    },
     "nix-flatpak": {
       "locked": {
         "lastModified": 1768656715,
@@ -212,7 +196,6 @@
         "dgop": "dgop",
         "dms": "dms",
         "home-manager": "home-manager",
-        "lazyvim": "lazyvim",
         "nix-flatpak": "nix-flatpak",
         "nixGL": "nixGL",
         "nixpkgs": "nixpkgs",
