@@ -1,24 +1,27 @@
 {
   inputs,
   pkgs,
+  lib,
   config,
   linkApp,
   ...
 }: {
   imports = [inputs.dms.homeModules.dank-material-shell];
 
-  programs.dank-material-shell = {
-    enable = true;
-    dgop.package = inputs.dgop.packages.${pkgs.system}.default;
-    systemd = {
-      enable = false;
+  config = lib.mkIf config.my.desktop.niri.enable {
+    programs.dank-material-shell = {
+      enable = true;
+      dgop.package = inputs.dgop.packages.${pkgs.system}.default;
+      systemd = {
+        enable = false;
+      };
+      enableSystemMonitoring = true;
+      enableVPN = true;
+      enableDynamicTheming = true;
+      enableAudioWavelength = true;
+      enableCalendarEvents = true;
+      enableClipboardPaste = true;
     };
-    enableSystemMonitoring = true;
-    enableVPN = true;
-    enableDynamicTheming = true;
-    enableAudioWavelength = true;
-    enableCalendarEvents = true;
-    enableClipboardPaste = true;
+    # xdg.configFile."dms" = linkApp "dms";
   };
-  # xdg.configFile."dms" = linkApp "dms";
 }
