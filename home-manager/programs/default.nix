@@ -1,8 +1,6 @@
 {
   imports = [
-    ./1Password
     ./alacritty
-    ./autostart
     ./cli
     ./zoxide
     ./distrobox
@@ -16,9 +14,7 @@
     ./tmux
     ./wezterm
     ./flatpak
-    ./jetbrains-toolbox
     ./ideavim
-    ./dev-langs
     ./helix
     ./yazi
     ./noctalia
