@@ -193,6 +193,17 @@
     nerd-fonts.jetbrains-mono
   ];
 
+  system.activationScripts.installRustStable = {
+    text = ''
+      if ! ${pkgs.rustup}/bin/rustup default >/dev/null 2>&1; then
+        echo "--- Configurando Rustup: Instalando toolchain stable como padrão ---"
+        ${pkgs.rustup}/bin/rustup default stable
+      else
+        echo "--- Rustup: Toolchain stable já está configurado. Pulando... ---"
+      fi
+    '';
+  };
+
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     SDL
@@ -339,15 +350,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.11"; # Did you read the comment?
-
-  system.activationScripts.installRustStable = {
-    text = ''
-      if ! ${pkgs.rustup}/bin/rustup default >/dev/null 2>&1; then
-        echo "--- Configurando Rustup: Instalando toolchain stable como padrão ---"
-        ${pkgs.rustup}/bin/rustup default stable
-      else
-        echo "--- Rustup: Toolchain stable já está configurado. Pulando... ---"
-      fi
-    '';
-  };
 }
