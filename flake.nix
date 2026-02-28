@@ -89,7 +89,11 @@
                 // {
                   isNixOS = true;
                 };
-              users.luisb = homeManagerUserConfig;
+              users.luisb = {
+                imports = [homeManagerUserConfig];
+                my.desktop.niri.enable = true;
+                my.desktop.gnome.enable = true;
+              };
             };
           }
         ];

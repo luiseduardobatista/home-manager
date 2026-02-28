@@ -1,6 +1,5 @@
 {
   config,
-  isNixOS,
   repoDir,
   ...
 }: let
@@ -19,7 +18,7 @@ in {
     inherit nixConfigPath;
 
     gl = pkg:
-      if isNixOS
+      if (!config.targets.genericLinux.enable)
       then pkg
       else config.lib.nixGL.wrap pkg;
   };
