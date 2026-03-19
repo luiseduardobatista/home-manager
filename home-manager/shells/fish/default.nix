@@ -11,8 +11,8 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting ""
-      # bind \cf sesh_interactive
-      bind \cf zesh_interactive
+      bind \cf sesh_interactive
+      # bind \cf zesh_interactive
       fish_add_path "$HOME/.cargo/bin"
     '';
     shellAliases = {

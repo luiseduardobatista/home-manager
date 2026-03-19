@@ -65,6 +65,9 @@ Se estiver em uma instalação limpa do NixOS:
 3. Aplique a configuração (Desktop ou Laptop):
 
     ```bash
+    # Habilite flake e git temporariamente para o shell
+    nix-shell -p git nix --extra-experimental-features "nix-command flakes"
+    
     # Para Desktop (Configurações Nvidia, Performance)
     sudo nixos-rebuild switch --flake ~/nix#desktop
 
