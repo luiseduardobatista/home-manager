@@ -18,7 +18,7 @@
     air
     sqlc
     stow
-    nodePackages.localtunnel
+    localtunnel
     eza
     cargo-nextest
     cargo-cache
