@@ -131,18 +131,15 @@
                     "textColor": "none"
                 },
                 {
+                    "id": "plugin:clipboard"
+                },
+                {
                     "hideWhenZero": true,
                     "hideWhenZeroUnread": false,
                     "iconColor": "none",
                     "id": "NotificationHistory",
                     "showUnreadBadge": true,
                     "unreadBadgeColor": "primary"
-                },
-                {
-                    "defaultSettings": {
-                        "position": "Bottom"
-                    },
-                    "id": "plugin:clipper"
                 },
                 {
                     "displayMode": "onhover",
@@ -171,8 +168,8 @@
                     "textColor": "none"
                 },
                 {
-                    "deviceNativePath": "",
-                    "displayMode": "onhover",
+                    "deviceNativePath": "__default__",
+                    "displayMode": "icon-always",
                     "hideIfIdle": true,
                     "hideIfNotDetected": true,
                     "id": "Battery",

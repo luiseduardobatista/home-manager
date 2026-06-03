@@ -23,47 +23,47 @@
     "single_file_review": false,
     "dock": "left",
     "favorite_models": [],
-    "model_parameters": [],
+    "model_parameters": []
   },
   "tab_bar": {
-    "show": false,
+    "show": false
   },
   "status_bar": {
-    "active_language_button": true,
+    "active_language_button": true
   },
   "toolbar": {
     "breadcrumbs": true,
-    "quick_actions": false,
+    "quick_actions": false
   },
   "scrollbar": {
-    "show": "never",
+    "show": "never"
   },
   "cursor_blink": false,
   "project_panel": {
-    "button": true,
+    "button": true
   },
   "use_smartcase_search": true,
   "which_key": {
-    "enabled": false,
+    "enabled": false
   },
   "buffer_line_height": "standard",
   "diagnostics": {
     "inline": {
-      "enabled": true,
-    },
+      "enabled": true
+    }
   },
   "preferred_line_length": 100,
   "relative_line_numbers": "enabled",
   "languages": {
     "Python": {
-      "preferred_line_length": 100,
-    },
+      "preferred_line_length": 100
+    }
   },
   "restore_on_startup": "empty_tab",
   "icon_theme": "Zed (Default)",
   "vim_mode": true,
   "vim": {
-    "use_system_clipboard": "always",
+    "use_system_clipboard": "always"
   },
   "vertical_scroll_margin": 5,
   "base_keymap": "JetBrains",
@@ -72,12 +72,12 @@
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "Ayu Dark",
+    "dark": "Ayu Dark"
   },
   // Necessário para evitar race condition com o remove_trailing_whitespace_on_save ao copiar algo
   "autosave": {
     "after_delay": {
-      "milliseconds": 1000,
-    },
-  },
+      "milliseconds": 1000
+    }
+  }
 }

@@ -1,94 +1,95 @@
-// Zed keymap
-//
-// For information on binding keys, see the Zed
-// documentation: https://zed.dev/docs/key-bindings
-//
-// To see the default key bindings run `zed: open default keymap`
-// from the command palette.
 [
   {
-    "context": "",
-    "bindings": {
-      "space f f": "file_finder::Toggle",
-      "space f p": "projects::OpenRecent",
-      "escape": "editor::Cancel",
-      "space e": "pane::RevealInProjectPanel",
-      "space f v": "file_finder::Toggle",
-      "space g g": "git_panel::ToggleFocus",
-      "ctrl-w": "pane::CloseActiveItem",
-      // "shift shift": "file_finder::Toggle"
-    },
-  },
-  {
-    "context": "Dock || Terminal || Editor",
-    "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown",
-    },
-  },
-  {
-    "context": "Editor && multibuffer",
-    "bindings": {
-      "ctrl-j": "menu::SelectNext", // Nome completo correto
-      "ctrl-k": "menu::SelectPrevious", // Nome completo correto
-      "enter": "editor::ExpandExcerpts",
-    },
-  },
-  {
-    "context": "ProjectPanel && not_editing",
-    "bindings": {
-      "a": "project_panel::NewFile",
-      "A": "project_panel::NewDirectory",
-      "r": "project_panel::Rename",
-      "d": "project_panel::Delete",
-      "x": "project_panel::Cut",
-      "c": "project_panel::Copy",
-      "p": "project_panel::Paste",
-      // Close project panel as project file panel on the right
-      "q": "workspace::ToggleLeftDock",
-      "space e": "workspace::ToggleLeftDock",
-      ":": "command_palette::Toggle",
-      "%": "project_panel::NewFile",
-      "/": "project_panel::NewSearchInDirectory",
-      "enter": "project_panel::OpenPermanent",
-      "escape": "workspace::ToggleLeftDock",
-      "h": "project_panel::CollapseSelectedEntry",
-      "j": "menu::SelectNext",
-      "k": "menu::SelectPrevious",
-      "l": "project_panel::ExpandSelectedEntry",
-      "o": "project_panel::OpenPermanent",
-      "shift-d": "project_panel::Delete",
-      "shift-r": "project_panel::Rename",
-      "t": "project_panel::OpenPermanent",
-      "v": "project_panel::OpenPermanent",
-      "shift-g": "menu::SelectLast",
-      "g g": "menu::SelectFirst",
-      "-": "project_panel::SelectParent",
-      "ctrl-6": "pane::AlternateFile",
-    },
-  },
-  {
-    "context": "Editor && VimControl && !VimWaiting && !menu",
-    "bindings": {
-      "space |": "workspace::NewFileSplitVertical",
-      "space -": "workspace::NewFileSplitHorizontal",
-      "space w d": "pane::CloseActiveItem",
-      "space w o": "workspace::CloseInactiveTabsAndPanes",
-      "space c r": "editor::Rename",
-      "space c a": "editor::ToggleCodeActions",
-    },
-  },
-  {
-    "context": "VimControl && !menu",
+    "context": "Editor && (vim_mode == normal || vim_mode == visual) && !menu",
     "bindings": {
       "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d z z"],
       "ctrl-u": ["workspace::SendKeystrokes", "ctrl-u z z"],
-      "n": ["workspace::SendKeystrokes", "n z z z v"],
-      "shift-n": ["workspace::SendKeystrokes", "shift-n z z z v"],
-      "shift-g": ["workspace::SendKeystrokes", "shift-g z z"],
+      "ctrl-o": ["workspace::SendKeystrokes", "ctrl-o z z"],
+      "ctrl-i": ["workspace::SendKeystrokes", "ctrl-i z z"],
+      "n": ["workspace::SendKeystrokes", "n z z"],
+      "shift-n": ["workspace::SendKeystrokes", "shift-n z z"],
+      "g y": "editor::GoToTypeDefinition",
       "g r": "editor::FindAllReferences",
-    },
+      "shift-k": "editor::Hover"
+    }
   },
+  {
+    "context": "Editor && vim_mode == normal && !menu",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-shift-h": "vim::ResizePaneLeft",
+      "ctrl-shift-j": "vim::ResizePaneDown",
+      "ctrl-shift-k": "vim::ResizePaneUp",
+      "ctrl-shift-l": "vim::ResizePaneRight",
+      "space -": "pane::SplitDown",
+      "space |": "pane::SplitRight",
+      "space s h": "pane::SplitDown",
+      "space s v": "pane::SplitRight",
+      "space w d": "pane::CloseActiveItem",
+      "space b d": "pane::CloseActiveItem",
+      "space b s": "workspace::NewFile",
+      "space b c": ["workspace::SendKeystrokes", "g g V G y"],
+      "space e d": "project_panel::ToggleFocus",
+      "space e f": "pane::RevealInProjectPanel",
+      "space e s": "zed::OpenSettings",
+      "space e k": "zed::OpenKeymap",
+      "space f f": "file_finder::Toggle",
+      "space f b": "tab_switcher::Toggle",
+      "space f g": "pane::DeploySearch",
+      "space f shift-s": "outline::Toggle",
+      "space f d": "diagnostics::Deploy",
+      "space f v": "file_finder::Toggle",
+      "space f p": "projects::OpenRecent",
+      "space g o": "editor::ToggleSelectedDiffHunks",
+      "space g g": "terminal_panel::Toggle",
+      "space c a": "editor::ToggleCodeActions",
+      "space c f": "editor::Format",
+      "space c r": "editor::Rename",
+      "space t t": "terminal_panel::Toggle"
+    }
+  },
+  {
+    "context": "Dock && !menu",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-shift-h": "vim::ResizePaneLeft",
+      "ctrl-shift-j": "vim::ResizePaneDown",
+      "ctrl-shift-k": "vim::ResizePaneUp",
+      "ctrl-shift-l": "vim::ResizePaneRight"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert",
+    "bindings": {
+      "ctrl-k": "editor::ShowSignatureHelp"
+    }
+  },
+  {
+    "context": "RightDock && !Editor && !Terminal && !Input",
+    "bindings": {
+      "q": "workspace::ToggleRightDock"
+    }
+  },
+  {
+    "context": "ProjectPanel",
+    "bindings": {
+      "q": "project_panel::Toggle",
+      "escape": "project_panel::Toggle"
+    }
+  }
 ]
