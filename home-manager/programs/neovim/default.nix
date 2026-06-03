@@ -10,7 +10,7 @@
     vimAlias = true;
     viAlias = true;
   };
-  xdg.configFile."nvim/init.lua".enable = false;
+  xdg.configFile."nvim/init.lua".enable = lib.mkForce false;
 
   home.packages = with pkgs-unstable; [
     gcc

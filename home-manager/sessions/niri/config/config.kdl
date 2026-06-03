@@ -11,6 +11,9 @@ input {
  // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
 
+            layout "us,br"
+            variant "altgr-intl,"
+            options "grp:win_space_toggle,ctrl:nocaps"
             // For example:
             // layout "us,ru"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"

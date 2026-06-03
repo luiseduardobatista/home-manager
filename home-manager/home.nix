@@ -14,7 +14,7 @@
 
   imports = [
     inputs.noctalia.homeModules.default
-    inputs.dms.homeModules.dank-material-shell
+    # inputs.dms.homeModules.dank-material-shell
     ./lib/helpers.nix
     ./sessions
     ./theming
@@ -57,5 +57,5 @@
 
   programs.home-manager.enable = true;
   systemd.user.startServices = "sd-switch";
-  home.stateVersion = "25.11";
+  home.stateVersion = "26.05";
 }
