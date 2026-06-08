@@ -35,5 +35,6 @@
     localtunnel
     bat
     codecrafters-cli
+    fastfetch
   ];
 }

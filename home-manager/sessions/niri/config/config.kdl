@@ -354,10 +354,10 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: alacritty" {
         spawn "alacritty"
     }
-    // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Mod+D hotkey-overlay-title="Launcher (Noctalia / Fuzzel Fallback)" {
-        spawn-sh "noctalia-shell ipc call launcher toggle || fuzzel"
-    }
+    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    // Mod+D hotkey-overlay-title="Launcher (Noctalia / Fuzzel Fallback)" {
+    //     spawn-sh "noctalia-shell ipc call launcher toggle || fuzzel"
+    // }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
         spawn "swaylock"
     }
