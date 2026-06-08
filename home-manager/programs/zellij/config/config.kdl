@@ -608,9 +608,9 @@ plugins {
 load_plugins {
   zjstatus-hints
   vim-zellij-navigator
-  "file:~/.config/zellij/plugins/zjframes.wasm" {
-    hide_frame_for_single_pane       "true"
-  }
+  // "file:~/.config/zellij/plugins/zjframes.wasm" {
+  //   hide_frame_for_single_pane       "true"
+  // }
 }
 web_client {
     font "monospace"

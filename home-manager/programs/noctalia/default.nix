@@ -5,7 +5,7 @@
   linkApp,
   ...
 }: {
-  programs.noctalia-shell = {
+  programs.noctalia = {
     enable = true;
   };
   xdg.configFile."noctalia" = linkApp "noctalia";

@@ -12,7 +12,7 @@ input {
             // For more information, see xkeyboard-config(7).
 
             layout "us,br"
-            variant "altgr-intl,"
+            variant "intl,"
             options "grp:win_space_toggle,ctrl:nocaps"
             // For example:
             // layout "us,ru"
@@ -840,3 +840,5 @@ include "dms/outputs.kdl"
 include "dms/windowrules.kdl"
 include "dms/binds.kdl"
 include "dms/colors.kdl"
+
+include "noctalia.kdl"

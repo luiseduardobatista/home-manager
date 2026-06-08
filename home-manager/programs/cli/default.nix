@@ -34,5 +34,6 @@
     curl
     localtunnel
     bat
+    codecrafters-cli
   ];
 }
