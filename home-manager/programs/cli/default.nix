@@ -1,5 +1,11 @@
-{pkgs-unstable, ...}: {
+{
+  pkgs-unstable,
+  inputs,
+  pkgs,
+  ...
+}: {
   home.packages = with pkgs-unstable; [
+    inputs.zesh.packages.${pkgs.system}.zesh
     lazygit
     lazydocker
     btop
@@ -36,5 +42,6 @@
     bat
     codecrafters-cli
     fastfetch
+    rtk
   ];
 }
