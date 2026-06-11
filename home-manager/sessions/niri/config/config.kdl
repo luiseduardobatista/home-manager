@@ -351,8 +351,8 @@ binds {
         show-hotkey-overlay
     }
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: alacritty" {
-        spawn "alacritty"
+    Mod+T hotkey-overlay-title="Open a Terminal: foot" {
+        spawn "foot"
     }
     Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     // Mod+D hotkey-overlay-title="Launcher (Noctalia / Fuzzel Fallback)" {

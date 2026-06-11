@@ -28,7 +28,7 @@
     homeDirectory = "/home/luisb";
     sessionVariables = {
       BROWSER = "firefox";
-      TERMINAL = "alacritty";
+      TERMINAL = "foot";
       NIXOS_OZONE_WL = 1;
     };
   };

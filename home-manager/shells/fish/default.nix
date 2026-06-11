@@ -11,8 +11,8 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting ""
-      # bind \cf sesh_interactive
-      bind \cf zesh_interactive
+      bind \cf sesh_interactive
+      # bind \cf zesh_interactive
     '';
     shellAliases = {
       lvim = "NVIM_APPNAME=\"lvim\" nvim";
