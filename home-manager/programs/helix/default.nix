@@ -10,6 +10,7 @@
     basedpyright
     marksman
     ruff
+    lua-language-server
   ];
 in {
   programs.helix = {
