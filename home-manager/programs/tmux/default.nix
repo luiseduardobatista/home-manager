@@ -19,10 +19,6 @@ in {
     terminal = "tmux-256color";
     keyMode = "vi";
     focusEvents = true;
-    plugins = with pkgs.tmuxPlugins; [
-      continuum
-      resurrect
-    ];
     extraConfig = ''
       # ==========================================
       # GERAL
@@ -170,6 +166,9 @@ in {
       set -g @continuum-restore 'on'
       set -g @continuum-boot 'on'
       set -g @continuum-save-interval '10'
+
+      run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
+      run-shell ${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux
     '';
   };
   xdg.configFile."tmux/monitor.sh" = {
