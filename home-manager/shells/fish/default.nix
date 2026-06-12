@@ -11,8 +11,8 @@
     enable = true;
     interactiveShellInit = ''
       set fish_greeting ""
-      bind \cf sesh_interactive
-      # bind \cf zesh_interactive
+      bind ctrl-space sesh_interactive
+      # bind ctrl-space zesh_interactive
     '';
     shellAliases = {
       lvim = "NVIM_APPNAME=\"lvim\" nvim";
@@ -42,15 +42,19 @@
         tmux set-environment -g WAYLAND_DISPLAY $WAYLAND_DISPLAY
         echo "Ambiente Tmux atualizado para $WAYLAND_DISPLAY"
       '';
+      zesh_preview = ''
+        set -l target (string replace -r "^Session: " "" "$argv[1]")
+        zesh preview "$target"
+      '';
       sesh_interactive = ''
         set -l session (sesh list --icons | fzf --height 90% --layout=reverse \
             --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
-            --header '  C-a All | C-t Tmux | C-g Configs | C-x Zoxide | C-f Find | C-d Kill Session' \
+            --header '  C-a All | C-t Tmux | C-g Configs | C-x Zoxide | C-space Find | C-d Kill Session' \
             --bind 'tab:down,btab:up' \
             --bind 'ctrl-a:change-prompt(⚡  )+reload(sesh list --icons)' \
             --bind 'ctrl-t:change-prompt(🪟  )+reload(sesh list -t --icons)' \
             --bind 'ctrl-x:change-prompt(📁  )+reload(sesh list -z --icons)' \
-            --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+            --bind 'ctrl-space:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
             --bind 'ctrl-d:execute(tmux kill-session -t {2..})+change-prompt(⚡  )+reload(sesh list --icons)' \
             --preview-window 'right:50%' \
             --preview 'sesh preview {}' < /dev/tty)
@@ -68,15 +72,15 @@
             zoxide query -l
         end | fzf --height 90% --layout=reverse \
             --no-sort --ansi --border-label ' zesh ' --prompt '⚡  ' \
-            --header '  C-a All | C-t Sessions | C-x Zoxide | C-f Find | C-d Kill Session' \
+            --header '  C-a All | C-t Sessions | C-x Zoxide | C-space Find | C-d Kill Session' \
             --bind 'tab:down,btab:up' \
             --bind 'ctrl-a:change-prompt(⚡  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /"; zoxide query -l)' \
             --bind 'ctrl-t:change-prompt(🪟  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /")' \
             --bind 'ctrl-x:change-prompt(📁  )+reload(zoxide query -l)' \
-            --bind 'ctrl-f:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
+            --bind 'ctrl-space:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
             --bind 'ctrl-d:execute(zellij delete-session --force $(echo {} | sed "s/^Session: //"))+change-prompt(⚡  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /"; zoxide query -l)' \
             --preview-window 'right:50%' \
-            --preview 'zesh preview (echo {} | sed "s/^Session: //")' < /dev/tty)
+            --preview 'zesh_preview {}' < /dev/tty)
 
         commandline -f repaint >/dev/null 2>&1
 
