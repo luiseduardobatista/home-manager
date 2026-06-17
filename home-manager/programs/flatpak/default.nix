@@ -1,10 +1,4 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
+{...}: {
   services.flatpak = {
     enable = true;
 
@@ -33,7 +27,6 @@
       "com.usebruno.Bruno"
       "org.remmina.Remmina"
       "it.mijorus.gearlever"
-      "app.zen_browser.zen"
       "com.github.tchx84.Flatseal"
       "io.dbeaver.DBeaverCommunity"
       "com.github.wwmm.easyeffects"

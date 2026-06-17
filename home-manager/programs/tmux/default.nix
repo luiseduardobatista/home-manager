@@ -9,6 +9,10 @@
   blue_muted = "#81A1C1";
   cyan_soft = "#88C0D0";
 in {
+  home.packages = with pkgs; [
+    moreutils
+  ];
+
   programs.tmux = {
     enable = true;
     prefix = "C-f";
@@ -19,6 +23,28 @@ in {
     terminal = "tmux-256color";
     keyMode = "vi";
     focusEvents = true;
+    plugins = with pkgs.tmuxPlugins; [
+      {
+        plugin = resurrect;
+        extraConfig = ''
+          set -g @resurrect-strategy-vim 'session'
+          set -g @resurrect-strategy-nvim 'session'
+          set -g @resurrect-capture-pane-contents 'on'
+          resurrect_dir="$XDG_CACHE_HOME/.tmux/resurrect"
+          set -g @resurrect-dir $resurrect_dir
+          set -g @resurrect-hook-post-save-all 'target=$(readlink -f $resurrect_dir/last); sed "s| --cmd .*-vim-pack-dir||g; s|/etc/profiles/per-user/$USER/bin/||g; s|/home/$USER/.nix-profile/bin/||g" $target | sponge $target'
+        '';
+      }
+      {
+        plugin = continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-boot 'on'
+          set -g @continuum-save-interval '10'
+          set -g @continuum-systemd-start-cmd 'start-server'
+        '';
+      }
+    ];
     extraConfig = ''
       # ==========================================
       # GERAL
@@ -158,17 +184,6 @@ in {
       set -g mode-style "fg=${gray_dark},bg=${blue_muted}"
       set -g pane-border-style "fg=${gray_dark}"
       set -g pane-active-border-style "fg=${green_soft}"
-
-      set -g @resurrect-strategy-vim 'session'
-      set -g @resurrect-strategy-nvim 'session'
-      set -g @resurrect-capture-pane-contents 'on'
-
-      set -g @continuum-restore 'on'
-      set -g @continuum-boot 'on'
-      set -g @continuum-save-interval '10'
-
-      run-shell ${pkgs.tmuxPlugins.resurrect}/share/tmux-plugins/resurrect/resurrect.tmux
-      run-shell ${pkgs.tmuxPlugins.continuum}/share/tmux-plugins/continuum/continuum.tmux
     '';
   };
   xdg.configFile."tmux/monitor.sh" = {

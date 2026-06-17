@@ -35,14 +35,6 @@
     zesh = {
       url = "github:roberte777/zesh";
     };
-    # dms = {
-    #   url = "github:AvengeMedia/DankMaterialShell/stable";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # dgop = {
-    #   url = "github:AvengeMedia/dgop";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     nix-flatpak.url = "github:gmodena/nix-flatpak/";
   };
   outputs = {

@@ -1,4 +1,4 @@
-{
+{...}: {
   imports = [
     ./1Password
     ./alacritty
@@ -26,6 +26,5 @@
     ./zellij
     ./opencode
     ./pi
-    # ./dms
   ];
 }
