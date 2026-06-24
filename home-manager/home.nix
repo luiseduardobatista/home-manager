@@ -27,7 +27,7 @@
     username = "luisb";
     homeDirectory = "/home/luisb";
     sessionVariables = {
-      BROWSER = "brave";
+      BROWSER = "firefox";
       TERMINAL = "foot";
       NIXOS_OZONE_WL = 1;
     };
