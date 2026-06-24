@@ -7,5 +7,5 @@
     zed-editor-fhs
   ];
 
-  xdg.configFile."zed" = linkApp "zed";
+  # xdg.configFile."zed" = linkApp "zed";
 }
