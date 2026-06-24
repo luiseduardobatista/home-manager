@@ -10,7 +10,6 @@
     lazydocker
     btop
     tree
-    gemini-cli
     sesh
     gnumake
     just
@@ -43,5 +42,6 @@
     codecrafters-cli
     fastfetch
     rtk
+    antigravity-cli
   ];
 }
