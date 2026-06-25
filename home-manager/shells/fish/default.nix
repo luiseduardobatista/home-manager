@@ -13,7 +13,6 @@
       set fish_greeting ""
       bind ctrl-space sesh_interactive
       # bind ctrl-space zesh_interactive
-      devenv hook fish | source
     '';
     shellAliases = {
       lvim = "NVIM_APPNAME=\"lvim\" nvim";
