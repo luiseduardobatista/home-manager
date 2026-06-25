@@ -7,6 +7,7 @@
   home.packages = with pkgs;
     [
       rustup
+      devenv
     ]
     ++ lib.optionals isNixOS [
       python3
