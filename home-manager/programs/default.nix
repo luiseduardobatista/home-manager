@@ -8,6 +8,7 @@
     ./distrobox
     ./flameshot
     ./foot
+    ./ghostty
     ./git
     ./kitty
     ./mise
