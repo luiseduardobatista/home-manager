@@ -56,6 +56,7 @@ Se estiver em uma instalação limpa do NixOS:
 1. Clone o repositório:
 
     ```bash
+    nix-shell -p git nix --extra-experimental-features "nix-command flakes" && \
     git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && \
     cd ~/nix && \
     git remote set-url origin git@github.com:luiseduardobatista/home-manager.git
@@ -65,9 +66,6 @@ Se estiver em uma instalação limpa do NixOS:
 3. Aplique a configuração (Desktop ou Laptop):
 
     ```bash
-    # Habilite flake e git temporariamente para o shell
-    nix-shell -p git nix --extra-experimental-features "nix-command flakes"
-    
     # Para Desktop (Configurações Nvidia, Performance)
     sudo nixos-rebuild switch --flake ~/nix#desktop
 
