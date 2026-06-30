@@ -136,44 +136,8 @@ DEPS = {
         "libtllist-dev",
         "scdoc",
     ],
-    "debian": [
-        "git",
-        "curl",
-        "python3-venv",
-        "vim",
-        "wl-clipboard",
-        "meson",
-        "ninja-build",
-        "pkg-config",
-        "build-essential",
-        "libwayland-dev",
-        "libwayland-bin",
-        "wayland-protocols",
-        "libpixman-1-dev",
-        "libxkbcommon-dev",
-        "libfontconfig1-dev",
-        "libutf8proc-dev",
-        "libtllist-dev",
-        "scdoc",
-    ],
-    "arch": [
-        "git",
-        "curl",
-        "python",
-        "vim",
-        "wl-clipboard",
-        "meson",
-        "ninja",
-        "wayland",
-        "wayland-protocols",
-        "pixman",
-        "libxkbcommon",
-        "scdoc",
-        "pkgconf",
-        "base-devel",
-    ],
 }
-DISTRO_MAP = {"pop": "ubuntu", "manjaro": "arch"}
+DISTRO_MAP = {"pop": "ubuntu"}
 
 
 def detect_distro() -> str:
@@ -195,13 +159,11 @@ def detect_distro() -> str:
 
 def install_deps(distro: str, dry_run: bool = False) -> None:
     deps = " ".join(DEPS[distro])
-    if distro in ("ubuntu", "debian"):
+    if distro == "ubuntu":
         run("sudo apt-get update -qq", dry_run=dry_run)
         run(f"sudo apt-get install -yqq {deps}", dry_run=dry_run)
     elif distro == "fedora":
         run(f"sudo dnf install -yq {deps}", dry_run=dry_run)
-    elif distro == "arch":
-        run(f"sudo pacman -Syu --noconfirm {deps}", dry_run=dry_run)
     ok("System dependencies installed")
 
 
