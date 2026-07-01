@@ -75,6 +75,12 @@
     binfmt = true;
   };
 
+  # OpenWhispr - voice dictation with Wayland auto-paste support
+  programs.openwhispr = {
+    enable = true;
+    users = ["luisb"];
+  };
+
   # Configure console keymap
   console.keyMap = "dvorak";
 
@@ -109,6 +115,7 @@
       "docker"
       "video"
       "audio"
+      "input"
     ];
     packages = with pkgs; [
       #  thunderbird

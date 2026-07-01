@@ -305,6 +305,26 @@
         "type": "github"
       }
     },
+    "openwhispr": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1782832663,
+        "narHash": "sha256-ec1DdAPin3fRFD8G0uACd3r2KzNEYa/vpCY+/YTvk3c=",
+        "owner": "OpenWhispr",
+        "repo": "openwhispr",
+        "rev": "fd818bd1af0d6bbf067f380c3423dd37d614c070",
+        "type": "github"
+      },
+      "original": {
+        "owner": "OpenWhispr",
+        "repo": "openwhispr",
+        "type": "github"
+      }
+    },
     "pi": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -334,6 +354,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
+        "openwhispr": "openwhispr",
         "pi": "pi",
         "zesh": "zesh"
       }
