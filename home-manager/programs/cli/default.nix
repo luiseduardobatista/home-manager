@@ -43,5 +43,6 @@
     fastfetch
     rtk
     antigravity-cli
+    gh
   ];
 }
