@@ -1,0 +1,117 @@
+[audio]
+enable_sounds = true
+
+[bar.default]
+center = [ "clock", "notifications" ]
+end = [ "cpu", "ram", "temp", "tray", "clipboard", "network", "volume", "brightness", "battery", "session" ]
+margin_ends = 0
+radius = 0
+start = [ "control-center", "workspaces" ]
+widget_spacing = 13
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "power_profile"
+
+[[control_center.shortcuts]]
+type = "clipboard"
+
+[[control_center.shortcuts]]
+type = "session"
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@DP-3" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@DP-3"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 1280.0
+    cy = 1321.0
+    output = "DP-3"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@DP-3".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+[shell.animation]
+speed = 1.2000000178813934
+
+[shell.launcher]
+compact = true
+
+[theme]
+builtin = "Nord"
+community_palette = "Oxocarbon"
+custom_palette = "kame-house-mc"
+mode = "dark"
+source = "custom"
+wallpaper_scheme = "m3-content"
+
+    [theme.templates]
+    builtin_ids = [ "niri" ]
+
+[wallpaper]
+directory = "/home/luisb/nix/home-manager/theming/wallpaper"
+
+    [wallpaper.default]
+    path = "/home/luisb/nix/home-manager/theming/wallpaper/kame-house.png"
+
+    [wallpaper.last]
+    path = "/home/luisb/nix/home-manager/theming/wallpaper/kame-house.png"
+
+    [wallpaper.monitors.DP-3]
+    path = "/home/luisb/nix/home-manager/theming/wallpaper/kame-house.png"
+
+[widget.bluetooth]
+enabled = false
+
+[widget.cpu]
+display = "text"
+
+[widget.launcher]
+enabled = false
+
+[widget.media]
+enabled = false
+
+[widget.network]
+show_label = false
+
+[widget.ram]
+display = "text"
+
+[widget.temp]
+display = "text"
+
+[widget.tray]
+drawer = true
+
+[widget.wallpaper]
+enabled = false
+
+[widget.workspaces]
+hide_when_empty = true

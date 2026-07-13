@@ -30,8 +30,7 @@
       flake = false;
     };
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell/v4.7.7";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:noctalia-dev/noctalia-shell";
     };
     pi.url = "github:lukasl-dev/pi.nix";
     zesh = {
@@ -87,7 +86,7 @@
           ./nixos/hosts/${hostName}/configuration.nix
           ./nixos/common.nix
           home-manager.nixosModules.home-manager
-        inputs.openwhispr.nixosModules.default
+          inputs.openwhispr.nixosModules.default
           {
             home-manager = {
               useGlobalPkgs = true;

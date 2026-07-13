@@ -8,20 +8,18 @@
 input {
     keyboard {
         xkb {
- // You can set rules, model, layout, variant and options.
+            // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
-
             layout "us,br"
             variant "intl,"
             options "grp:win_space_toggle,ctrl:nocaps"
-            // For example:
+ // For example:
             // layout "us,ru"
             // options "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
 
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
             // localectl set-x11-keymap.
-
         }
         // Enable numlock on startup, omitting this setting disables it.
         numlock
@@ -80,7 +78,7 @@ cursor {
 output "Dell Inc. DELL S2721DGF 4P76XN3" {
     mode "2560x1440"
     scale 1
-    // variable-refresh-rate
+ // variable-refresh-rate
 }
 output "eDP-1" {
     // Uncomment this line to disable this output.
@@ -270,7 +268,7 @@ screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 // The wiki explains how to configure individual animations:
 // https://yalter.github.io/niri/Configuration:-Animations
 animations {
-  workspace-switch {
+    workspace-switch {
         off
     }
  // Uncomment to turn off all animations.
@@ -278,7 +276,6 @@ animations {
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
     // slowdown 3.0
-
 }
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
@@ -313,13 +310,11 @@ window-rule {
 //     match app-id="^jetbrains-.*$" title="Modify"
 //     open-floating true
 // }
-
 // window-rule {
 //     match app-id="^jetbrains-.*$"
 //     exclude title=" — "
 //     open-floating true
 // }
-
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
@@ -357,10 +352,10 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: foot" {
         spawn "foot"
     }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    // Mod+D hotkey-overlay-title="Launcher (Noctalia / Fuzzel Fallback)" {
-    //     spawn-sh "noctalia-shell ipc call launcher toggle || fuzzel"
-    // }
+    // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+D hotkey-overlay-title="Launcher (Noctalia / Fuzzel Fallback)" {
+        spawn-sh "noctalia msg panel-toggle launcher || fuzzel"
+    }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
         spawn "swaylock"
     }
@@ -820,6 +815,26 @@ gestures {
         off
     }
 }
+// Floating Noctalia settings window.
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width {
+        fixed 1080
+    }
+    default-window-height {
+        fixed 920
+    }
+}
+layer-rule {
+    background-effect {
+        blur false
+    }
+}
+debug {
+    // Allows notification actions and window activation from Noctalia.
+    honor-xdg-activation-with-invalid-serial
+}
 // Para apps electron
 environment {
     XDG_SESSION_TYPE "wayland"
@@ -830,18 +845,13 @@ environment {
     QT_QPA_PLATFORMTHEME_QT6 "gtk3"
     NIXOS_OZONE_WL "1"
 }
-spawn-at-startup "noctalia-shell"
+spawn-at-startup "noctalia"
 spawn-at-startup "/run/current-system/sw/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit"
-spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
+// spawn-at-startup "gnome-keyring-daemon" "--start" "--components=secrets"
 spawn-at-startup "dbus-update-activation-environment --systemd NIRI_SOCKET WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
-
-
 include "dms/cursor.kdl"
-
 include "dms/outputs.kdl"
-
 include "dms/windowrules.kdl"
 include "dms/binds.kdl"
 include "dms/colors.kdl"
-
 include "noctalia.kdl"

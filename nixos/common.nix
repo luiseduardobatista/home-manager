@@ -191,7 +191,6 @@
     cachix
     inetutils
     usbutils
-    networkmanagerapplet
     wl-clipboard
     xclip
     brave
