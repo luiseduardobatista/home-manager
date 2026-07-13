@@ -352,6 +352,9 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: foot" {
         spawn "foot"
     }
+    Mod+F hotkey-overlay-title="Open File Manager: nautilus" {
+        spawn "nautilus"
+    }
     // Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     Mod+D hotkey-overlay-title="Launcher (Noctalia / Fuzzel Fallback)" {
         spawn-sh "noctalia msg panel-toggle launcher || fuzzel"
