@@ -21,7 +21,6 @@
     ./ideavim
     ./dev-langs
     ./helix
-    ./yazi
     ./noctalia
     ./zed
     ./zellij
