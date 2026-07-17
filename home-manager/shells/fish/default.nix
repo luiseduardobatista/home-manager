@@ -12,7 +12,6 @@
     interactiveShellInit = ''
       set fish_greeting ""
       bind ctrl-space sesh_interactive
-      # bind ctrl-space zesh_interactive
     '';
     shellAliases = {
       lvim = "NVIM_APPNAME=\"lvim\" nvim";
@@ -25,7 +24,7 @@
       hmc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       hms = "home-manager switch --flake .";
       fhmu = "nix flake update && home-manager switch --flake .";
-      rb = "sudo nixos-rebuild switch --flake ~/nix";
+      rb = "git add . & sudo nixos-rebuild switch --flake ~/nix";
       update = "nix flake update --flake ~/nix && sudo nixos-rebuild switch --flake ~/nix";
       clean = "nix-collect-garbage -d";
       testsum = "gotestsum --format=testdox";
@@ -41,6 +40,26 @@
       refresh_env = ''
         tmux set-environment -g WAYLAND_DISPLAY $WAYLAND_DISPLAY
         echo "Ambiente Tmux atualizado para $WAYLAND_DISPLAY"
+      '';
+      wt = ''
+        set -l root (git worktree list 2>/dev/null | head -1 | string split ' ')[1]
+        if test -z "$root"
+            echo "Nao esta em um repositorio git"
+            return 1
+        end
+
+        if set -q argv[1]
+            cd "$root/.worktrees/$argv"
+        else
+            set -l target (
+                git worktree list 2>/dev/null | tail -n +2 |
+                sed "s|.*\.worktrees/||; s|\s.*||" |
+                fzf --height 40% --layout=reverse --prompt 'worktree > '
+            )
+            if test -n "$target"
+                cd "$root/.worktrees/$target"
+            end
+        end
       '';
       zesh_preview = ''
         set -l target (string replace -r "^Session: " "" "$argv[1]")
