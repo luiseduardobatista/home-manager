@@ -55,11 +55,11 @@
     system = "x86_64-linux";
     repoDir = "nix";
     pkgs = import nixpkgs {
-      inherit system;
+      localSystem = { inherit system; };
       config.allowUnfree = true;
     };
     pkgs-unstable = import nixpkgs-unstable {
-      inherit system;
+      localSystem = { inherit system; };
       config.allowUnfree = true;
     };
     sharedArgs = {
