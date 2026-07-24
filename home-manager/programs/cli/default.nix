@@ -5,7 +5,7 @@
   ...
 }: {
   home.packages = with pkgs-unstable; [
-    inputs.zesh.packages.${pkgs.system}.zesh
+    inputs.zesh.packages.${pkgs.stdenv.hostPlatform.system}.zesh
     lazygit
     lazydocker
     btop
@@ -14,7 +14,6 @@
     gnumake
     just
     unzip
-    poetry
     openfortivpn
     golines
     gopls
@@ -27,7 +26,7 @@
     eza
     cargo-nextest
     cargo-cache
-    nixfmt-rfc-style
+    nixfmt
     statix
     uv
     alejandra
@@ -41,8 +40,8 @@
     bat
     codecrafters-cli
     fastfetch
-    rtk
-    antigravity-cli
     gh
+  ] ++ [
+    pkgs.rtk
   ];
 }
