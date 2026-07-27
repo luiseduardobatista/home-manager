@@ -18,14 +18,11 @@
       ls = "eza";
       lg = "lazygit";
       zj = "zellij";
-      d = "distrobox enter dev";
-      db = "distrobox";
-      ddb = "distrobox rm ";
       hmc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       hms = "home-manager switch --flake .";
       fhmu = "nix flake update && home-manager switch --flake .";
       rb = "git add . & sudo nixos-rebuild switch --flake ~/nix";
-      update = "nix flake update --flake ~/nix && sudo nixos-rebuild switch --flake ~/nix";
+      rbu = "nix flake update --flake ~/nix && git add . && sudo nixos-rebuild switch --flake ~/nix";
       clean = "nix-collect-garbage -d";
       testsum = "gotestsum --format=testdox";
     };
