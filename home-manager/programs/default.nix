@@ -5,7 +5,6 @@
     ./autostart
     ./cli
     ./zoxide
-    ./distrobox
     ./flameshot
     ./foot
     ./ghostty
