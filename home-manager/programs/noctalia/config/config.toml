@@ -57,6 +57,9 @@ widget_order = [ "lockscreen-login-box@DP-3" ]
         show_login_button = true
         show_password_hint = true
 
+[notification]
+position = "top_center"
+
 [shell.animation]
 speed = 1.2000000178813934
 
@@ -89,6 +92,9 @@ directory = "/home/luisb/nix/home-manager/theming/wallpaper"
 [widget.bluetooth]
 enabled = false
 
+[widget.control-center]
+enabled = false
+
 [widget.cpu]
 display = "text"
 
@@ -115,3 +121,5 @@ enabled = false
 
 [widget.workspaces]
 hide_when_empty = true
+pill_scale = 0.80000000000000004
+style = "minimal"
