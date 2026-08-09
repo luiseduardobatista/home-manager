@@ -1,8 +1,13 @@
 {
   config,
   pkgs,
+  inputs,
   ...
 }: {
+  environment.systemPackages = [
+    inputs.enter-the-wired.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+
   programs.steam = {
     enable = false;
     remotePlay.openFirewall = true;

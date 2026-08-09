@@ -8,6 +8,7 @@
     [
       rustup
       devenv
+      typescript-go
     ]
     ++ lib.optionals isNixOS [
       python3

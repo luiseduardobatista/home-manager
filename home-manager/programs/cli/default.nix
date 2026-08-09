@@ -41,6 +41,7 @@
     codecrafters-cli
     fastfetch
     gh
+    codex
   ] ++ [
     pkgs.rtk
   ];

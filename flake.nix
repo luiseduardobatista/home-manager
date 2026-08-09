@@ -37,6 +37,7 @@
       url = "github:roberte777/zesh";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/";
+    enter-the-wired.url = "github:ciscosweater/enter-the-wired";
     openwhispr = {
       url = "github:OpenWhispr/openwhispr";
       inputs.nixpkgs.follows = "nixpkgs";
