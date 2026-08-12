@@ -38,10 +38,6 @@
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/";
     enter-the-wired.url = "github:ciscosweater/enter-the-wired";
-    openwhispr = {
-      url = "github:OpenWhispr/openwhispr";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs = {
     self,
@@ -87,7 +83,6 @@
           ./nixos/hosts/${hostName}/configuration.nix
           ./nixos/common.nix
           home-manager.nixosModules.home-manager
-          inputs.openwhispr.nixosModules.default
           {
             home-manager = {
               useGlobalPkgs = true;

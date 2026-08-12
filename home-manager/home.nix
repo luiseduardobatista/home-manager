@@ -30,6 +30,9 @@
       BROWSER = "firefox";
       TERMINAL = "foot";
       NIXOS_OZONE_WL = 1;
+      # decibri (rpiv-voice) precisa de libasound.so.2, que no NixOS não está
+      # no caminho padrão do loader (binários pré-compilados não acham a lib).
+      LD_LIBRARY_PATH = "${pkgs.alsa-lib}/lib";
     };
   };
 

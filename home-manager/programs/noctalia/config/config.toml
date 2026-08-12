@@ -55,7 +55,6 @@ widget_order = [ "lockscreen-login-box@DP-3" ]
         show_caps_lock = true
         show_keyboard_layout = true
         show_login_button = true
-        show_password_hint = true
 
 [notification]
 position = "top_center"
@@ -95,9 +94,6 @@ enabled = false
 [widget.control-center]
 enabled = false
 
-[widget.cpu]
-display = "text"
-
 [widget.launcher]
 enabled = false
 
@@ -106,12 +102,6 @@ enabled = false
 
 [widget.network]
 show_label = false
-
-[widget.ram]
-display = "text"
-
-[widget.temp]
-display = "text"
 
 [widget.tray]
 drawer = true
