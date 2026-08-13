@@ -38,6 +38,10 @@
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/";
     enter-the-wired.url = "github:ciscosweater/enter-the-wired";
+    whisper = {
+      url = "github:luiseduardobatista/whisperrs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = {
     self,

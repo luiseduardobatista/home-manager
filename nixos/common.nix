@@ -187,6 +187,7 @@
     usbutils
     wl-clipboard
     xclip
+    inputs.whisper.packages.${pkgs.system}.default
     brave
     v4l-utils
     libreoffice
