@@ -359,6 +359,9 @@ binds {
     Mod+D hotkey-overlay-title="Launcher (Noctalia / Fuzzel Fallback)" {
         spawn-sh "noctalia msg panel-toggle launcher || fuzzel"
     }
+    Mod+S hotkey-overlay-title="Dictation (whisper)" {
+        spawn-sh "whisper toggle"
+    }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" {
         spawn "swaylock"
     }
