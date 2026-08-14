@@ -193,6 +193,7 @@
     brave
     v4l-utils
     libreoffice
+    cmake
   ];
 
   fonts.packages = with pkgs; [
