@@ -46,10 +46,14 @@
     };
   };
   outputs = {self, flake-parts, ...} @ inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    flake-parts.lib.mkFlake { inherit inputs; } ({config, ...}: {
       imports = [
         inputs.flake-parts.flakeModules.modules
+        ./modules
       ];
+
+      systems = [ "x86_64-linux" ];
+
       flake = let
         inherit (self) outputs;
         system = "x86_64-linux";
@@ -78,13 +82,14 @@
             inputs.nix-flatpak.homeManagerModules.nix-flatpak
           ];
         };
-        mkNixos = hostName:
+        mkNixos = hostName: let
+          hostModule = config.flake.modules.nixos.${"host-${hostName}"};
+        in
           inputs.nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = sharedArgs;
             modules = [
-              ./nixos/hosts/${hostName}/configuration.nix
-              ./nixos/common.nix
+              hostModule
               inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
@@ -118,5 +123,5 @@
           laptop = mkNixos "laptop";
         };
       };
-    };
+    });
 }
