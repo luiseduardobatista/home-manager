@@ -11,6 +11,9 @@
       locale
       nix
       ssh
+      boot
+      networking
+      nix-ld
     ];
 
     users.users.luisb = {

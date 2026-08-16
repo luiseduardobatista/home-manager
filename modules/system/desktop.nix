@@ -8,6 +8,9 @@
       audio
       printing
       fonts
+      gnome
+      niri
+      v4l2loopback
     ];
   };
 }

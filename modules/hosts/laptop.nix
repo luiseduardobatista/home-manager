@@ -6,13 +6,7 @@
   flake.modules.nixos.host-laptop = {
     imports = with config.flake.modules.nixos; [
       desktop
-      boot
-      networking
       docker
-      nix-ld
-      v4l2loopback
-      gnome
-      niri
       ./laptop/hardware-configuration.nix
     ];
 
