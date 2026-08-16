@@ -15,6 +15,7 @@
     ./ssh
     ./tmux
     ./wezterm
+    ./whisper
     ./flatpak
     ./jetbrains-toolbox
     ./ideavim

@@ -16,5 +16,7 @@
         pkgs.networkmanager-openvpn
       ];
     };
+
+    users.users.luisb.extraGroups = ["networkmanager"];
   };
 }

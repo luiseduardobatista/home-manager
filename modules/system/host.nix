@@ -4,7 +4,6 @@
 }: {
   flake.modules.nixos.host = {
     pkgs,
-    inputs,
     ...
   }: {
     imports = with config.flake.modules.nixos; [
@@ -20,11 +19,8 @@
       isNormalUser = true;
       description = "Luís Eduardo Batista";
       extraGroups = [
-        "networkmanager"
         "wheel"
-        "docker"
         "video"
-        "audio"
         "input"
       ];
       packages = with pkgs; [
@@ -39,25 +35,11 @@
       binfmt = true;
     };
 
-    programs.firefox.enable = true;
-
     programs.fish.enable = true;
     programs.starship.enable = true;
     users.defaultUserShell = pkgs.fish;
 
-    services.flatpak.enable = true;
-
     programs._1password.enable = true;
-    programs._1password-gui = {
-      enable = true;
-      polkitPolicyOwners = ["luisb"];
-    };
-
-    security.polkit.enable = true;
-
-    environment.sessionVariables = {
-      NIXOS_OZONE_WL = "1";
-    };
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
@@ -71,12 +53,6 @@
       cachix
       inetutils
       usbutils
-      wl-clipboard
-      xclip
-      inputs.whisper.packages.${pkgs.system}.default
-      brave
-      v4l-utils
-      libreoffice
       cmake
     ];
   };
