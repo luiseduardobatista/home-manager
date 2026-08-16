@@ -23,6 +23,7 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixGL = {
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,80 +45,78 @@
       url = "github:luiseduardobatista/whisperrs";
     };
   };
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-    nixGL,
-    nix-flatpak,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    system = "x86_64-linux";
-    repoDir = "nix";
-    pkgs = import nixpkgs {
-      localSystem = {inherit system;};
-      config.allowUnfree = true;
-    };
-    pkgs-unstable = import nixpkgs-unstable {
-      localSystem = {inherit system;};
-      config.allowUnfree = true;
-    };
-    sharedArgs = {
-      inherit
-        inputs
-        outputs
-        nixGL
-        nix-flatpak
-        repoDir
-        pkgs-unstable
-        ;
-    };
-    homeManagerUserConfig = {
+  outputs = {self, flake-parts, ...} @ inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        ./home-manager/home.nix
-        nix-flatpak.homeManagerModules.nix-flatpak
+        inputs.flake-parts.flakeModules.modules
       ];
-    };
-    mkNixos = hostName:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = sharedArgs;
-        modules = [
-          ./nixos/hosts/${hostName}/configuration.nix
-          ./nixos/common.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-              extraSpecialArgs =
-                sharedArgs
-                // {
-                  isNixOS = true;
+      flake = let
+        inherit (self) outputs;
+        system = "x86_64-linux";
+        repoDir = "nix";
+        pkgs = import inputs.nixpkgs {
+          localSystem = {inherit system;};
+          config.allowUnfree = true;
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          localSystem = {inherit system;};
+          config.allowUnfree = true;
+        };
+        sharedArgs = {
+          inherit
+            inputs
+            outputs
+            repoDir
+            pkgs-unstable
+            ;
+          nixGL = inputs.nixGL;
+          nix-flatpak = inputs.nix-flatpak;
+        };
+        homeManagerUserConfig = {
+          imports = [
+            ./home-manager/home.nix
+            inputs.nix-flatpak.homeManagerModules.nix-flatpak
+          ];
+        };
+        mkNixos = hostName:
+          inputs.nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = sharedArgs;
+            modules = [
+              ./nixos/hosts/${hostName}/configuration.nix
+              ./nixos/common.nix
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  backupFileExtension = "backup";
+                  extraSpecialArgs =
+                    sharedArgs
+                    // {
+                      isNixOS = true;
+                    };
+                  users.luisb = homeManagerUserConfig;
                 };
-              users.luisb = homeManagerUserConfig;
-            };
-          }
-        ];
-      };
-  in {
-    homeConfigurations = {
-      "luisb" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs =
-          sharedArgs
-          // {
-            isNixOS = false;
+              }
+            ];
           };
-        modules = [homeManagerUserConfig];
+      in {
+        homeConfigurations = {
+          "luisb" = inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs =
+              sharedArgs
+              // {
+                isNixOS = false;
+              };
+            modules = [homeManagerUserConfig];
+          };
+        };
+        nixosConfigurations = {
+          desktop = mkNixos "desktop";
+          laptop = mkNixos "laptop";
+        };
       };
     };
-    nixosConfigurations = {
-      desktop = mkNixos "desktop";
-      laptop = mkNixos "laptop";
-    };
-  };
 }
