@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Verifica formatação dos .nix rastreados. Avisa sem bloquear;
+# export FMT_STRICT=1 para transformar em gate.
+set -uo pipefail
+
+if output=$(git ls-files -z -- '*.nix' | xargs -0 -r alejandra --check 2>&1); then
+  exit 0
+fi
+
+echo "⚠️  Alejandra: arquivos .nix fora do padrão:" >&2
+echo "$output" >&2
+if [[ "${FMT_STRICT:-0}" == "1" ]]; then
+  echo "FMT_STRICT=1 — push abortado. Rode: alejandra <arquivos>" >&2
+  exit 1
+fi
+exit 0
