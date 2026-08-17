@@ -1,11 +1,9 @@
 {
   lib,
   pkgs,
-  linkApp,
   ...
 }: {
-  # xdg.configFile."pop-shell/config.json".enable = false;
-  xdg.configFile."pop-shell" = linkApp "../sessions/gnome/pop-shell";
+  xdg.configFile."pop-shell/config.json".source = ./pop-shell/config.json;
 
   home.packages = with pkgs; [
     gnomeExtensions.pop-shell

@@ -1,13 +1,10 @@
-{
-  linkApp,
-  isNixOS,
-  ...
-}: {
+{isNixOS, ...}: {
   programs.mise = {
     enable = !isNixOS;
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
   };
-  xdg.configFile."mise" = linkApp "mise";
+  xdg.configFile."mise/config.toml".source = ./mise/config.toml;
+  xdg.configFile."mise/.miseignore".source = ./mise/.miseignore;
 }

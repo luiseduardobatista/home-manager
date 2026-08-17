@@ -1,11 +1,10 @@
 {
   lib,
   pkgs,
-  linkApp,
   isNixOS,
   ...
 }: {
-  xdg.configFile."1Password/ssh" = linkApp "1Password";
+  xdg.configFile."1Password/ssh/agent.toml".source = ./onepassword/agent.toml;
   xdg.configFile."autostart/1password.desktop" = lib.mkIf isNixOS {
     text = ''
       [Desktop Entry]
