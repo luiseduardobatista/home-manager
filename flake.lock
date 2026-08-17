@@ -356,22 +356,6 @@
         "type": "sourcehut"
       }
     },
-    "lazyvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1780679131,
-        "narHash": "sha256-IKKt2E4mocu1d5ybdo0Qr5z3T+cmk9Nfp1ZdsUW+FAA=",
-        "owner": "luiseduardobatista",
-        "repo": "lazyvim",
-        "rev": "805d27a1e0b139dd8dcd935c982194c124f9a5db",
-        "type": "github"
-      },
-      "original": {
-        "owner": "luiseduardobatista",
-        "repo": "lazyvim",
-        "type": "github"
-      }
-    },
     "nix": {
       "inputs": {
         "flake-compat": [
@@ -666,7 +650,6 @@
         "enter-the-wired": "enter-the-wired",
         "flake-parts": "flake-parts",
         "home-manager": "home-manager",
-        "lazyvim": "lazyvim",
         "nix-flatpak": "nix-flatpak",
         "nixGL": "nixGL",
         "nixpkgs": "nixpkgs_2",

@@ -16,7 +16,7 @@
         "nix-command"
         "flakes"
       ];
-      substituters = substituters;
+      inherit substituters;
       trusted-public-keys = trustedPublicKeys;
     };
 

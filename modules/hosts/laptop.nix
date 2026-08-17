@@ -12,13 +12,15 @@
 
     networking.hostName = "laptop";
     hardware.graphics.enable = true;
-    services.power-profiles-daemon.enable = false;
-    services.tlp.enable = true;
-    services.fprintd.enable = true;
-    services.xserver.xkb = {
-      layout = "us,br";
-      variant = "alt-intl,";
-      options = lib.mkForce "";
+    services = {
+      power-profiles-daemon.enable = false;
+      tlp.enable = true;
+      fprintd.enable = true;
+      xserver.xkb = {
+        layout = "us,br";
+        variant = "alt-intl,";
+        options = lib.mkForce "";
+      };
     };
   };
 

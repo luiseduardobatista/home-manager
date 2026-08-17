@@ -28,10 +28,6 @@
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lazyvim = {
-      url = "github:luiseduardobatista/lazyvim";
-      flake = false;
-    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
     };
@@ -46,9 +42,7 @@
     };
   };
   outputs = inputs @ {flake-parts, ...}: let
-    caches = import ./caches.nix;
-    substituters = caches.substituters;
-    trustedPublicKeys = caches.trustedPublicKeys;
+    inherit (import ./caches.nix) substituters trustedPublicKeys;
   in
     flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
       imports = [
@@ -77,7 +71,7 @@
             substituters
             trustedPublicKeys
             ;
-          nixGL = inputs.nixGL;
+          inherit (inputs) nixGL;
         };
         homeManagerBase = [
           inputs.noctalia.homeModules.default

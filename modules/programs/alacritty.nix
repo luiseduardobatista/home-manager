@@ -19,11 +19,13 @@
           action = "ToggleFullscreen";
         }
       ];
-      window.decorations = "none";
-      window.dynamic_padding = false;
-      window.padding = {
-        x = 0;
-        y = 0;
+      window = {
+        decorations = "none";
+        dynamic_padding = false;
+        padding = {
+          x = 0;
+          y = 0;
+        };
       };
     };
   };

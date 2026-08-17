@@ -24,16 +24,18 @@
 
     system.stateVersion = "25.11"; # Did you read the comment?
 
-    programs.appimage = {
-      enable = true;
-      binfmt = true;
+    programs = {
+      appimage = {
+        enable = true;
+        binfmt = true;
+      };
+
+      fish.enable = true;
+      starship.enable = true;
+      _1password.enable = true;
     };
 
-    programs.fish.enable = true;
-    programs.starship.enable = true;
     users.defaultUserShell = pkgs.fish;
-
-    programs._1password.enable = true;
 
     # List packages installed in system profile. To search, run:
     # $ nix search wget
