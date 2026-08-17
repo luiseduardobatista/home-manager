@@ -13,7 +13,6 @@
       lvim = "NVIM_APPNAME=\"lvim\" nvim";
       ls = "eza";
       lg = "lazygit";
-      zj = "zellij";
       hmc = "sudo nix-collect-garbage -d; nix-collect-garbage -d";
       hms = "home-manager switch --flake .";
       fhmu = "nix flake update && home-manager switch --flake .";
@@ -54,10 +53,6 @@
             end
         end
       '';
-      zesh_preview = ''
-        set -l target (string replace -r "^Session: " "" "$argv[1]")
-        zesh preview "$target"
-      '';
       sesh_interactive = ''
         set -l session (sesh list --icons | fzf --height 90% --layout=reverse \
             --no-sort --ansi --border-label ' sesh ' --prompt '⚡  ' \
@@ -76,33 +71,6 @@
         end
         set -l session_name (string split -f 2 ' ' "$session")
         sesh connect "$session_name"
-      '';
-
-      zesh_interactive = ''
-        set -l session (begin
-            zellij list-sessions --short 2>/dev/null | sed 's/^/Session: /'
-            zoxide query -l
-        end | fzf --height 90% --layout=reverse \
-            --no-sort --ansi --border-label ' zesh ' --prompt '⚡  ' \
-            --header '  C-a All | C-t Sessions | C-x Zoxide | C-space Find | C-d Kill Session' \
-            --bind 'tab:down,btab:up' \
-            --bind 'ctrl-a:change-prompt(⚡  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /"; zoxide query -l)' \
-            --bind 'ctrl-t:change-prompt(🪟  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /")' \
-            --bind 'ctrl-x:change-prompt(📁  )+reload(zoxide query -l)' \
-            --bind 'ctrl-space:change-prompt(🔎  )+reload(fd -H -d 2 -t d -E .Trash . ~)' \
-            --bind 'ctrl-d:execute(zellij delete-session --force $(echo {} | sed "s/^Session: //"))+change-prompt(⚡  )+reload(zellij list-sessions --short 2>/dev/null | sed "s/^/Session: /"; zoxide query -l)' \
-            --preview-window 'right:50%' \
-            --preview 'zesh_preview {}' < /dev/tty)
-
-        commandline -f repaint >/dev/null 2>&1
-
-        if test -z "$session"
-            return
-        end
-
-        set -l target (string replace -r "^Session: " "" "$session")
-
-        zesh connect "$target"
       '';
     };
   };
