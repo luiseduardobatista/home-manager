@@ -13,3 +13,7 @@ flake.lock
 /home-manager/dotfiles/tmux/plugins/
 
 __pycache__/
+**/config.kdl.backup*
+**/config.kdl.dmsbackup*
+**/*.bak
+**/*.bak.*
