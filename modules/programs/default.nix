@@ -15,6 +15,7 @@
     tmux = ./tmux.nix;
     wezterm = ./wezterm.nix;
     whisper = ./whisper.nix;
+    revdiff = ./revdiff.nix;
     flatpak = ./flatpak.nix;
     jetbrains-toolbox = ./jetbrains-toolbox.nix;
     dev-langs = ./dev-langs.nix;

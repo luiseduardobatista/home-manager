@@ -34,6 +34,7 @@
       noctalia
       zed
       opencode
+      revdiff
       pi
       fish
       zsh

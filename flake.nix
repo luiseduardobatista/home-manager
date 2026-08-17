@@ -40,6 +40,10 @@
     whisper = {
       url = "github:luiseduardobatista/whisperrs";
     };
+    revdiff = {
+      url = "github:umputun/revdiff";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
   outputs = inputs @ {flake-parts, ...}: let
     inherit (import ./caches.nix) substituters trustedPublicKeys;
