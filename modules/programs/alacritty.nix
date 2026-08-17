@@ -7,7 +7,7 @@
     enable = true;
     package = gl pkgs.alacritty;
     settings = {
-      general.import = [ "~/.config/alacritty/kanso-zen.toml" ];
+      general.import = ["~/.config/alacritty/kanso-zen.toml"];
       cursor.style.shape = "Block";
       env.TERM = "xterm-256color";
       font.size = 13;

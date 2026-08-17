@@ -1,8 +1,5 @@
 {
-  flake.modules.nixos.nix-ld = {
-    pkgs,
-    ...
-  }: {
+  flake.modules.nixos.nix-ld = {pkgs, ...}: {
     programs.nix-ld.enable = true;
     programs.nix-ld.libraries = with pkgs; [
       SDL

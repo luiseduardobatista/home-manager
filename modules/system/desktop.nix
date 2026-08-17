@@ -1,11 +1,5 @@
-{
-  config,
-  ...
-}: {
-  flake.modules.nixos.desktop = {
-    pkgs,
-    ...
-  }: {
+{config, ...}: {
+  flake.modules.nixos.desktop = {pkgs, ...}: {
     imports = with config.flake.modules.nixos; [
       host
       audio

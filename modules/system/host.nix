@@ -1,11 +1,5 @@
-{
-  config,
-  ...
-}: {
-  flake.modules.nixos.host = {
-    pkgs,
-    ...
-  }: {
+{config, ...}: {
+  flake.modules.nixos.host = {pkgs, ...}: {
     imports = with config.flake.modules.nixos; [
       locale
       nix

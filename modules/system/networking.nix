@@ -1,8 +1,5 @@
 {
-  flake.modules.nixos.networking = {
-    pkgs,
-    ...
-  }: {
+  flake.modules.nixos.networking = {pkgs, ...}: {
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
     # Configure network proxy if necessary
