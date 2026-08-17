@@ -1,7 +1,4 @@
-{
-  config,
-  ...
-}: {
+{config, ...}: {
   flake.modules.nixos.host-desktop = {
     imports = with config.flake.modules.nixos; [
       desktop
@@ -11,5 +8,11 @@
     ];
 
     networking.hostName = "desktop";
+  };
+
+  flake.modules.homeManager.host-desktop = {
+    imports = with config.flake.modules.homeManager; [
+      luis
+    ];
   };
 }

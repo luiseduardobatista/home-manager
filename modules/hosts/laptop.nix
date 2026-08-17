@@ -20,22 +20,24 @@
       variant = "alt-intl,";
       options = lib.mkForce "";
     };
-    home-manager.users.luisb = {
-      lib,
-      ...
-    }: {
-      dconf.settings = {
-        "org/gnome/desktop/input-sources" = {
-          sources = lib.mkForce [
-            (lib.gvariant.mkTuple ["xkb" "us+alt-intl"])
-            (lib.gvariant.mkTuple ["xkb" "br"])
-          ];
-          mru-sources = lib.mkForce [
-            (lib.gvariant.mkTuple ["xkb" "br"])
-            (lib.gvariant.mkTuple ["xkb" "us+alt-intl"])
-          ];
-          xkb-options = [];
-        };
+  };
+
+  flake.modules.homeManager.host-laptop = {lib, ...}: {
+    imports = with config.flake.modules.homeManager; [
+      luis
+    ];
+
+    dconf.settings = {
+      "org/gnome/desktop/input-sources" = {
+        sources = lib.mkForce [
+          (lib.gvariant.mkTuple ["xkb" "us+alt-intl"])
+          (lib.gvariant.mkTuple ["xkb" "br"])
+        ];
+        mru-sources = lib.mkForce [
+          (lib.gvariant.mkTuple ["xkb" "br"])
+          (lib.gvariant.mkTuple ["xkb" "us+alt-intl"])
+        ];
+        xkb-options = [];
       };
     };
   };

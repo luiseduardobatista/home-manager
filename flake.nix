@@ -45,14 +45,18 @@
       url = "github:luiseduardobatista/whisperrs";
     };
   };
-  outputs = {self, flake-parts, ...} @ inputs:
-    flake-parts.lib.mkFlake { inherit inputs; } ({config, ...}: {
+  outputs = {
+    self,
+    flake-parts,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
       imports = [
         inputs.flake-parts.flakeModules.modules
         ./modules
       ];
 
-      systems = [ "x86_64-linux" ];
+      systems = ["x86_64-linux"];
 
       flake = let
         inherit (self) outputs;
@@ -76,12 +80,12 @@
           nixGL = inputs.nixGL;
           nix-flatpak = inputs.nix-flatpak;
         };
-        homeManagerUserConfig = {
-          imports = [
-            ./home-manager/home.nix
-            inputs.nix-flatpak.homeManagerModules.nix-flatpak
-          ];
-        };
+        homeManagerBase = [
+          inputs.noctalia.homeModules.default
+          inputs.pi.homeModules.default
+          inputs.nix-flatpak.homeManagerModules.nix-flatpak
+          ./home-manager/lib/helpers.nix
+        ];
         mkNixos = hostName: let
           hostModule = config.flake.modules.nixos.${"host-${hostName}"};
         in
@@ -101,7 +105,9 @@
                     // {
                       isNixOS = true;
                     };
-                  users.luisb = homeManagerUserConfig;
+                  users.luisb = {
+                    imports = homeManagerBase ++ [config.flake.modules.homeManager.${"host-${hostName}"}];
+                  };
                 };
               }
             ];
@@ -115,7 +121,7 @@
               // {
                 isNixOS = false;
               };
-            modules = [homeManagerUserConfig];
+            modules = homeManagerBase ++ [config.flake.modules.homeManager.luis];
           };
         };
         nixosConfigurations = {

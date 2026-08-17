@@ -1,6 +1,7 @@
 {
   imports = [
     ./gnome.nix
-    ./niri.nix
+    ./niri
+    ./noctalia
   ];
 }
