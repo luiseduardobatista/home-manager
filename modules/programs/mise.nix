@@ -4,7 +4,11 @@
     enableBashIntegration = true;
     enableFishIntegration = true;
     enableZshIntegration = true;
+    globalConfig = {
+      tools.go = "latest";
+    };
   };
-  xdg.configFile."mise/config.toml".source = ./config.toml;
-  xdg.configFile."mise/.miseignore".source = ./.miseignore;
+  xdg.configFile."mise/.miseignore".text = ''
+    mise/
+  '';
 }

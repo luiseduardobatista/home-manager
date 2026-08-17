@@ -9,7 +9,7 @@
     ghostty = ./ghostty.nix;
     git = ./git.nix;
     kitty = ./kitty.nix;
-    mise = ./mise;
+    mise = ./mise.nix;
     neovim = ./neovim.nix;
     ssh = ./ssh.nix;
     tmux = ./tmux.nix;
