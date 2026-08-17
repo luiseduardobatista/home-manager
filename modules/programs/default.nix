@@ -20,7 +20,6 @@
     dev-langs = ./dev-langs.nix;
     helix = ./helix.nix;
     zed = ./zed.nix;
-    zellij = ./zellij;
     opencode = ./opencode.nix;
     pi = ./pi.nix;
     fish = ./fish.nix;

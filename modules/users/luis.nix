@@ -33,7 +33,6 @@
       helix
       noctalia
       zed
-      zellij
       opencode
       pi
       fish
