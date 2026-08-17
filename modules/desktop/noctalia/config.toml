@@ -77,16 +77,16 @@ wallpaper_scheme = "m3-content"
     builtin_ids = [ "niri" ]
 
 [wallpaper]
-directory = "/home/luisb/nix/home-manager/theming/wallpaper"
+directory = "/home/luisb/nix/modules/desktop/noctalia/wallpaper"
 
     [wallpaper.default]
-    path = "/home/luisb/nix/home-manager/theming/wallpaper/kame-house.png"
+    path = "/home/luisb/nix/modules/desktop/noctalia/wallpaper/kame-house.png"
 
     [wallpaper.last]
-    path = "/home/luisb/nix/home-manager/theming/wallpaper/kame-house.png"
+    path = "/home/luisb/nix/modules/desktop/noctalia/wallpaper/kame-house.png"
 
     [wallpaper.monitors.DP-3]
-    path = "/home/luisb/nix/home-manager/theming/wallpaper/kame-house.png"
+    path = "/home/luisb/nix/modules/desktop/noctalia/wallpaper/kame-house.png"
 
 [widget.bluetooth]
 enabled = false
