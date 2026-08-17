@@ -1,11 +1,11 @@
 {
   flake.modules.homeManager = {
-    onepassword = ./onepassword;
-    alacritty = ./alacritty;
+    onepassword = ./onepassword.nix;
+    alacritty = ./alacritty.nix;
     cli = ./cli.nix;
     zoxide = ./zoxide.nix;
-    flameshot = ./flameshot;
-    foot = ./foot;
+    flameshot = ./flameshot.nix;
+    foot = ./foot.nix;
     ghostty = ./ghostty.nix;
     git = ./git.nix;
     kitty = ./kitty.nix;
@@ -17,7 +17,6 @@
     whisper = ./whisper.nix;
     flatpak = ./flatpak.nix;
     jetbrains-toolbox = ./jetbrains-toolbox.nix;
-    ideavim = ./ideavim;
     dev-langs = ./dev-langs.nix;
     helix = ./helix.nix;
     zed = ./zed.nix;

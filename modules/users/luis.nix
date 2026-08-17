@@ -29,7 +29,6 @@
       whisper
       flatpak
       jetbrains-toolbox
-      ideavim
       dev-langs
       helix
       noctalia
