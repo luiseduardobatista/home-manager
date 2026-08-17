@@ -1,0 +1,50 @@
+{
+  pkgs-unstable,
+  inputs,
+  pkgs,
+  ...
+}: {
+  home.packages = with pkgs-unstable;
+    [
+      inputs.zesh.packages.${pkgs.stdenv.hostPlatform.system}.zesh
+      lazygit
+      lazydocker
+      btop
+      tree
+      sesh
+      gnumake
+      just
+      unzip
+      openfortivpn
+      golines
+      gopls
+      impl
+      gotestsum
+      air
+      sqlc
+      stow
+      localtunnel
+      eza
+      cargo-nextest
+      cargo-cache
+      nixfmt
+      statix
+      uv
+      alejandra
+      fzf
+      fd
+      ripgrep
+      xclip
+      wget
+      curl
+      localtunnel
+      bat
+      codecrafters-cli
+      fastfetch
+      gh
+      codex
+    ]
+    ++ [
+      pkgs.rtk
+    ];
+}

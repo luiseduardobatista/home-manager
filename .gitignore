@@ -8,8 +8,12 @@ flake.lock
 .idea/
 .vscode/
 
-# Ignorar o repositório nvim clonado
-/home-manager/dotfiles/nvim/
-/home-manager/dotfiles/tmux/plugins/
+# Ignorar repositórios dotfiles clonados em runtime
 
 __pycache__/
+**/config.kdl.backup*
+**/config.kdl.dmsbackup*
+**/*.bak
+**/*.bak.*
+**/*.bk
+**/*.backup*

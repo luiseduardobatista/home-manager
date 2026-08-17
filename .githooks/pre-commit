@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Formata .nix staged com Alejandra e re-staga. Silencioso; não toca em nada não-staged.
+set -euo pipefail
+
+# --diff-filter=ACM exclui deleções (arquivo não existe mais no disco),
+# senão commitar a remoção de um .nix quebraria o hook.
+git diff --cached --name-only -z --diff-filter=ACM -- '*.nix' | xargs -0 -r alejandra --quiet
+git diff --cached --name-only -z --diff-filter=ACM -- '*.nix' | xargs -0 -r git add --
+
+exit 0

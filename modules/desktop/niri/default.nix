@@ -1,0 +1,33 @@
+{
+  flake.modules.nixos.niri = {pkgs, ...}: {
+    environment.systemPackages = with pkgs; [
+      xwayland-satellite
+      pantheon.pantheon-agent-polkit
+    ];
+    programs.niri.enable = true;
+    security.polkit.enable = true;
+  };
+
+  flake.modules.homeManager.niri = {
+    config,
+    pkgs,
+    liveRepoPath,
+    ...
+  }: {
+    home.packages = with pkgs; [
+      fuzzel
+    ];
+
+    xdg.configFile = {
+      "niri/config.kdl".source =
+        config.lib.file.mkOutOfStoreSymlink "${liveRepoPath}/modules/desktop/niri/config.kdl";
+
+      "niri/noctalia.kdl".source = ./noctalia.kdl;
+      "niri/dms/cursor.kdl".source = ./dms/cursor.kdl;
+      "niri/dms/outputs.kdl".source = ./dms/outputs.kdl;
+      "niri/dms/windowrules.kdl".source = ./dms/windowrules.kdl;
+      "niri/dms/binds.kdl".source = ./dms/binds.kdl;
+      "niri/dms/colors.kdl".source = ./dms/colors.kdl;
+    };
+  };
+}

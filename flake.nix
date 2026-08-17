@@ -23,13 +23,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-parts.url = "github:hercules-ci/flake-parts";
     nixGL = {
       url = "github:nix-community/nixGL";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    lazyvim = {
-      url = "github:luiseduardobatista/lazyvim";
-      flake = false;
     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
@@ -44,80 +41,86 @@
       url = "github:luiseduardobatista/whisperrs";
     };
   };
-  outputs = {
-    self,
-    nixpkgs,
-    nixpkgs-unstable,
-    home-manager,
-    nixGL,
-    nix-flatpak,
-    ...
-  } @ inputs: let
-    inherit (self) outputs;
-    system = "x86_64-linux";
-    repoDir = "nix";
-    pkgs = import nixpkgs {
-      localSystem = {inherit system;};
-      config.allowUnfree = true;
-    };
-    pkgs-unstable = import nixpkgs-unstable {
-      localSystem = {inherit system;};
-      config.allowUnfree = true;
-    };
-    sharedArgs = {
-      inherit
-        inputs
-        outputs
-        nixGL
-        nix-flatpak
-        repoDir
-        pkgs-unstable
-        ;
-    };
-    homeManagerUserConfig = {
+  outputs = inputs @ {flake-parts, ...}: let
+    inherit (import ./caches.nix) substituters trustedPublicKeys;
+  in
+    flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
       imports = [
-        ./home-manager/home.nix
-        nix-flatpak.homeManagerModules.nix-flatpak
+        inputs.flake-parts.flakeModules.modules
+        ./modules
       ];
-    };
-    mkNixos = hostName:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = sharedArgs;
-        modules = [
-          ./nixos/hosts/${hostName}/configuration.nix
-          ./nixos/common.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              backupFileExtension = "backup";
-              extraSpecialArgs =
-                sharedArgs
-                // {
-                  isNixOS = true;
-                };
-              users.luisb = homeManagerUserConfig;
-            };
-          }
+
+      systems = ["x86_64-linux"];
+
+      flake = let
+        system = "x86_64-linux";
+        repoDir = "nix";
+        pkgs = import inputs.nixpkgs {
+          localSystem = {inherit system;};
+          config.allowUnfree = true;
+        };
+        pkgs-unstable = import inputs.nixpkgs-unstable {
+          localSystem = {inherit system;};
+          config.allowUnfree = true;
+        };
+        sharedArgs = {
+          inherit
+            inputs
+            repoDir
+            pkgs-unstable
+            substituters
+            trustedPublicKeys
+            ;
+          inherit (inputs) nixGL;
+        };
+        homeManagerBase = [
+          inputs.noctalia.homeModules.default
+          inputs.pi.homeModules.default
+          inputs.nix-flatpak.homeManagerModules.nix-flatpak
+          ./modules/users/helpers.nix
         ];
-      };
-  in {
-    homeConfigurations = {
-      "luisb" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs =
-          sharedArgs
-          // {
-            isNixOS = false;
+        mkNixos = hostName: let
+          hostModule = config.flake.modules.nixos.${"host-${hostName}"};
+        in
+          inputs.nixpkgs.lib.nixosSystem {
+            inherit system;
+            specialArgs = sharedArgs;
+            modules = [
+              hostModule
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  backupFileExtension = "backup";
+                  extraSpecialArgs =
+                    sharedArgs
+                    // {
+                      isNixOS = true;
+                    };
+                  users.luisb = {
+                    imports = homeManagerBase ++ [config.flake.modules.homeManager.${"host-${hostName}"}];
+                  };
+                };
+              }
+            ];
           };
-        modules = [homeManagerUserConfig];
+      in {
+        homeConfigurations = {
+          "luisb" = inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            extraSpecialArgs =
+              sharedArgs
+              // {
+                isNixOS = false;
+              };
+            modules = homeManagerBase ++ [config.flake.modules.homeManager.luis];
+          };
+        };
+        nixosConfigurations = {
+          desktop = mkNixos "desktop";
+          laptop = mkNixos "laptop";
+        };
       };
-    };
-    nixosConfigurations = {
-      desktop = mkNixos "desktop";
-      laptop = mkNixos "laptop";
-    };
-  };
+    });
 }
