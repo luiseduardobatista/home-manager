@@ -18,7 +18,7 @@
     ...
   }: {
     imports = [
-      ./gnome/pop-shell.nix
+      ./pop-shell
     ];
 
     options.programs.gnome.extensions = lib.mkOption {

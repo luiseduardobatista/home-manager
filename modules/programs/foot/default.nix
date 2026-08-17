@@ -20,5 +20,5 @@
       csd.preferred = "none";
     };
   };
-  xdg.configFile."foot/themes/kanso-zen.ini".source = ./foot/themes/kanso-zen.ini;
+  xdg.configFile."foot/themes/kanso-zen.ini".source = ./themes/kanso-zen.ini;
 }

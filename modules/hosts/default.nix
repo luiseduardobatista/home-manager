@@ -1,6 +1,6 @@
 {
   imports = [
-    ./desktop.nix
-    ./laptop.nix
+    ./desktop
+    ./laptop
   ];
 }

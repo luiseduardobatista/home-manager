@@ -3,8 +3,8 @@
     imports = with config.flake.modules.nixos; [
       desktop
       docker
-      ./desktop/hardware-configuration.nix
-      ./desktop/gaming.nix
+      ./hardware-configuration.nix
+      ./gaming.nix
     ];
 
     networking.hostName = "desktop";

@@ -4,7 +4,7 @@
   isNixOS,
   ...
 }: {
-  xdg.configFile."1Password/ssh/agent.toml".source = ./onepassword/agent.toml;
+  xdg.configFile."1Password/ssh/agent.toml".source = ./agent.toml;
   xdg.configFile."autostart/1password.desktop" = lib.mkIf isNixOS {
     text = ''
       [Desktop Entry]

@@ -3,7 +3,7 @@
   pkgs,
   ...
 }: {
-  xdg.configFile."pop-shell/config.json".source = ./pop-shell/config.json;
+  xdg.configFile."pop-shell/config.json".source = ./config.json;
 
   home.packages = with pkgs; [
     gnomeExtensions.pop-shell

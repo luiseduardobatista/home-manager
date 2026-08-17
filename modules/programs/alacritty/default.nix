@@ -29,5 +29,5 @@
       };
     };
   };
-  xdg.configFile."alacritty/kanso-zen.toml".source = ./alacritty/kanso-zen.toml;
+  xdg.configFile."alacritty/kanso-zen.toml".source = ./kanso-zen.toml;
 }

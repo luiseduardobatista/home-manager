@@ -7,7 +7,7 @@
     imports = with config.flake.modules.nixos; [
       desktop
       docker
-      ./laptop/hardware-configuration.nix
+      ./hardware-configuration.nix
     ];
 
     networking.hostName = "laptop";
