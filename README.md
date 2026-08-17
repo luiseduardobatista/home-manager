@@ -1,175 +1,138 @@
-# Meus Dotfiles com Nix
+# Dotfiles com Nix
 
-Este repositório contém minhas configurações pessoais de sistema e ambiente de desenvolvimento, gerenciadas com [Nix](https://nixos.org/) e [Home Manager](https://github.com/nix-community/home-manager).
+Configurações pessoais de sistema e ambiente de desenvolvimento, gerenciadas com [Nix](https://nixos.org/), [Home Manager](https://github.com/nix-community/home-manager) e [flake-parts](https://flake.parts/).
 
-O projeto é híbrido, funcionando tanto como:
+O projeto é híbrido e funciona como:
 
-1. **NixOS:** Configuração completa do sistema operacional (Desktop e Laptop).
-2. **Non-NixOS (Standalone):** Gerenciamento do `$HOME` em distribuições como Ubuntu, Fedora e Arch.
+1. **NixOS:** configuração completa do sistema operacional (Desktop e Laptop).
+2. **Standalone (Linux genérico):** gerenciamento do `$HOME` em distribuições como Ubuntu, Fedora e Arch, usando Home Manager com `targets.genericLinux` e `nixGL` para aceleração gráfica.
 
-## Índice
+## Visão geral
 
-* [Recursos](#recursos)
-* [Instalação](#instalação)
-  * [Em Outras Distribuições](#em-outras-distribuições-ubuntu-fedora-etc)
-  * [No NixOS](#no-nixos)
-* [Pós-Instalação](#pós-instalação)
-* [Estrutura do Projeto](#estrutura-do-projeto)
-* [Gerenciamento de Dotfiles](#gerenciamento-de-dotfiles)
-* [Ambiente de Desenvolvimento](#ambiente-de-desenvolvimento)
-* [Ambiente Desktop (GNOME)](#ambiente-desktop-gnome)
-* [Testando com Docker](#testando-com-docker)
-* [Tópicos Avançados](#tópicos-avançados)
+- **`flake.nix`**: define inputs, `nixConfig` (substituters/trusted keys de Cachix), a estrutura `flake-parts` e os outputs.
+- **`modules/`**: árvore modular organizada por domínio, com entrypoints `default.nix` explícitos (sem auto-import).
+- **`install.py`**: instalador para Linux genérico (idempotente; instala Nix e aplica Home Manager).
+- **`Dockerfile` / `Dockerfile.fedora`**: ambientes de teste limpos.
 
-## Recursos
+## Arquitetura
 
-* **Sistema Híbrido:** Configurações compartilhadas entre NixOS e outras distros (usando `nixGL` automaticamente para aceleração gráfica fora do NixOS).
-* **Flatpaks Declarativos:** Uso do `nix-flatpak` para gerenciar apps como Zen Browser, Obsidian e Discord via código.
-* **Segurança:** Integração profunda com **1Password** (GUI e Agente SSH).
-* **Shell:** Zsh, Fish e Bash configurados com Starship. Workflow otimizado com **Sesh** + **Tmux** + **Fzf**.
-* **DevEnv:**
-  * **Mise:** Gerenciamento de versões de linguagens (Node, Go, Python).
-  * **Distrobox:** Container `dev` (Ubuntu 24.04) pré-configurado com hooks de integração com o host.
-  * **Neovim:** Baseado no LazyVim.
-  * **IDEs JetBrains:** Configuração do IdeaVim sincronizada com a experiência do Neovim.
-* **Aplicações Gráficas:** Wezterm, Kitty, Alacritty e Foot configurados de forma intercambiável.
+`flake.nix` usa `flake-parts` (`flake-parts.lib.mkFlake`) com o import:
+
+```nix
+imports = [
+  inputs.flake-parts.flakeModules.modules
+  ./modules
+];
+```
+
+A árvore `modules/` é dividida por responsabilidade:
+
+| Diretório | Responsabilidade |
+|---|---|
+| `modules/system/` | Responsabilidades do SO (boot, networking, locale, nix, ssh, audio, printing, docker, nix-ld, fonts, gnome system-level, v4l2loopback) |
+| `modules/desktop/` | Sessão/DE/WM compartilháveis entre NixOS e Home Manager (GNOME, Niri, Noctalia) |
+| `modules/programs/` | Aplicações e ferramentas (terminais, shell, tmux, neovim, git, etc.) |
+| `modules/users/` | Identidade e composição do usuário (base comum `luis` + helpers) |
+| `modules/hosts/` | Composição por máquina (`desktop`, `laptop`), incluindo hardware-configuration e classes `homeManager.host-*` |
+
+Cada diretório tem um entrypoint `default.nix` que importa os módulos do domínio. Os módulos publicam suas opções por classe:
+
+- `flake.modules.nixos.*` — módulos consumidos pela configuração NixOS;
+- `flake.modules.homeManager.*` — módulos consumidos pelo Home Manager (integrado ao NixOS e standalone).
+
+Os hosts são composição, não implementação: `desktop` e `laptop` importam o perfil `desktop` (que por sua vez importa a base `host`) e adicionam apenas hardware e diferenças reais da máquina.
+
+## Outputs do flake
+
+- `nixosConfigurations.desktop`
+- `nixosConfigurations.laptop`
+- `homeConfigurations.luisb` (Home Manager standalone)
+
+## Home Manager
+
+Home Manager funciona nos dois caminhos:
+
+**Integrado ao NixOS** — via `home-manager.nixosModules.home-manager`, com `home-manager.users.luisb`, `useGlobalPkgs = true` e `useUserPackages = true` (o usuário `luisb` usa os `pkgs` do sistema).
+
+**Standalone em Linux genérico** — via `home-manager.lib.homeManagerConfiguration`, com `targets.genericLinux.enable = true` e `nixGL` aplicado automaticamente nos terminais através do helper `gl` (em NixOS o helper devolve o pacote sem wrapper).
+
+O provider `nix-flatpak` e os módulos de `noctalia` e `pi` são importados nos dois caminhos (NixOS integrado e standalone).
+
+## Política de dotfiles
+
+- **Configurações estáveis são declarativas**: use opções nativas do Home Manager (ex.: `programs.tmux.extraConfig`) ou `source = ./arquivo` para configurações cujo formato original seja melhor (arquivos copiados para a store).
+- **Live / out-of-store** (somente Niri e Noctalia):
+  - `modules/desktop/niri/config.kdl` → symlink para `~/.config/niri/config.kdl`;
+  - `modules/desktop/noctalia/config.toml` → symlink para `~/.config/noctalia/config.toml`.
+
+  Esses arquivos são editáveis diretamente no checkout (`~/nix`), sem `home-manager switch`; o hot reload é aplicado pelo próprio aplicativo.
 
 ## Instalação
 
-### Em Outras Distribuições (Ubuntu, Fedora, etc)
-
-Para instalar e configurar seu ambiente com um único comando, execute o script abaixo. Ele detecta a distribuição, instala o Nix, configura o Daemon e aplica o Home Manager.
-
-```bash
-git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && \
-cd ~/nix && \
-git remote set-url origin git@github.com:luiseduardobatista/home-manager.git && \
-./install.sh
-```
-
-O script é idempotente; você pode executá-lo novamente para atualizações ou reparos.
-
-### No NixOS
-
-Se estiver em uma instalação limpa do NixOS:
+### NixOS
 
 1. Clone o repositório:
 
-    ```bash
-    nix-shell -p git nix --extra-experimental-features "nix-command flakes" && \
-    git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && \
-    cd ~/nix && \
-    git remote set-url origin git@github.com:luiseduardobatista/home-manager.git
-    ```
+   ```bash
+   git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && cd ~/nix
+   ```
 
-2. Gere ou ajuste a configuração de hardware (`/etc/nixos/hardware-configuration.nix`) e coloque em `./nixos/hosts/<host>`.
-3. Aplique a configuração (Desktop ou Laptop):
+2. Gere ou ajuste a configuração de hardware e coloque em `modules/hosts/<host>/hardware-configuration.nix`.
+3. Aplique a configuração:
 
-    ```bash
-    # Para Desktop (Configurações Nvidia, Performance)
-    sudo nixos-rebuild switch --flake ~/nix#desktop
+   ```bash
+   sudo nixos-rebuild switch --flake ~/nix#desktop
+   # ou
+   sudo nixos-rebuild switch --flake ~/nix#laptop
+   ```
 
-    # Para Laptop (Configurações TLP, Economia de bateria)
-    sudo nixos-rebuild switch --flake ~/nix#laptop
-    ```
+### Standalone (Linux genérico)
 
-## Pós-Instalação
-
-### Configuração do `sudo` (Para Non-NixOS)
-
-Após a instalação, verifique se o `sudo` reconhece os binários do Nix. Caso contrário, adicione os caminhos ao `secure_path` no `/etc/sudoers`:
-
-```text
-Defaults    secure_path = /home/luisb/.nix-profile/bin:/nix/var/nix/profiles/default/bin:/sbin:/bin:/usr/sbin:/usr/bin
+```bash
+git clone https://github.com/luiseduardobatista/home-manager.git ~/nix && cd ~/nix
+python3 install.py
 ```
 
-## Estrutura do Projeto
+O script é idempotente: detecta a distribuição, instala o Nix (e dependências de sistema, se necessário), e aplica o Home Manager. Opções úteis: `--skip-nix`, `--skip-deps`, `--dry-run`.
 
-* **`flake.nix`**: Define os inputs e as saídas (`nixosConfigurations` e `homeConfigurations`).
-* **`nixos/`**: Configurações exclusivas do sistema operacional.
-  * `common.nix`: Configurações base (Boot, Docker, Pipewire, Locale).
-  * `hosts/`: Definições específicas de hardware.
-* **`home-manager/`**: Configurações de usuário (agnósticas).
-  * `home.nix`: Ponto de entrada do usuário.
-  * `lib/helpers.nix`: Funções auxiliares.
-  * `programs/`: Módulos de software (Git, Neovim, Wezterm, Distrobox).
-  * `sessions/`: Configurações gráficas (GNOME, temas).
+## Atualização / rebuild
 
-## Gerenciamento de Dotfiles
+```bash
+# NixOS
+sudo nixos-rebuild switch --flake ~/nix#<host>
 
-### Mutáveis vs Imutáveis (`linkApp`)
-
-Nativamente, o Nix torna arquivos de configuração "somente leitura" (symlinks para a `/nix/store`). Para permitir edição rápida de configurações de aplicações (como `wezterm.lua` ou `init.lua`), utilizo uma função auxiliar chamada **`linkApp`**.
-
-Ela cria um link simbólico direto do diretório do repositório (`~/nix/...`) para o `~/.config/...`.
-
-**Exemplo:**
-
-```nix
-# Em programs/wezterm/default.nix
-xdg.configFile."wezterm" = linkApp "wezterm";
+# Home Manager standalone
+home-manager switch --flake ~/nix#luisb
 ```
 
-Isso permite editar `~/nix/home-manager/programs/wezterm/config/wezterm.lua` e ver as mudanças imediatamente, sem precisar rodar um rebuild do Home Manager.
+## Ambiente de desenvolvimento
 
-### Adicionando um Pacote Simples
-
-Para adicionar um pacote simples ao sistema:
-
-1. Abra `home-manager/programs/cli/default.nix` (ou arquivo equivalente).
-2. Adicione o pacote à lista:
-
-    ```nix
-    home.packages = with pkgs; [
-      pacote-novo
-    ];
-    ```
-
-3. Aplique:
-    * Non-NixOS: `home-manager switch --flake .`
-    * NixOS: `sudo nixos-rebuild switch --flake .`
-
-## Ambiente de Desenvolvimento
-
-### Distrobox (`dev`)
-
-Para evitar poluir o sistema base, utilizo um container Ubuntu chamado `dev`.
-
-* Definido em `programs/distrobox/default.nix`.
-* Possui **hooks** automáticos que corrigem permissões de `sudo` e injetam variáveis de ambiente (`PATH`, `Mise`) para integração transparente com o host.
-* **Uso:** `db enter dev` ou alias `d`.
-
-### Sesh + Tmux
-
-Gerenciamento de sessões de terminal:
-
-* No Fish, pressione `Ctrl + f`.
-* Uma janela do **FZF** abrirá listando seus projetos.
-* Ao selecionar, ele cria (ou anexa) uma sessão Tmux isolada para aquele projeto.
+- **Shell:** Fish, Zsh e Starship; `sesh` + Tmux + `fzf` para gerenciar sessões de terminal (bind `Ctrl+Espaço` no Fish).
+- **Tmux:** plugin `resurrect` (restauração de sessão) e `continuum` (auto-save/auto-restore).
+- **Neovim:** config padrão clonada de `MiniMax` e configuração LazyVim, ambos clonados por activation do Home Manager.
+- **Mise:** gerenciamento de versões de linguagens (Node, Go, Python, etc.).
+- **Helix** como editor alternativo.
+- **Terminais:** Foot como padrão (`TERMINAL=foot`); Kitty, Alacritty, WezTerm e Ghostty configurados como alternativas.
 
 ## Ambiente Desktop (GNOME)
 
-A configuração transforma o GNOME em um Tiling Window Manager usando **Pop Shell**.
+GNOME com tiling por janelas via **Pop Shell** e **Forge**.
 
-* **Gerenciamento de Janelas:**
-  * `Super + Y`: Alternar Tiling mode.
-  * `Super + Setas` (ou `hjkl`): Mover foco.
-  * `Super + Shift + Setas`: Mover janelas.
-* **Atalhos Gerais:**
-  * `Super + T`: Terminal.
-  * `Super + Q`: Fechar janela.
-  * `Super + F`: Arquivos.
+Atalhos principais:
+
+- `Super + T` — abrir terminal;
+- `Super + Q` — fechar janela;
+- `Super + F` — abrir arquivos (home);
+- `Super + Y` — alternar modo tiling (Pop Shell).
 
 ## Testando com Docker
 
-Dockerfiles estão disponíveis para validar a instalação em ambientes limpos:
-
 ```bash
-# Teste no Ubuntu
+# Ubuntu
 docker build -t home-manager-config .
 docker run -it home-manager-config
 
-# Teste no Fedora
+# Fedora
 docker build -f Dockerfile.fedora -t nix-fedora-config-test .
 docker run --rm nix-fedora-config-test
 ```

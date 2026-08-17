@@ -45,11 +45,11 @@
       url = "github:luiseduardobatista/whisperrs";
     };
   };
-  outputs = {
-    self,
-    flake-parts,
-    ...
-  } @ inputs:
+  outputs = inputs @ {flake-parts, ...}: let
+    caches = import ./caches.nix;
+    substituters = caches.substituters;
+    trustedPublicKeys = caches.trustedPublicKeys;
+  in
     flake-parts.lib.mkFlake {inherit inputs;} ({config, ...}: {
       imports = [
         inputs.flake-parts.flakeModules.modules
@@ -59,7 +59,6 @@
       systems = ["x86_64-linux"];
 
       flake = let
-        inherit (self) outputs;
         system = "x86_64-linux";
         repoDir = "nix";
         pkgs = import inputs.nixpkgs {
@@ -73,18 +72,18 @@
         sharedArgs = {
           inherit
             inputs
-            outputs
             repoDir
             pkgs-unstable
+            substituters
+            trustedPublicKeys
             ;
           nixGL = inputs.nixGL;
-          nix-flatpak = inputs.nix-flatpak;
         };
         homeManagerBase = [
           inputs.noctalia.homeModules.default
           inputs.pi.homeModules.default
           inputs.nix-flatpak.homeManagerModules.nix-flatpak
-          ./home-manager/lib/helpers.nix
+          ./modules/users/helpers.nix
         ];
         mkNixos = hostName: let
           hostModule = config.flake.modules.nixos.${"host-${hostName}"};
