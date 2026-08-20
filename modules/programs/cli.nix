@@ -43,6 +43,7 @@
       fastfetch
       gh
       codex
+      glow
     ]
     ++ [
       pkgs.rtk
